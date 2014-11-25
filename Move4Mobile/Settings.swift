@@ -30,7 +30,7 @@ class Settings: UITableViewController {
         return menuItems.count
     }
 
-    
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("settingsCell", forIndexPath: indexPath) as UITableViewCell
@@ -41,7 +41,7 @@ class Settings: UITableViewController {
         // Configure the cell...
 
         return cell
-    }
+    }*/
     
 
     /*

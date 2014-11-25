@@ -21,18 +21,7 @@
 		B3A1A33A1A24784C0090BC17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A1A3381A24784C0090BC17 /* Main.storyboard */; };
 		B3A1A33C1A24784D0090BC17 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3A1A33B1A24784D0090BC17 /* Images.xcassets */; };
 		B3A1A33F1A24784D0090BC17 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A1A33D1A24784D0090BC17 /* LaunchScreen.xib */; };
-		B3A1A34B1A24784D0090BC17 /* Move4MobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A1A34A1A24784D0090BC17 /* Move4MobileTests.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		B3A1A3451A24784D0090BC17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B3A1A3271A24784C0090BC17 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B3A1A32E1A24784C0090BC17;
-			remoteInfo = Move4Mobile;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B30BA88C1A249C2800B398CB /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -51,20 +40,12 @@
 		B3A1A3391A24784C0090BC17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B3A1A33B1A24784D0090BC17 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B3A1A33E1A24784D0090BC17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		B3A1A3441A24784D0090BC17 /* Move4KlantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Move4KlantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A1A3491A24784D0090BC17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A1A34A1A24784D0090BC17 /* Move4MobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move4MobileTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B3A1A32C1A24784C0090BC17 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3A1A3411A24784D0090BC17 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -87,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				B3A1A32F1A24784C0090BC17 /* Move4Klant.app */,
-				B3A1A3441A24784D0090BC17 /* Move4KlantTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,24 +139,6 @@
 			productReference = B3A1A32F1A24784C0090BC17 /* Move4Klant.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B3A1A3431A24784D0090BC17 /* Move4KlantTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B3A1A3511A24784D0090BC17 /* Build configuration list for PBXNativeTarget "Move4KlantTests" */;
-			buildPhases = (
-				B3A1A3401A24784D0090BC17 /* Sources */,
-				B3A1A3411A24784D0090BC17 /* Frameworks */,
-				B3A1A3421A24784D0090BC17 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B3A1A3461A24784D0090BC17 /* PBXTargetDependency */,
-			);
-			name = Move4KlantTests;
-			productName = Move4MobileTests;
-			productReference = B3A1A3441A24784D0090BC17 /* Move4KlantTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -188,10 +150,7 @@
 				TargetAttributes = {
 					B3A1A32E1A24784C0090BC17 = {
 						CreatedOnToolsVersion = 6.1;
-					};
-					B3A1A3431A24784D0090BC17 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = B3A1A32E1A24784C0090BC17;
+						DevelopmentTeam = YQ62CYT4B3;
 					};
 				};
 			};
@@ -209,7 +168,6 @@
 			projectRoot = "";
 			targets = (
 				B3A1A32E1A24784C0090BC17 /* Move4Klant */,
-				B3A1A3431A24784D0090BC17 /* Move4KlantTests */,
 			);
 		};
 /* End PBXProject section */
@@ -222,13 +180,6 @@
 				B3A1A33A1A24784C0090BC17 /* Main.storyboard in Resources */,
 				B3A1A33F1A24784D0090BC17 /* LaunchScreen.xib in Resources */,
 				B3A1A33C1A24784D0090BC17 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3A1A3421A24784D0090BC17 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,23 +204,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B3A1A3401A24784D0090BC17 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B3A1A34B1A24784D0090BC17 /* Move4MobileTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B3A1A3461A24784D0090BC17 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B3A1A32E1A24784C0090BC17 /* Move4Klant */;
-			targetProxy = B3A1A3451A24784D0090BC17 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B3A1A3381A24784C0090BC17 /* Main.storyboard */ = {
@@ -372,9 +307,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Leo van der Zee (UZHU3D3GM7)";
 				INFOPLIST_FILE = Move4Mobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Move4Klant;
+				PROVISIONING_PROFILE = "716d2182-f0fd-404d-bddc-73a5dc3cf3f7";
 			};
 			name = Debug;
 		};
@@ -385,40 +322,6 @@
 				INFOPLIST_FILE = Move4Mobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Move4Klant;
-			};
-			name = Release;
-		};
-		B3A1A3521A24784D0090BC17 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Move4MobileTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = Move4KlantTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Move4Mobile.app/Move4Mobile";
-			};
-			name = Debug;
-		};
-		B3A1A3531A24784D0090BC17 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Move4MobileTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = Move4KlantTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Move4Mobile.app/Move4Mobile";
 			};
 			name = Release;
 		};
@@ -439,15 +342,6 @@
 			buildConfigurations = (
 				B3A1A34F1A24784D0090BC17 /* Debug */,
 				B3A1A3501A24784D0090BC17 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B3A1A3511A24784D0090BC17 /* Build configuration list for PBXNativeTarget "Move4KlantTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B3A1A3521A24784D0090BC17 /* Debug */,
-				B3A1A3531A24784D0090BC17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

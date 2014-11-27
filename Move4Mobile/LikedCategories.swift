@@ -12,19 +12,17 @@ class LikedCategories: UIViewController {
     @IBOutlet var label_info: UILabel!
     @IBOutlet var tableLikes: UITableView!
     @IBOutlet var button_save: UIBarButtonItem!
+    var allCategories = [Category]()
     var likes = [String]()
-    var selectedLikes = [String]()
-    var savedLikes = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        likes.append("spijkers")
-        likes.append("verf")
-        savedLikes.append("0")
-        savedLikes.append("1")
+        //allCategories.append("spijkers")
+        //allCategories.append("verf")
+        likes.append("0")
+        likes.append("1")
         tableLikes.reloadData()
-        selectedLikes = savedLikes
     }
 
     override func didReceiveMemoryWarning() {

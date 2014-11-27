@@ -44,7 +44,7 @@
                         <color key="backgroundColor" red="0.40637017248887353" green="0.73955804523541624" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="L8N-Tp-Rgf">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" style="plain" id="Fxf-1P-Pfr">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="Fxf-1P-Pfr">
                             <connections>
                                 <segue destination="ued-sH-HkX" kind="show" identifier="segueToSettings" id="3yQ-nA-bDY"/>
                             </connections>
@@ -202,9 +202,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="qBs-e9-tZ6">
-                        <barButtonItem key="rightBarButtonItem" title="Wijzig" style="plain" id="sWJ-Ad-9pl">
+                        <barButtonItem key="rightBarButtonItem" title="Wijzig" id="sWJ-Ad-9pl">
                             <connections>
-                                <segue destination="Ffw-h2-T0P" kind="show" id="dfd-ab-Bzv"/>
+                                <segue destination="Ffw-h2-T0P" kind="show" identifier="editAccount" id="7kC-hV-mi2"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -328,7 +328,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="V7o-qW-CHq">
-                        <barButtonItem key="rightBarButtonItem" title="Opslaan" style="plain" id="8wV-eP-lzn"/>
+                        <barButtonItem key="rightBarButtonItem" title="Opslaan" style="plain" id="8wV-eP-lzn">
+                            <connections>
+                                <segue destination="bjk-PU-1bB" kind="show" identifier="saveToManageAccount" id="sdO-N7-JOY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -404,7 +408,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Dhk-M2-T0g">
-                        <barButtonItem key="rightBarButtonItem" title="Opslaan" style="plain" id="PVs-U2-RRO">
+                        <barButtonItem key="rightBarButtonItem" title="Opslaan" id="PVs-U2-RRO">
                             <connections>
                                 <action selector="save:" destination="NkB-wq-LIV" id="pPw-yC-WPb"/>
                             </connections>
@@ -423,4 +427,7 @@
             <point key="canvasLocation" x="2303.5" y="143.5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="sdO-N7-JOY"/>
+    </inferredMetricsTieBreakers>
 </document>

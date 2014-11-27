@@ -23,9 +23,7 @@ class ManageAccount: UIViewController {
     var likes = [String]()
     
     // dummy info
-    var name =      "Leo"
-    var sirName =   "van der Zee"
-    var email =     "lzee100@gmail.com"
+    var user : User = User()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +33,13 @@ class ManageAccount: UIViewController {
         
         var image = UIImage(named: "emptyprofile")
         imageView_profilePicture.image = image
-
+        if (user.name == nil){
+        user.createUserWithName("Leo", uLastName: "van der Zee", uEmail: "lzee100@gmail.com")
+        }
         
-        // set person info 
-        label_firstNameOutput.text  = name
-        label_lastNameOutput.text   = sirName
-        label_emailAdresOutput.text = email
+        label_firstNameOutput.text  = user.name!
+        label_lastNameOutput.text   = user.lastName!
+        label_emailAdresOutput.text = user.email!
     }
 
     // table functions
@@ -77,7 +76,11 @@ class ManageAccount: UIViewController {
         return cell!
     }
 
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destinationVC = segue.destinationViewController as EditAccount
+        destinationVC.user = user
+    }
+
 
    
 

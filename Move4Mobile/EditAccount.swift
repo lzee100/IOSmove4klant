@@ -23,10 +23,7 @@ class EditAccount: UIViewController {
     @IBOutlet var tableLikes: UITableView!
     var likes = [String]()
     
-    // dummy info
-    var name =      "Leo"
-    var sirName =   "van der Zee"
-    var email =     "lzee100@gmail.com"
+    var user : User = User()
     
     
     
@@ -37,9 +34,14 @@ class EditAccount: UIViewController {
         likes.append("spijkers")
         likes.append("verf")
         
-        textinput_firstName.placeholder = name
-        textinput_sirName.placeholder = sirName
-        textinput_email.placeholder = email
+        // check if user has not been set by previous segue (ManageAccount)
+        if (user.name == nil){
+        user.createUserWithName("Leo", uLastName: "van der Zee", uEmail: "lzee100@gmail.com")
+        }
+        
+        textinput_firstName.placeholder = user.name!
+        textinput_sirName.placeholder = user.lastName!
+        textinput_email.placeholder = user.email!
         
         
         var image = UIImage(named: "emptyprofile")
@@ -85,7 +87,47 @@ class EditAccount: UIViewController {
         
         return cell!
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        var name = textinput_firstName.text
+        var lastname = textinput_sirName.text
+        var email = textinput_email.text
+        
+        if (name == "") {
+            name = textinput_firstName.placeholder!
+        }
+        if (lastname == ""){
+            lastname = textinput_sirName.placeholder!
+        }
+        if (email == ""){
+            email = textinput_email.placeholder!
+        }
+        
+        let newUser : User = User()
+        newUser.createUserWithName(name, uLastName: lastname, uEmail: email)
+        let destinationVC = segue.destinationViewController as ManageAccount
+        destinationVC.user = newUser
+    }
 
+    @IBAction func save(sender: AnyObject) {
+        var name = textinput_firstName.text
+        var lastname = textinput_sirName.text
+        var email = textinput_email.text
+        
+        if (name == "") {
+            name = textinput_firstName.placeholder!
+        }
+        if (lastname == ""){
+            lastname = textinput_sirName.placeholder!
+        }
+        if (email == ""){
+            email = textinput_email.placeholder!
+        }
+        
+        
+        [self.performSegueWithIdentifier("saveAccountInfo", sender: sender)]
+    }
 
     /*
     // MARK: - Navigation

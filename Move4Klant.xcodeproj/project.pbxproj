@@ -35,6 +35,7 @@
 		B3FF11091A25E3C800F3AE84 /* tool_kit_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FF11021A25E3C800F3AE84 /* tool_kit_1.png */; };
 		B3FF110A1A25E3C800F3AE84 /* tool_kit_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FF11031A25E3C800F3AE84 /* tool_kit_2.png */; };
 		B3FF110B1A25E3C800F3AE84 /* tools.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FF11041A25E3C800F3AE84 /* tools.png */; };
+		B3FF110D1A2718A600F3AE84 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF110C1A2718A600F3AE84 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		B3FF11021A25E3C800F3AE84 /* tool_kit_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tool_kit_1.png; sourceTree = "<group>"; };
 		B3FF11031A25E3C800F3AE84 /* tool_kit_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tool_kit_2.png; sourceTree = "<group>"; };
 		B3FF11041A25E3C800F3AE84 /* tools.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tools.png; sourceTree = "<group>"; };
+		B3FF110C1A2718A600F3AE84 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				B3A1A3341A24784C0090BC17 /* AppDelegate.swift */,
 				B3A1A3361A24784C0090BC17 /* ViewController.swift */,
 				B3A1A3381A24784C0090BC17 /* Main.storyboard */,
+				B3FF110C1A2718A600F3AE84 /* User.swift */,
 				B30BA8981A249E0700B398CB /* LikedCategoriesCell.swift */,
 				B30BA8941A249D9F00B398CB /* LikedCategories.swift */,
 				B30BA89C1A24A0A900B398CB /* EditAccountCell.swift */,
@@ -263,6 +266,7 @@
 				B30BA89B1A249F5400B398CB /* SettingsCell.swift in Sources */,
 				B30BA8991A249E0700B398CB /* LikedCategoriesCell.swift in Sources */,
 				B3A1A3351A24784C0090BC17 /* AppDelegate.swift in Sources */,
+				B3FF110D1A2718A600F3AE84 /* User.swift in Sources */,
 				B30BA8951A249D9F00B398CB /* LikedCategories.swift in Sources */,
 				B30BA8911A249C9800B398CB /* ManageAccount.swift in Sources */,
 				B30BA8931A249D6000B398CB /* EditAccount.swift in Sources */,

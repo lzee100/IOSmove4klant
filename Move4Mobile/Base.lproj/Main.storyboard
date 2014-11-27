@@ -70,7 +70,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="accountBeheerCell" rowHeight="76" id="iaK-yH-r9O" customClass="SettingsCell" customModule="Move4Klant" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" rowHeight="76" id="iaK-yH-r9O" customClass="SettingsCell" customModule="Move4Klant" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iaK-yH-r9O" id="2P1-FR-AGN">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -211,7 +211,17 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="button_change" destination="sWJ-Ad-9pl" id="YOs-ps-LY6"/>
+                        <outlet property="button_Change" destination="sWJ-Ad-9pl" id="7Dn-4h-ZEf"/>
+                        <outlet property="imageView_profilePicture" destination="A25-LF-v5y" id="T85-gJ-iBl"/>
+                        <outlet property="label_LastName" destination="28A-W9-JK2" id="DEi-Kg-InI"/>
+                        <outlet property="label_TitleAccountinfo" destination="MBg-ot-h0b" id="Q2W-OQ-j9F"/>
+                        <outlet property="label_emailAdresOutput" destination="213-Eo-IiE" id="HuW-zb-iQC"/>
+                        <outlet property="label_emailadres" destination="EH8-RZ-pif" id="50I-ds-bHp"/>
+                        <outlet property="label_firstName" destination="4el-zA-7I6" id="stf-gL-ps7"/>
+                        <outlet property="label_firstNameOutput" destination="iFr-JN-HhQ" id="Nql-Gh-cSM"/>
+                        <outlet property="label_lastNameOutput" destination="saF-gJ-vnL" id="FXE-Mc-muf"/>
+                        <outlet property="label_titleLikes" destination="4gX-xw-dqE" id="q6G-mm-HLe"/>
+                        <outlet property="tableView_Likes" destination="zgF-1d-Y9U" id="uA1-wZ-djb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwM-Nv-9Hv" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -9,7 +9,23 @@
 import UIKit
 
 class ManageAccount: UIViewController {
-    @IBOutlet weak var button_change: UIBarButtonItem!
+    @IBOutlet var label_TitleAccountinfo: UILabel!
+    @IBOutlet var imageView_profilePicture: UIImageView!
+    @IBOutlet var label_firstName: UILabel!
+    @IBOutlet var label_LastName: UILabel!
+    @IBOutlet var label_emailadres: UILabel!
+    @IBOutlet var label_firstNameOutput: UILabel!
+    @IBOutlet var label_lastNameOutput: UILabel!
+    @IBOutlet var label_emailAdresOutput: UILabel!
+    @IBOutlet var label_titleLikes: UILabel!
+    @IBOutlet var tableView_Likes: UITableView!
+    @IBOutlet var button_Change: UIBarButtonItem!
+    var likes = [String]()
+    
+    // dummy info
+    var name =      "Leo"
+    var sirName =   "van der Zee"
+    var email =     "lzee100@gmail.com"
 
     override func viewDidLoad() {
         super.viewDidLoad()

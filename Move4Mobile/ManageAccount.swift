@@ -9,6 +9,7 @@
 import UIKit
 
 class ManageAccount: UIViewController {
+    @IBOutlet weak var button_change: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()

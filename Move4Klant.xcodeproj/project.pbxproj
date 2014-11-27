@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3CC8D2F1A25FD6A00C0E513 /* ServerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC8D2E1A25FD6A00C0E513 /* ServerRequestHandler.swift */; };
+		A3CC8D311A26012E00C0E513 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC8D301A26012E00C0E513 /* Config.swift */; };
+		A3CC8D331A260E2D00C0E513 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC8D321A260E2D00C0E513 /* Category.swift */; };
+		A3D006BD1A271217007FD6F6 /* HTTPRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D006B81A271217007FD6F6 /* HTTPRequestSerializer.swift */; };
+		A3D006BE1A271217007FD6F6 /* HTTPResponseSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D006B91A271217007FD6F6 /* HTTPResponseSerializer.swift */; };
+		A3D006BF1A271217007FD6F6 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D006BA1A271217007FD6F6 /* HTTPTask.swift */; };
+		A3D006C01A271217007FD6F6 /* HTTPUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D006BB1A271217007FD6F6 /* HTTPUpload.swift */; };
 		B30BA88D1A249C2800B398CB /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30BA88C1A249C2800B398CB /* Home.swift */; };
 		B30BA88F1A249C5700B398CB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30BA88E1A249C5700B398CB /* Settings.swift */; };
 		B30BA8911A249C9800B398CB /* ManageAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30BA8901A249C9800B398CB /* ManageAccount.swift */; };
@@ -24,6 +31,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A3CC8D2E1A25FD6A00C0E513 /* ServerRequestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRequestHandler.swift; sourceTree = "<group>"; };
+		A3CC8D301A26012E00C0E513 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		A3CC8D321A260E2D00C0E513 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		A3D006B81A271217007FD6F6 /* HTTPRequestSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPRequestSerializer.swift; path = "../../../../Downloads/SwiftHTTP-master/HTTPRequestSerializer.swift"; sourceTree = "<group>"; };
+		A3D006B91A271217007FD6F6 /* HTTPResponseSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPResponseSerializer.swift; path = "../../../../Downloads/SwiftHTTP-master/HTTPResponseSerializer.swift"; sourceTree = "<group>"; };
+		A3D006BA1A271217007FD6F6 /* HTTPTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPTask.swift; path = "../../../../Downloads/SwiftHTTP-master/HTTPTask.swift"; sourceTree = "<group>"; };
+		A3D006BB1A271217007FD6F6 /* HTTPUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPUpload.swift; path = "../../../../Downloads/SwiftHTTP-master/HTTPUpload.swift"; sourceTree = "<group>"; };
+		A3D006BC1A271217007FD6F6 /* SwiftHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwiftHTTP.h; path = "../../../../Downloads/SwiftHTTP-master/SwiftHTTP.h"; sourceTree = "<group>"; };
 		B30BA88C1A249C2800B398CB /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		B30BA88E1A249C5700B398CB /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B30BA8901A249C9800B398CB /* ManageAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageAccount.swift; sourceTree = "<group>"; };
@@ -55,6 +70,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A3D006B71A271116007FD6F6 /* SwiftHTTP */ = {
+			isa = PBXGroup;
+			children = (
+				A3D006B81A271217007FD6F6 /* HTTPRequestSerializer.swift */,
+				A3D006B91A271217007FD6F6 /* HTTPResponseSerializer.swift */,
+				A3D006BA1A271217007FD6F6 /* HTTPTask.swift */,
+				A3D006BB1A271217007FD6F6 /* HTTPUpload.swift */,
+				A3D006BC1A271217007FD6F6 /* SwiftHTTP.h */,
+			);
+			name = SwiftHTTP;
+			sourceTree = "<group>";
+		};
+		A3D006C11A27143F007FD6F6 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				A3CC8D321A260E2D00C0E513 /* Category.swift */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		B3A1A3261A24784C0090BC17 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +110,8 @@
 		B3A1A3311A24784C0090BC17 /* Move4Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				A3D006C11A27143F007FD6F6 /* Objects */,
+				A3D006B71A271116007FD6F6 /* SwiftHTTP */,
 				B3A1A3341A24784C0090BC17 /* AppDelegate.swift */,
 				B3A1A3361A24784C0090BC17 /* ViewController.swift */,
 				B3A1A3381A24784C0090BC17 /* Main.storyboard */,
@@ -90,6 +127,8 @@
 				B3A1A33B1A24784D0090BC17 /* Images.xcassets */,
 				B3A1A33D1A24784D0090BC17 /* LaunchScreen.xib */,
 				B3A1A3321A24784C0090BC17 /* Supporting Files */,
+				A3CC8D2E1A25FD6A00C0E513 /* ServerRequestHandler.swift */,
+				A3CC8D301A26012E00C0E513 /* Config.swift */,
 			);
 			path = Move4Mobile;
 			sourceTree = "<group>";
@@ -190,17 +229,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3D006BF1A271217007FD6F6 /* HTTPTask.swift in Sources */,
+				A3D006BE1A271217007FD6F6 /* HTTPResponseSerializer.swift in Sources */,
 				B30BA8971A249DD900B398CB /* ManageAccountCell.swift in Sources */,
 				B3A1A3371A24784C0090BC17 /* ViewController.swift in Sources */,
 				B30BA88D1A249C2800B398CB /* Home.swift in Sources */,
 				B30BA89D1A24A0A900B398CB /* EditAccountCell.swift in Sources */,
 				B30BA88F1A249C5700B398CB /* Settings.swift in Sources */,
 				B30BA89B1A249F5400B398CB /* SettingsCell.swift in Sources */,
+				A3CC8D311A26012E00C0E513 /* Config.swift in Sources */,
 				B30BA8991A249E0700B398CB /* LikedCategoriesCell.swift in Sources */,
+				A3CC8D2F1A25FD6A00C0E513 /* ServerRequestHandler.swift in Sources */,
 				B3A1A3351A24784C0090BC17 /* AppDelegate.swift in Sources */,
 				B30BA8951A249D9F00B398CB /* LikedCategories.swift in Sources */,
 				B30BA8911A249C9800B398CB /* ManageAccount.swift in Sources */,
+				A3D006BD1A271217007FD6F6 /* HTTPRequestSerializer.swift in Sources */,
 				B30BA8931A249D6000B398CB /* EditAccount.swift in Sources */,
+				A3D006C01A271217007FD6F6 /* HTTPUpload.swift in Sources */,
+				A3CC8D331A260E2D00C0E513 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,11 +353,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Leo van der Zee (UZHU3D3GM7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sander Wubs (MKLYHUBSK8)";
 				INFOPLIST_FILE = Move4Mobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Move4Klant;
-				PROVISIONING_PROFILE = "716d2182-f0fd-404d-bddc-73a5dc3cf3f7";
+				PROVISIONING_PROFILE = "e2e009a6-1b5c-4dea-96ab-9cf06913613a";
 			};
 			name = Debug;
 		};

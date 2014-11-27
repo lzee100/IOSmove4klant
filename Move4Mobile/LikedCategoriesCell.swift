@@ -9,6 +9,8 @@
 import UIKit
 
 class LikedCategoriesCell: UITableViewCell {
+    @IBOutlet var label_category: UILabel!
+    @IBOutlet var switch_like: UISwitch!
 
     override func awakeFromNib() {
         super.awakeFromNib()

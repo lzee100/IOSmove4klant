@@ -9,7 +9,9 @@
 import UIKit
 
 class SettingsCell: UITableViewCell {
-
+    @IBOutlet var label_menuTitle: UILabel!
+    @IBOutlet var label_menuDescription: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

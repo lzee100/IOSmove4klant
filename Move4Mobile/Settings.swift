@@ -9,11 +9,13 @@
 import UIKit
 
 class Settings: UITableViewController {
-    var menuItems = [String]()
+    var menuTitle = [String]()
+    var menuDescription = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.menuItems.append("Accountbeheer")
+        self.menuTitle.append("Accountbeheer")
+        self.menuDescription.append("Beheer hier je accountinformatie")
     }
     
     // MARK: - Table view data source
@@ -27,21 +29,33 @@ class Settings: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return menuItems.count
+        
+        return menuTitle.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("settingsCell", forIndexPath: indexPath) as UITableViewCell
+        var i = indexPath.row
+        let id = "settingsCell"
+        var cell : SettingsCell? = tableView.dequeueReusableCellWithIdentifier(id) as SettingsCell?
 
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
+             cell = tableView.dequeueReusableCellWithIdentifier(id) as SettingsCell!
         }
-        // Configure the cell...
+        
+        cell!.label_menuTitle.text = menuTitle[indexPath.row]
+        cell!.label_menuDescription.text = menuDescription[indexPath.row]
 
-        return cell
-    }*/
+        return cell!
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
+    {
+        if (segue.identifier == "manageAccount") {
+            let view: ManageAccount = segue.destinationViewController as ManageAccount
+        }
+    } // go to next screen (overview scanned beacons) if clicked on a cell
+    
     
 
     /*

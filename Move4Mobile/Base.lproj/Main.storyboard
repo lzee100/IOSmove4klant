@@ -70,7 +70,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="76" id="iaK-yH-r9O" customClass="SettingsCell" customModule="Move4Klant" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" rowHeight="76" id="iaK-yH-r9O" customClass="SettingsCell" customModule="Move4Klant" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iaK-yH-r9O" id="2P1-FR-AGN">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -90,6 +90,8 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="label_menuDescription" destination="rwP-ll-xwX" id="mSZ-mU-ddd"/>
+                                    <outlet property="label_menuTitle" destination="Tad-oc-zzf" id="lIZ-Y5-mS9"/>
                                     <segue destination="bjk-PU-1bB" kind="show" identifier="manageAccount" id="X3r-wj-TbP"/>
                                 </connections>
                             </tableViewCell>
@@ -118,9 +120,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLr-Cm-Rda">
-                                <rect key="frame" x="16" y="110" width="150" height="150"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Voornaam:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4el-zA-7I6">
                                 <rect key="frame" x="16" y="285" width="83" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -140,13 +139,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saF-gJ-vnL">
-                                <rect key="frame" x="177" y="323" width="55" height="21"/>
+                                <rect key="frame" x="177" y="323" width="182" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="213-Eo-IiE">
-                                <rect key="frame" x="177" y="360" width="55" height="21"/>
+                                <rect key="frame" x="177" y="360" width="182" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -174,8 +173,15 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="label_Category" destination="4ss-0z-5HV" id="tax-AZ-gsb"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="bjk-PU-1bB" id="gVT-aT-TtX"/>
+                                    <outlet property="delegate" destination="bjk-PU-1bB" id="Yd2-0G-aPN"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Accountinformatie" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBg-ot-h0b">
                                 <rect key="frame" x="16" y="72" width="500" height="30"/>
@@ -189,6 +195,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A25-LF-v5y">
+                                <rect key="frame" x="16" y="110" width="150" height="150"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -201,6 +210,19 @@
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="button_Change" destination="sWJ-Ad-9pl" id="7Dn-4h-ZEf"/>
+                        <outlet property="imageView_profilePicture" destination="A25-LF-v5y" id="T85-gJ-iBl"/>
+                        <outlet property="label_LastName" destination="28A-W9-JK2" id="DEi-Kg-InI"/>
+                        <outlet property="label_TitleAccountinfo" destination="MBg-ot-h0b" id="Q2W-OQ-j9F"/>
+                        <outlet property="label_emailAdresOutput" destination="213-Eo-IiE" id="HuW-zb-iQC"/>
+                        <outlet property="label_emailadres" destination="EH8-RZ-pif" id="50I-ds-bHp"/>
+                        <outlet property="label_firstName" destination="4el-zA-7I6" id="stf-gL-ps7"/>
+                        <outlet property="label_firstNameOutput" destination="iFr-JN-HhQ" id="Nql-Gh-cSM"/>
+                        <outlet property="label_lastNameOutput" destination="saF-gJ-vnL" id="FXE-Mc-muf"/>
+                        <outlet property="label_titleLikes" destination="4gX-xw-dqE" id="q6G-mm-HLe"/>
+                        <outlet property="tableView_Likes" destination="zgF-1d-Y9U" id="uA1-wZ-djb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwM-Nv-9Hv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -259,8 +281,15 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="label_category" destination="aDT-gt-WEd" id="DAJ-3p-D06"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ffw-h2-T0P" id="nQD-zJ-pto"/>
+                                    <outlet property="delegate" destination="Ffw-h2-T0P" id="TSW-Uj-jxp"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G0-q9-8Xd">
                                 <rect key="frame" x="294" y="403" width="41" height="30"/>
@@ -292,7 +321,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mdC-D4-apY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RGH-9g-yZO">
                                 <rect key="frame" x="16" y="110" width="150" height="150"/>
                             </imageView>
                         </subviews>
@@ -303,6 +332,20 @@
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="button_changeLikes" destination="3G0-q9-8Xd" id="Puw-45-uSe"/>
+                        <outlet property="button_save" destination="8wV-eP-lzn" id="Bjs-dq-ekU"/>
+                        <outlet property="imageView_profilePicture" destination="RGH-9g-yZO" id="vFt-Et-D39"/>
+                        <outlet property="label_email" destination="Hi1-ho-SLc" id="GdC-3E-e4a"/>
+                        <outlet property="label_firstName" destination="jxn-z6-9T0" id="L0N-7T-qk4"/>
+                        <outlet property="label_sirName" destination="iID-V1-4QC" id="7Gp-3x-FGC"/>
+                        <outlet property="label_titleEditAccountinfo" destination="eF9-q5-JlQ" id="FKL-jH-qAl"/>
+                        <outlet property="label_titleLikes" destination="jBK-C5-tqQ" id="icG-pV-hdb"/>
+                        <outlet property="tableLikes" destination="TvG-NI-hcU" id="11L-pT-Okr"/>
+                        <outlet property="textinput_email" destination="1Bx-sb-hkR" id="YXR-Ai-bOV"/>
+                        <outlet property="textinput_firstName" destination="LyY-Fn-YIa" id="OK2-zR-xGH"/>
+                        <outlet property="textinput_sirName" destination="Bba-EA-rPj" id="uOk-HD-8jB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cw4-XL-x6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -346,17 +389,34 @@
                                                 </switch>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="label_category" destination="siE-jh-mgJ" id="Sdk-ti-U75"/>
+                                            <outlet property="switch_like" destination="95E-rC-6Re" id="Kp4-iY-Bvp"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="NkB-wq-LIV" id="oWu-zx-Juq"/>
+                                    <outlet property="delegate" destination="NkB-wq-LIV" id="w68-WA-I1B"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Dhk-M2-T0g">
-                        <barButtonItem key="rightBarButtonItem" title="Opslaan" style="plain" id="PVs-U2-RRO"/>
+                        <barButtonItem key="rightBarButtonItem" title="Opslaan" style="plain" id="PVs-U2-RRO">
+                            <connections>
+                                <action selector="save:" destination="NkB-wq-LIV" id="pPw-yC-WPb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="button_save" destination="PVs-U2-RRO" id="V7P-Ta-1ls"/>
+                        <outlet property="label_info" destination="8wd-3r-sr0" id="c7J-Cd-Ddj"/>
+                        <outlet property="tableLikes" destination="PTf-xB-cxM" id="hqG-Lc-syp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZh-g0-n21" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

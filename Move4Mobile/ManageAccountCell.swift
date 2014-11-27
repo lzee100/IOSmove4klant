@@ -9,6 +9,7 @@
 import UIKit
 
 class ManageAccountCell: UITableViewCell {
+    @IBOutlet var label_Category: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

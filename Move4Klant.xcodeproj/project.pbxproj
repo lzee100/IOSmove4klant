@@ -115,6 +115,7 @@
 		A3D006C11A27143F007FD6F6 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				B3FF110C1A2718A600F3AE84 /* User.swift */,
 				A3CC8D321A260E2D00C0E513 /* Category.swift */,
 			);
 			name = Objects;
@@ -146,7 +147,6 @@
 				B3A1A3341A24784C0090BC17 /* AppDelegate.swift */,
 				B3A1A3361A24784C0090BC17 /* ViewController.swift */,
 				B3A1A3381A24784C0090BC17 /* Main.storyboard */,
-				B3FF110C1A2718A600F3AE84 /* User.swift */,
 				B30BA8981A249E0700B398CB /* LikedCategoriesCell.swift */,
 				B30BA8941A249D9F00B398CB /* LikedCategories.swift */,
 				B30BA89C1A24A0A900B398CB /* EditAccountCell.swift */,

@@ -47,14 +47,6 @@ public class ServerRequestHandler: NSObject {
             },failure: {(error: NSError, response: HTTPResponse?) in
                 println("error: \(error)")
         })
-        
-        let cat : Category = Category()
-        let cat2 : Category = Category(ID: 1, name: "")
-        
-        let cat3 : Category = Category(ID: 1, Name: "name", liked:1)
-        
-        
-        
     }
     
     
@@ -77,7 +69,8 @@ public class ServerRequestHandler: NSObject {
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
         let params: Dictionary<String,AnyObject> = ["customerID": userID]
         request.POST(Config().LOGINURL, parameters: params, success: {(response: HTTPResponse) in
-            
+            let str = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println("response: \(str)") //prints the HTML of the page
             },failure: {(error: NSError, response: HTTPResponse?) in
                 
         })

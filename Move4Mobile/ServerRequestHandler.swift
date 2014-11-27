@@ -22,7 +22,6 @@ public class ServerRequestHandler: NSObject {
         },failure: {(error: NSError, response: HTTPResponse?) in
             println("error: \(error)")
     })
-
 }
    
 }

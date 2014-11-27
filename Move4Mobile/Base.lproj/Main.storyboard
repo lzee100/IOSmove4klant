@@ -40,6 +40,15 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3m-yF-Z8C">
+                                <rect key="frame" x="164" y="349" width="46" height="30"/>
+                                <state key="normal" title="Checkintest">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="checkFunctionPressed:" destination="QSm-O1-6KZ" eventType="touchUpOutside" id="mk6-kE-iXR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.40637017248887353" green="0.73955804523541624" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -53,6 +62,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="checkFunction" destination="N3m-yF-Z8C" id="m1J-47-G4l"/>
                         <outlet property="label_ijzerhandel" destination="g8X-Bb-cAu" id="lKb-LQ-HUA"/>
                         <outlet property="settings" destination="Fxf-1P-Pfr" id="aJw-hl-blY"/>
                     </connections>

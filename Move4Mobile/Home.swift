@@ -24,7 +24,13 @@ class Home: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBOutlet weak var checkFunction: UIButton!
 
+    @IBAction func checkFunctionPressed(sender: AnyObject) {
+        
+        ServerRequestHandler().checkinout(1)
+        
+    }
     /*
     // MARK: - Navigation
 

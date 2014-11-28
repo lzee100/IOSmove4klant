@@ -9,10 +9,10 @@
 import UIKit
 
 public class ServerRequestHandler: NSObject {
-    
+    /*
  public func getAllCategories() {
    //var request = NSMutableURLRequest(URL:Config().CATEGORYURL)
-    
+   
     var request = HTTPTask()
     request.GET(Config().CATEGORYURL, parameters: nil, success: {(response: HTTPResponse) in
         if let data = response.responseObject as? NSData {
@@ -69,7 +69,7 @@ public class ServerRequestHandler: NSObject {
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
         let params: Dictionary<String,AnyObject> = ["customerID": userID]
         request.POST(Config().LOGINURL, parameters: params, success: {(response: HTTPResponse) in
-            let str = NSString(data: data, encoding: NSUTF8StringEncoding)
+       //     let str = NSString(data: data, encoding: NSUTF8StringEncoding)
             println("response: \(str)") //prints the HTML of the page
             },failure: {(error: NSError, response: HTTPResponse?) in
                 
@@ -88,5 +88,5 @@ public class ServerRequestHandler: NSObject {
             },failure: {(error: NSError, response: HTTPResponse?) in
                 
         })
-    }
+    }*/
 }

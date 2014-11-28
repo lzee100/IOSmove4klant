@@ -297,7 +297,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="NkB-wq-LIV" kind="show" id="1wn-tI-ktl"/>
+                                    <segue destination="NkB-wq-LIV" kind="show" identifier="changeLikedCategories" id="1U3-f2-QKk"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LyY-Fn-YIa">
@@ -328,11 +328,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="V7o-qW-CHq">
-                        <barButtonItem key="rightBarButtonItem" title="Opslaan" style="plain" id="8wV-eP-lzn">
-                            <connections>
-                                <segue destination="bjk-PU-1bB" kind="show" identifier="saveToManageAccount" id="sdO-N7-JOY"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Opslaan" style="plain" id="8wV-eP-lzn"/>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -411,6 +407,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Opslaan" id="PVs-U2-RRO">
                             <connections>
                                 <action selector="save:" destination="NkB-wq-LIV" id="pPw-yC-WPb"/>
+                                <segue destination="bjk-PU-1bB" kind="show" identifier="saveLikesToManageAccount" id="Fj9-Ux-uoC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -428,6 +425,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sdO-N7-JOY"/>
+        <segue reference="Fj9-Ux-uoC"/>
     </inferredMetricsTieBreakers>
 </document>

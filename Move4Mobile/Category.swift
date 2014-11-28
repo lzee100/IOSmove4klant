@@ -29,13 +29,13 @@ class Category: NSObject {
         self.liked=liked
     }
     
-
-  
+    
+    
     func setInfo(Id: Int, Name: String, liked: Int){
-    self.ID = Id
-    self.name = Name
-    self.liked=liked
+        self.ID = Id
+        self.name = Name
+        self.liked=liked
     }
     
-
+    
 }

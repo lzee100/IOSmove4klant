@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A56179BB-7879-499D-8B42-7A60B1F7C7A5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Move4Klant</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6923F31DBC03499A0837C93DF26006D57A74ABA7</key>
+		<string>https://github.com/lzee100/IOSmove4klant.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Move4Klant.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6923F31DBC03499A0837C93DF26006D57A74ABA7</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lzee100/IOSmove4klant.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6923F31DBC03499A0837C93DF26006D57A74ABA7</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6923F31DBC03499A0837C93DF26006D57A74ABA7</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IOSmove4klant</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -278,6 +278,8 @@
 				B37373FA1A287D5600A35E2E /* HTTPRequestSerializer.swift in Sources */,
 				B37373FC1A287D5600A35E2E /* HTTPTask.swift in Sources */,
 				A3CC8D331A260E2D00C0E513 /* Category.swift in Sources */,
+				B37373FB1A287D5600A35E2E /* HTTPResponseSerializer.swift in Sources */,
+				B37373FD1A287D5600A35E2E /* HTTPUpload.swift in Sources */,
 				A3DB3E3A1A28AA9D00062094 /* Beacon.swift in Sources */,
 				A35737EB1A2777840021DD36 /* Product.swift in Sources */,
 			);

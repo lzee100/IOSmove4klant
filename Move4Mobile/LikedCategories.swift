@@ -65,12 +65,12 @@ class LikedCategories: UIViewController {
             cell = tableView.dequeueReusableCellWithIdentifier(id) as LikedCategoriesCell!
         }
         
-        cell!.label_category.text = likes[indexPath.row]
-//        if (savedLikes[indexPath.row] == "0"){
-//            cell!.switch_like.setOn(false, animated: true)
-//        } else {
-//            cell!.switch_like.setOn(true, animated: true)
-//        }
+        cell!.label_category.text = allCategories[indexPath.row].name!
+        if (allCategories[indexPath.row].liked == 0){
+            cell!.switch_like.setOn(false, animated: true)
+        } else {
+            cell!.switch_like.setOn(true, animated: true)
+        }
         cell!.switch_like.addTarget(self, action:"switchChanged:", forControlEvents: UIControlEvents.TouchUpInside)
         
         return cell!
@@ -79,28 +79,23 @@ class LikedCategories: UIViewController {
     func switchChanged (sender : UISwitch) {
         let cell : UITableViewCell = sender.superview!.superview as UITableViewCell
         let indexPath : NSIndexPath = tableLikes.indexPathForCell(cell)!
-//        let alert = UIAlertView()
-//        alert.title = "Title"
-//        alert.message = "You changed cell " + String(indexPath.row)
-//        alert.addButtonWithTitle("Ok")
-//        alert.show()
-//        if (selectedLikes[indexPath.row] == "1"){
-//        selectedLikes[indexPath.row] = "0"
-//        }
-//        else{
-//            selectedLikes[indexPath.row] = "1"
-//        }
+        if (allCategories[indexPath.row].liked == 1){
+            allCategories[indexPath.row].liked = 0
+        }
+        else{
+            allCategories[indexPath.row].liked = 1
+        }
     }
     
     @IBAction func save(sender: AnyObject) {
         var categoriesToSave = ""
         var i = 0
-//        for number in selectedLikes {
-//            if (number == "1"){
-//            categoriesToSave += likes[i]
-//            }
-//            i++
-//        }
+        for category in allCategories {
+            if (category.liked! == 1){
+                categoriesToSave += category.name!
+            }
+            i++
+        }
         let alert = UIAlertView()
         alert.title = "Title"
         alert.message = "To save: " + categoriesToSave

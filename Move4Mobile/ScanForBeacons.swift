@@ -14,6 +14,7 @@ class ScanForBeacons: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var label_RangingBeacons: UILabel!
     
+    
     var beacons: [CLBeacon]?
     var locationManager: CLLocationManager?
     var lastProximity: CLProximity?

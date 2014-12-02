@@ -11,7 +11,7 @@ import UIKit
 class Home: UIViewController {
     @IBOutlet var settings: UIBarButtonItem!
     @IBOutlet var label_ijzerhandel: UILabel!
-    
+    @IBOutlet weak var button_checkFunctions: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +24,10 @@ class Home: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBOutlet weak var checkFunction: UIButton!
 
     @IBAction func checkFunctionPressed(sender: AnyObject) {
         
-        ServerRequestHandler().checkinout(1)
+ServerRequestHandler().getAllProducts()
         
     }
     /*

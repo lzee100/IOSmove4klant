@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DXc-yh-qHG">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
@@ -41,12 +42,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3m-yF-Z8C">
-                                <rect key="frame" x="164" y="349" width="46" height="30"/>
+                                <rect key="frame" x="124" y="349" width="86" height="30"/>
                                 <state key="normal" title="Checkintest">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="checkFunctionPressed:" destination="QSm-O1-6KZ" eventType="touchUpOutside" id="mk6-kE-iXR"/>
+                                    <action selector="checkFunctionPressed:" destination="QSm-O1-6KZ" eventType="touchUpInside" id="oCL-fr-hfd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -62,7 +63,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="checkFunction" destination="N3m-yF-Z8C" id="m1J-47-G4l"/>
+                        <outlet property="button_checkFunctions" destination="N3m-yF-Z8C" id="AKh-bz-TIi"/>
                         <outlet property="label_ijzerhandel" destination="g8X-Bb-cAu" id="lKb-LQ-HUA"/>
                         <outlet property="settings" destination="Fxf-1P-Pfr" id="aJw-hl-blY"/>
                     </connections>

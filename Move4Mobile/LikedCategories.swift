@@ -61,11 +61,11 @@ class LikedCategories: UIViewController {
         }
         
         cell!.label_category.text = likes[indexPath.row]
-        if (savedLikes[indexPath.row] == "0"){
-            cell!.switch_like.setOn(false, animated: true)
-        } else {
-            cell!.switch_like.setOn(true, animated: true)
-        }
+//        if (savedLikes[indexPath.row] == "0"){
+//            cell!.switch_like.setOn(false, animated: true)
+//        } else {
+//            cell!.switch_like.setOn(true, animated: true)
+//        }
         cell!.switch_like.addTarget(self, action:"switchChanged:", forControlEvents: UIControlEvents.TouchUpInside)
         
         return cell!
@@ -102,23 +102,23 @@ class LikedCategories: UIViewController {
 //        alert.message = "You changed cell " + String(indexPath.row)
 //        alert.addButtonWithTitle("Ok")
 //        alert.show()
-        if (selectedLikes[indexPath.row] == "1"){
-        selectedLikes[indexPath.row] = "0"
-        }
-        else{
-            selectedLikes[indexPath.row] = "1"
-        }
+//        if (selectedLikes[indexPath.row] == "1"){
+//        selectedLikes[indexPath.row] = "0"
+//        }
+//        else{
+//            selectedLikes[indexPath.row] = "1"
+//        }
     }
     
     @IBAction func save(sender: AnyObject) {
         var categoriesToSave = ""
         var i = 0
-        for number in selectedLikes {
-            if (number == "1"){
-            categoriesToSave += likes[i]
-            }
-            i++
-        }
+//        for number in selectedLikes {
+//            if (number == "1"){
+//            categoriesToSave += likes[i]
+//            }
+//            i++
+//        }
         let alert = UIAlertView()
                 alert.title = "Title"
         alert.message = "To save: " + categoriesToSave

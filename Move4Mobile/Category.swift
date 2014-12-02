@@ -37,5 +37,9 @@ class Category: NSObject {
     self.liked=liked
     }
     
+    func toString() -> String{
+        return "ID: \(ID)  Name: \(name) "
+    }
+    
 
 }

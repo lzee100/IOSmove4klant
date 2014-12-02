@@ -16,6 +16,8 @@ class Settings: UITableViewController {
         super.viewDidLoad()
         self.menuTitle.append("Accountbeheer")
         self.menuDescription.append("Beheer hier je accountinformatie")
+        self.menuTitle.append("Scan for Beacons")
+        self.menuDescription.append("Test beacon Scanning")
     }
     
     // MARK: - Table view data source
@@ -53,6 +55,9 @@ class Settings: UITableViewController {
     {
         if (segue.identifier == "manageAccount") {
             let view: ManageAccount = segue.destinationViewController as ManageAccount
+        }
+        if (segue.identifier == "scanForBeacons"){
+            let view: ScanForBeacons = segue.destinationViewController as ScanForBeacons
         }
     } // go to next screen (overview scanned beacons) if clicked on a cell
     

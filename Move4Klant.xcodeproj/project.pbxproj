@@ -23,11 +23,14 @@
 		B37373FB1A287D5600A35E2E /* HTTPResponseSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F71A287D5600A35E2E /* HTTPResponseSerializer.swift */; };
 		B37373FC1A287D5600A35E2E /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F81A287D5600A35E2E /* HTTPTask.swift */; };
 		B37373FD1A287D5600A35E2E /* HTTPUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F91A287D5600A35E2E /* HTTPUpload.swift */; };
+		B37374031A28909D00A35E2E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B37374021A28909D00A35E2E /* CoreData.framework */; };
 		B3A1A3351A24784C0090BC17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A1A3341A24784C0090BC17 /* AppDelegate.swift */; };
 		B3A1A3371A24784C0090BC17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A1A3361A24784C0090BC17 /* ViewController.swift */; };
 		B3A1A33A1A24784C0090BC17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A1A3381A24784C0090BC17 /* Main.storyboard */; };
 		B3A1A33C1A24784D0090BC17 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3A1A33B1A24784D0090BC17 /* Images.xcassets */; };
 		B3A1A33F1A24784D0090BC17 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A1A33D1A24784D0090BC17 /* LaunchScreen.xib */; };
+		B3D49E921A2DBB8400982DF5 /* ScanForBeacons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E911A2DBB8400982DF5 /* ScanForBeacons.swift */; };
+		B3D49E941A2DBD9F00982DF5 /* ScanForBeaconsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E931A2DBD9F00982DF5 /* ScanForBeaconsCell.swift */; };
 		B3FF110D1A2718A600F3AE84 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF110C1A2718A600F3AE84 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +51,7 @@
 		B37373F71A287D5600A35E2E /* HTTPResponseSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponseSerializer.swift; sourceTree = "<group>"; };
 		B37373F81A287D5600A35E2E /* HTTPTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		B37373F91A287D5600A35E2E /* HTTPUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPUpload.swift; sourceTree = "<group>"; };
+		B37374021A28909D00A35E2E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B3A1A32F1A24784C0090BC17 /* Move4Klant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move4Klant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A1A3331A24784C0090BC17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A1A3341A24784C0090BC17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,8 @@
 		B3A1A33E1A24784D0090BC17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B3A1A3491A24784D0090BC17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A1A34A1A24784D0090BC17 /* Move4MobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move4MobileTests.swift; sourceTree = "<group>"; };
+		B3D49E911A2DBB8400982DF5 /* ScanForBeacons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanForBeacons.swift; sourceTree = "<group>"; };
+		B3D49E931A2DBD9F00982DF5 /* ScanForBeaconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanForBeaconsCell.swift; sourceTree = "<group>"; };
 		B3FF110C1A2718A600F3AE84 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B37374031A28909D00A35E2E /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +101,7 @@
 		B3A1A3261A24784C0090BC17 = {
 			isa = PBXGroup;
 			children = (
+				B37374021A28909D00A35E2E /* CoreData.framework */,
 				B3A1A3311A24784C0090BC17 /* Move4Mobile */,
 				B3A1A3471A24784D0090BC17 /* Move4MobileTests */,
 				B3A1A3301A24784C0090BC17 /* Products */,
@@ -125,6 +133,8 @@
 				B30BA89A1A249F5400B398CB /* SettingsCell.swift */,
 				B30BA88E1A249C5700B398CB /* Settings.swift */,
 				B30BA88C1A249C2800B398CB /* Home.swift */,
+				B3D49E931A2DBD9F00982DF5 /* ScanForBeaconsCell.swift */,
+				B3D49E911A2DBB8400982DF5 /* ScanForBeacons.swift */,
 				B3A1A33B1A24784D0090BC17 /* Images.xcassets */,
 				B3A1A33D1A24784D0090BC17 /* LaunchScreen.xib */,
 				B3A1A3321A24784C0090BC17 /* Supporting Files */,
@@ -191,6 +201,11 @@
 					B3A1A32E1A24784C0090BC17 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = YQ62CYT4B3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -240,6 +255,8 @@
 				B30BA8991A249E0700B398CB /* LikedCategoriesCell.swift in Sources */,
 				A3CC8D2F1A25FD6A00C0E513 /* ServerRequestHandler.swift in Sources */,
 				B3A1A3351A24784C0090BC17 /* AppDelegate.swift in Sources */,
+				B3D49E941A2DBD9F00982DF5 /* ScanForBeaconsCell.swift in Sources */,
+				B3D49E921A2DBB8400982DF5 /* ScanForBeacons.swift in Sources */,
 				B3FF110D1A2718A600F3AE84 /* User.swift in Sources */,
 				B30BA8951A249D9F00B398CB /* LikedCategories.swift in Sources */,
 				B30BA8911A249C9800B398CB /* ManageAccount.swift in Sources */,

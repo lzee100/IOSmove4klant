@@ -22,7 +22,7 @@ class User: NSObject {
     }
     
     init(uName : NSString, uLastName : NSString, uEmail : NSString){}
-        
+    
     func createUserWithName (uName : NSString, uLastName : NSString, uEmail : NSString) {
         self.name       = uName
         self.lastName   = uLastName
@@ -40,5 +40,5 @@ class User: NSObject {
     func setByteArrayImage (data : NSMutableData) {
         self.byteArray = data
     }
-   
+    
 }

@@ -14,17 +14,22 @@ class LikedCategories: UIViewController {
     @IBOutlet var button_save: UIBarButtonItem!
     var allCategories = [Category]()
     var likes = [String]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if (allCategories.count == 0){
+        var cat1 : Category = Category(ID: 1, Name: "Verf", liked: 0)
+        var cat2 : Category = Category(ID: 2, Name: "Spijkers", liked: 1)
+        allCategories.append(cat1)
+        allCategories.append(cat2)
+        }
+        
         //allCategories.append("spijkers")
         //allCategories.append("verf")
-        likes.append("0")
-        likes.append("1")
         tableLikes.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -41,9 +46,9 @@ class LikedCategories: UIViewController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if (likes.count != 0)
+        if (allCategories.count != 0)
         {
-            return likes.count
+            return allCategories.count
         }
         else
         {
@@ -71,31 +76,8 @@ class LikedCategories: UIViewController {
         return cell!
     }
     
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        var cell : LikedCategoriesCell =  tableView.cellForRowAtIndexPath(indexPath) as LikedCategoriesCell
-//        if (cell.switch_like.on){
-//            let alert = UIAlertView()
-//            alert.title = "Switch"
-//            alert.message = "Switch is on"
-//            alert.addButtonWithTitle("Ok")
-//            alert.show()
-//            selectedLikes[indexPath.row] = "1"
-//        }
-//        else {
-//            let alert = UIAlertView()
-//            alert.title = "Title"
-//            alert.message = "Switch if off"
-//            alert.addButtonWithTitle("Ok")
-//            alert.show()
-//            selectedLikes[indexPath.row] = "0"
-//        }
-//        
-//    }
-    
     func switchChanged (sender : UISwitch) {
         let cell : UITableViewCell = sender.superview!.superview as UITableViewCell
-        
-        
         let indexPath : NSIndexPath = tableLikes.indexPathForCell(cell)!
 //        let alert = UIAlertView()
 //        alert.title = "Title"
@@ -120,12 +102,18 @@ class LikedCategories: UIViewController {
 //            i++
 //        }
         let alert = UIAlertView()
-                alert.title = "Title"
+        alert.title = "Title"
         alert.message = "To save: " + categoriesToSave
-                alert.addButtonWithTitle("Ok")
-                alert.show()
-
+        alert.addButtonWithTitle("Ok")
+        alert.show()
+        
     }
     
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destinationVC = segue.destinationViewController as ManageAccount
+        destinationVC.allCategories = self.allCategories
+    }
+    
+    
+    
 }

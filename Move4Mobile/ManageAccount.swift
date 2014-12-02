@@ -20,28 +20,37 @@ class ManageAccount: UIViewController {
     @IBOutlet var label_titleLikes: UILabel!
     @IBOutlet var tableView_Likes: UITableView!
     @IBOutlet var button_Change: UIBarButtonItem!
-    var likes = [String]()
+    var allCategories = [Category]()
+    var likedCategories = [Category]()
+    
     
     // dummy info
     var user : User = User()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        likes.append("spijkers")
-        likes.append("verf")
         
         var image = UIImage(named: "emptyprofile")
         imageView_profilePicture.image = image
         if (user.name == nil){
-        user.createUserWithName("Leo", uLastName: "van der Zee", uEmail: "lzee100@gmail.com")
+            user.createUserWithName("Leo", uLastName: "van der Zee", uEmail: "lzee100@gmail.com")
+        }
+        
+        if (allCategories.count != 0){
+            var i = 0
+            for category in allCategories {
+                if (category.liked == 1){
+                    likedCategories.append(category)
+                    i++
+                }
+            }
         }
         
         label_firstNameOutput.text  = user.name!
         label_lastNameOutput.text   = user.lastName!
         label_emailAdresOutput.text = user.email!
     }
-
+    
     // table functions
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -52,12 +61,9 @@ class ManageAccount: UIViewController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if (likes.count != 0)
-        {
-            return likes.count
-        }
-        else
-        {
+        if (likedCategories.count > 0){
+            return likedCategories.count
+        } else {
             return 0
         }
     }
@@ -71,17 +77,18 @@ class ManageAccount: UIViewController {
             cell = tableView.dequeueReusableCellWithIdentifier(id) as ManageAccountCell!
         }
         
-        cell!.label_Category.text = likes[indexPath.row]
+        cell!.label_Category.text = likedCategories[indexPath.row].name
         
         return cell!
     }
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destinationVC = segue.destinationViewController as EditAccount
         destinationVC.user = user
+        destinationVC.allCategories = self.allCategories
     }
-
-
-   
-
+    
+    
+    
+    
 }

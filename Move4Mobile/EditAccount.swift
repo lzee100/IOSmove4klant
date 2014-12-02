@@ -21,22 +21,30 @@ class EditAccount: UIViewController {
     @IBOutlet var textinput_email: UITextField!
     @IBOutlet var label_titleLikes: UILabel!
     @IBOutlet var tableLikes: UITableView!
-    var likes = [String]()
+    var allCategories = [Category]()
+    var likedCategories = [Category]()
     
     var user : User = User()
     
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        likes.append("spijkers")
-        likes.append("verf")
+        
+        if (allCategories.count != 0){
+            var i = 0
+            for category in allCategories {
+                if (category.liked == 1){
+                    likedCategories.append(category)
+                    i++
+                }
+            }
+        }
         
         // check if user has not been set by previous segue (ManageAccount)
         if (user.name == nil){
-        user.createUserWithName("Leo", uLastName: "van der Zee", uEmail: "lzee100@gmail.com")
+            user.createUserWithName("Leo", uLastName: "van der Zee", uEmail: "lzee100@gmail.com")
         }
         
         textinput_firstName.placeholder = user.name!
@@ -46,9 +54,9 @@ class EditAccount: UIViewController {
         
         var image = UIImage(named: "emptyprofile")
         imageView_profilePicture.image = image
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -64,9 +72,9 @@ class EditAccount: UIViewController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if (likes.count != 0)
+        if (likedCategories.count != 0)
         {
-            return likes.count
+            return likedCategories.count
         }
         else
         {
@@ -83,33 +91,39 @@ class EditAccount: UIViewController {
             cell = tableView.dequeueReusableCellWithIdentifier(id) as EditAccountCell!
         }
         
-        cell!.label_category.text = likes[indexPath.row]
+        cell!.label_category.text = likedCategories[indexPath.row].name!
         
         return cell!
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        var name = textinput_firstName.text
-        var lastname = textinput_sirName.text
-        var email = textinput_email.text
-        
-        if (name == "") {
-            name = textinput_firstName.placeholder!
+        if (segue.identifier == "saveManageAccount"){
+            var name = textinput_firstName.text
+            var lastname = textinput_sirName.text
+            var email = textinput_email.text
+            
+            if (name == "") {
+                name = textinput_firstName.placeholder!
+            }
+            if (lastname == ""){
+                lastname = textinput_sirName.placeholder!
+            }
+            if (email == ""){
+                email = textinput_email.placeholder!
+            }
+            
+            let newUser : User = User()
+            newUser.createUserWithName(name, uLastName: lastname, uEmail: email)
+            let destinationVC = segue.destinationViewController as ManageAccount
+            destinationVC.user = newUser
         }
-        if (lastname == ""){
-            lastname = textinput_sirName.placeholder!
+        if (segue.identifier == "changeLikedCategories"){
+            let destinationVC = segue.destinationViewController as LikedCategories
+            destinationVC.allCategories = self.allCategories
         }
-        if (email == ""){
-            email = textinput_email.placeholder!
-        }
-        
-        let newUser : User = User()
-        newUser.createUserWithName(name, uLastName: lastname, uEmail: email)
-        let destinationVC = segue.destinationViewController as ManageAccount
-        destinationVC.user = newUser
     }
-
+    
     @IBAction func save(sender: AnyObject) {
         var name = textinput_firstName.text
         var lastname = textinput_sirName.text
@@ -128,15 +142,15 @@ class EditAccount: UIViewController {
         
         [self.performSegueWithIdentifier("saveAccountInfo", sender: sender)]
     }
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

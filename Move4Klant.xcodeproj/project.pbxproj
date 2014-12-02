@@ -27,6 +27,10 @@
 		B30BA8991A249E0700B398CB /* LikedCategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30BA8981A249E0700B398CB /* LikedCategoriesCell.swift */; };
 		B30BA89B1A249F5400B398CB /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30BA89A1A249F5400B398CB /* SettingsCell.swift */; };
 		B30BA89D1A24A0A900B398CB /* EditAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30BA89C1A24A0A900B398CB /* EditAccountCell.swift */; };
+		B37373FA1A287D5600A35E2E /* HTTPRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F61A287D5600A35E2E /* HTTPRequestSerializer.swift */; };
+		B37373FB1A287D5600A35E2E /* HTTPResponseSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F71A287D5600A35E2E /* HTTPResponseSerializer.swift */; };
+		B37373FC1A287D5600A35E2E /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F81A287D5600A35E2E /* HTTPTask.swift */; };
+		B37373FD1A287D5600A35E2E /* HTTPUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F91A287D5600A35E2E /* HTTPUpload.swift */; };
 		B3A1A3351A24784C0090BC17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A1A3341A24784C0090BC17 /* AppDelegate.swift */; };
 		B3A1A3371A24784C0090BC17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A1A3361A24784C0090BC17 /* ViewController.swift */; };
 		B3A1A33A1A24784C0090BC17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A1A3381A24784C0090BC17 /* Main.storyboard */; };
@@ -57,6 +61,10 @@
 		B30BA8981A249E0700B398CB /* LikedCategoriesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikedCategoriesCell.swift; sourceTree = "<group>"; };
 		B30BA89A1A249F5400B398CB /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		B30BA89C1A24A0A900B398CB /* EditAccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAccountCell.swift; sourceTree = "<group>"; };
+		B37373F61A287D5600A35E2E /* HTTPRequestSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestSerializer.swift; sourceTree = "<group>"; };
+		B37373F71A287D5600A35E2E /* HTTPResponseSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponseSerializer.swift; sourceTree = "<group>"; };
+		B37373F81A287D5600A35E2E /* HTTPTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		B37373F91A287D5600A35E2E /* HTTPUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPUpload.swift; sourceTree = "<group>"; };
 		B3A1A32F1A24784C0090BC17 /* Move4Klant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move4Klant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A1A3331A24784C0090BC17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A1A3341A24784C0090BC17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,11 +91,10 @@
 		A3D006B71A271116007FD6F6 /* SwiftHTTP */ = {
 			isa = PBXGroup;
 			children = (
-				A3D006B81A271217007FD6F6 /* HTTPRequestSerializer.swift */,
-				A3D006B91A271217007FD6F6 /* HTTPResponseSerializer.swift */,
-				A3D006BA1A271217007FD6F6 /* HTTPTask.swift */,
-				A3D006BB1A271217007FD6F6 /* HTTPUpload.swift */,
-				A3D006BC1A271217007FD6F6 /* SwiftHTTP.h */,
+				B37373F61A287D5600A35E2E /* HTTPRequestSerializer.swift */,
+				B37373F71A287D5600A35E2E /* HTTPResponseSerializer.swift */,
+				B37373F81A287D5600A35E2E /* HTTPTask.swift */,
+				B37373F91A287D5600A35E2E /* HTTPUpload.swift */,
 			);
 			name = SwiftHTTP;
 			sourceTree = "<group>";
@@ -107,7 +114,6 @@
 		B3A1A3261A24784C0090BC17 = {
 			isa = PBXGroup;
 			children = (
-				B3FF10FD1A25E3C800F3AE84 /* images */,
 				B3A1A3311A24784C0090BC17 /* Move4Mobile */,
 				B3A1A3471A24784D0090BC17 /* Move4MobileTests */,
 				B3A1A3301A24784C0090BC17 /* Products */,
@@ -253,8 +259,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3D006BF1A271217007FD6F6 /* HTTPTask.swift in Sources */,
-				A3D006BE1A271217007FD6F6 /* HTTPResponseSerializer.swift in Sources */,
 				B30BA8971A249DD900B398CB /* ManageAccountCell.swift in Sources */,
 				A3DB3E381A2866FE00062094 /* SwiftyJSON.swift in Sources */,
 				B3A1A3371A24784C0090BC17 /* ViewController.swift in Sources */,
@@ -270,9 +274,9 @@
 				B3FF110D1A2718A600F3AE84 /* User.swift in Sources */,
 				B30BA8951A249D9F00B398CB /* LikedCategories.swift in Sources */,
 				B30BA8911A249C9800B398CB /* ManageAccount.swift in Sources */,
-				A3D006BD1A271217007FD6F6 /* HTTPRequestSerializer.swift in Sources */,
 				B30BA8931A249D6000B398CB /* EditAccount.swift in Sources */,
-				A3D006C01A271217007FD6F6 /* HTTPUpload.swift in Sources */,
+				B37373FA1A287D5600A35E2E /* HTTPRequestSerializer.swift in Sources */,
+				B37373FC1A287D5600A35E2E /* HTTPTask.swift in Sources */,
 				A3CC8D331A260E2D00C0E513 /* Category.swift in Sources */,
 				A3DB3E3A1A28AA9D00062094 /* Beacon.swift in Sources */,
 				A35737EB1A2777840021DD36 /* Product.swift in Sources */,

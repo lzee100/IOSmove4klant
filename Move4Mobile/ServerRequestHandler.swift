@@ -183,6 +183,7 @@ public class ServerRequestHandler: NSObject {
     }
     
     public func getLikes(userID: Int) -> Array<Int>{
+        
         var request = HTTPTask()
         var returnvalue = Array<Int>()
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
@@ -205,6 +206,7 @@ public class ServerRequestHandler: NSObject {
             }
             },failure: {(error: NSError, response: HTTPResponse?) in
         })
+        
         return returnvalue
     }
     

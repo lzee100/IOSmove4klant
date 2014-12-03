@@ -41,4 +41,8 @@ class User: NSObject {
         self.byteArray = data
     }
     
+    func getUserID() -> String{
+        return userID!
+    }
+    
 }

@@ -211,7 +211,7 @@
                                 <connections>
                                     <outlet property="label_menuDescription" destination="rwP-ll-xwX" id="mSZ-mU-ddd"/>
                                     <outlet property="label_menuTitle" destination="Tad-oc-zzf" id="lIZ-Y5-mS9"/>
-                                    <segue destination="HN0-6C-MDM" kind="show" identifier="scanForBeacons" id="s8f-4N-sGC"/>
+                                    <segue destination="bjk-PU-1bB" kind="show" identifier="manageAccount" id="cuh-CO-Hzh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -543,4 +543,7 @@
             <point key="canvasLocation" x="2303.5" y="143.5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="cuh-CO-Hzh"/>
+    </inferredMetricsTieBreakers>
 </document>

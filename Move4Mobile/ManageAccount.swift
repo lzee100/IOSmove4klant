@@ -9,6 +9,8 @@
 import UIKit
 
 class ManageAccount: UIViewController {
+
+
     @IBOutlet var label_TitleAccountinfo: UILabel!
     @IBOutlet var imageView_profilePicture: UIImageView!
     @IBOutlet var label_firstName: UILabel!
@@ -22,33 +24,16 @@ class ManageAccount: UIViewController {
     @IBOutlet var button_Change: UIBarButtonItem!
     var allCategories = [Category]()
     var likedCategories = [Category]()
+    var likes = [Int]()
     
     
     // dummy info
-    var user : User = User()
+    var user : User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var image = UIImage(named: "emptyprofile")
-        imageView_profilePicture.image = image
-        if (user.name == nil){
-            user.createUserWithName("Leo", uLastName: "van der Zee", uEmail: "lzee100@gmail.com")
-        }
-        
-        if (allCategories.count != 0){
-            var i = 0
-            for category in allCategories {
-                if (category.liked == 1){
-                    likedCategories.append(category)
-                    i++
-                }
-            }
-        }
-        
-        label_firstNameOutput.text  = user.name!
-        label_lastNameOutput.text   = user.lastName!
-        label_emailAdresOutput.text = user.email!
+        execute()
+        NSLog("1x executed")
     }
     
     // table functions
@@ -84,11 +69,48 @@ class ManageAccount: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destinationVC = segue.destinationViewController as EditAccount
-        destinationVC.user = user
+        destinationVC.user = user!
         destinationVC.allCategories = self.allCategories
     }
     
-    
+    func execute() {
+        //var image = UIImage(named: "emptyprofile")
+        //imageView_profilePicture.image = image
+        if ((user) == nil){
+            user = User()
+            user!.createUserWithName("Leo", uLastName: "van der Zee", uEmail: "lzee100@gmail.com")
+            user!.setUserID("0")
+        }
+        
+        allCategories = ServerRequestHandler().getAllCategories()
+        
+        for category in allCategories {
+            category.toString()
+        }
+        
+        let userID = user!.getUserID().toInt()!
+        NSLog("UserID = " + String(userID))
+        
+        
+        if ServerRequestHandler().getLikes(0).count > 0 {
+            asdf()
+        }
+        if (self.allCategories.count != 0){
+            for like in self.likes {
+                var i = like
+                for category in self.allCategories {
+                    if category.ID == i {
+                        self.likedCategories.append(category)
+                        println("liked toegevoegd")
+                    }
+                }
+            }
+        }
+        
+        label_firstNameOutput.text  = user!.name!
+        label_lastNameOutput.text   = user!.lastName!
+        label_emailAdresOutput.text = user!.email!
+    }
     
     
 }

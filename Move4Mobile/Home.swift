@@ -27,7 +27,7 @@ class Home: UIViewController {
 
     @IBAction func checkFunctionPressed(sender: AnyObject) {
         
-ServerRequestHandler().getAllProducts()
+        ServerRequestHandler().getLikes(0)
         
     }
     /*

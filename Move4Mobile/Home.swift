@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class Home: UIViewController {
     @IBOutlet var settings: UIBarButtonItem!

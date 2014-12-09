@@ -76,10 +76,9 @@ class ScanForBeacons: UIViewController, CLLocationManagerDelegate {
         didRangeBeacons beacons: [AnyObject]!,
         inRegion region: CLBeaconRegion!) {
             self.beacons = beacons as [CLBeacon]?
-            NSLog(String(beacons.count))
+            println(String(beacons.count))
             self.tableView.reloadData()
             
-            NSLog("didRangeBeacons")
             var message:String = ""
             
             var playSound = false

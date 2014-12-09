@@ -17,10 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var beacons: [CLBeacon]?
     var locationManager: CLLocationManager?
     var lastProximity: CLProximity?
+    let beaconID = 52607
+    let adverticementHasBeenShown = 0
+    var timer = NSTimer()
+    var elapsedTime = 0
+    var startTimer = true
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let uuid : NSUUID = NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!
+        let uuid : NSUUID = NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524")!
         let beaconIdentifier = "iBeaconModules.us"
         let beaconUUID: NSUUID = uuid
         let beaconRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID,
@@ -101,14 +106,15 @@ extension AppDelegate: CLLocationManagerDelegate {
         didRangeBeacons beacons: [AnyObject]!,
         inRegion region: CLBeaconRegion!) {
             self.beacons = beacons as [CLBeacon]?
-            NSLog(String(beacons.count))
+            println(String(beacons.count))
             
-            NSLog("didRangeBeacons")
+            //NSLog("didRangeBeacons")
             var message:String = ""
             
             var playSound = false
             
             if(beacons.count > 0) {
+                
                 let nearestBeacon:CLBeacon = beacons[0] as CLBeacon
                 
                 if(nearestBeacon.proximity == lastProximity ||
@@ -125,9 +131,17 @@ extension AppDelegate: CLLocationManagerDelegate {
                     message = "You are near the beacon"
                 case CLProximity.Immediate:
                     message = "You are in the immediate proximity of the beacon"
+                    // check the beacons for major
+                        let major = nearestBeacon.major.integerValue
+                    if major == beaconID {
+                        if major == 52607 {
+                            showProduct()
+                        }
+                    }
                 case CLProximity.Unknown:
                     return
                 }
+                
             } else {
                 
                 if(lastProximity == CLProximity.Unknown) {
@@ -139,7 +153,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                 lastProximity = CLProximity.Unknown
             }
             
-            NSLog("%@", message)
+            //NSLog("%@", message)
             sendLocalNotificationWithMessage(message, playSound: playSound)
     }
     
@@ -159,6 +173,12 @@ extension AppDelegate: CLLocationManagerDelegate {
             
             NSLog("You exited the region")
             sendLocalNotificationWithMessage("You exited the region", playSound: true)
+    }
+    
+    func showProduct() {
+        println("product screen")
+//        let navigation = self.window?.rootViewController
+//        navigation!.performSegueWithIdentifier("Home", sender: nil)
     }
 
 }

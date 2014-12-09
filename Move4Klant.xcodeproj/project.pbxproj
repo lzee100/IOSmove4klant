@@ -35,6 +35,7 @@
 		B3D49E921A2DBB8400982DF5 /* ScanForBeacons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E911A2DBB8400982DF5 /* ScanForBeacons.swift */; };
 		B3D49E941A2DBD9F00982DF5 /* ScanForBeaconsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E931A2DBD9F00982DF5 /* ScanForBeaconsCell.swift */; };
 		B3D49E961A2DD7AC00982DF5 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E951A2DD7AC00982DF5 /* SwiftyJSON.swift */; };
+		B3D49E981A31A4BE00982DF5 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E971A31A4BE00982DF5 /* LogIn.swift */; };
 		B3FF110D1A2718A600F3AE84 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF110C1A2718A600F3AE84 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		B3D49E911A2DBB8400982DF5 /* ScanForBeacons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanForBeacons.swift; sourceTree = "<group>"; };
 		B3D49E931A2DBD9F00982DF5 /* ScanForBeaconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanForBeaconsCell.swift; sourceTree = "<group>"; };
 		B3D49E951A2DD7AC00982DF5 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "../../../../../Library/Containers/com.apple.mail/Data/Library/Mail Downloads/F9584DA6-FF4D-4B1A-B134-68A276EB3772/SwiftyJSON.swift"; sourceTree = "<group>"; };
+		B3D49E971A31A4BE00982DF5 /* LogIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		B3FF110C1A2718A600F3AE84 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,9 +135,10 @@
 				A3D006C11A27143F007FD6F6 /* Objects */,
 				A3D006B71A271116007FD6F6 /* SwiftHTTP */,
 				B3A1A3341A24784C0090BC17 /* AppDelegate.swift */,
+				B3A1A3381A24784C0090BC17 /* Main.storyboard */,
+				B3D49E971A31A4BE00982DF5 /* LogIn.swift */,
 				B3D49E951A2DD7AC00982DF5 /* SwiftyJSON.swift */,
 				B3A1A3361A24784C0090BC17 /* ViewController.swift */,
-				B3A1A3381A24784C0090BC17 /* Main.storyboard */,
 				B30BA8981A249E0700B398CB /* LikedCategoriesCell.swift */,
 				B30BA8941A249D9F00B398CB /* LikedCategories.swift */,
 				B30BA89C1A24A0A900B398CB /* EditAccountCell.swift */,
@@ -282,6 +285,7 @@
 				B37373FD1A287D5600A35E2E /* HTTPUpload.swift in Sources */,
 				A3DB3E3A1A28AA9D00062094 /* Beacon.swift in Sources */,
 				A35737EB1A2777840021DD36 /* Product.swift in Sources */,
+				B3D49E981A31A4BE00982DF5 /* LogIn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

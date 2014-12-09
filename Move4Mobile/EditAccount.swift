@@ -32,16 +32,6 @@ class EditAccount: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (allCategories.count != 0){
-            var i = 0
-            for category in allCategories {
-                if (category.liked == 1){
-                    likedCategories.append(category)
-                    i++
-                }
-            }
-        }
-        
         // check if user has not been set by previous segue (ManageAccount)
         if (user.name == nil){
             user.createUserWithName("Leo", uLastName: "van der Zee", uEmail: "lzee100@gmail.com")

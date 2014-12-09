@@ -11,7 +11,7 @@ import Foundation
 
 public class ServerRequestHandler: NSObject {
     
-     func getAllCategories() -> [Category] {
+    func getAllCategories() -> [Category] {
         var returnarray = [Category]()
         let url=NSURL(string: Config().CATEGORYURL)
         let allContactsData=NSData(contentsOfURL:url!)
@@ -51,7 +51,7 @@ public class ServerRequestHandler: NSObject {
 //        })
     }
     
-     func getAllOffers() -> [Offer]{
+    func getAllOffers() -> [Offer]{
         var returnarray = [Offer]()
         let url=NSURL(string: Config().GETALLOFFERS)
         let allContactsData=NSData(contentsOfURL:url!)
@@ -81,10 +81,6 @@ public class ServerRequestHandler: NSObject {
         return returnarray
     }
 
-    
-    
-    
-    
     func getAllBeacons() -> [Beacon]{
         var returnarray = [Beacon]()
         let url=NSURL(string: Config().GETALLBEACONS)
@@ -117,9 +113,7 @@ public class ServerRequestHandler: NSObject {
         return returnarray
     }
     
-    
-    
-     func getAllProducts() -> [Product]{
+    func getAllProducts() -> [Product]{
         var returnarray = [Product]()
         let url=NSURL(string: Config().GETALLPRODUCTS)
         let allContactsData=NSData(contentsOfURL:url!)
@@ -134,7 +128,7 @@ public class ServerRequestHandler: NSObject {
             for index in 0...json.count-1 {
                 
                 let beacon : AnyObject? = json[index]
-                
+                println(beacon)
                 let collection = beacon! as Dictionary<String, String>
                 
                 var productid : String  = collection["id"]!
@@ -143,15 +137,13 @@ public class ServerRequestHandler: NSObject {
                 let productdesc : String = collection["description"]!
                 
                 let beaconobj : Product = Product(ID: productid.toInt()!, categoryID: productcat.toInt()!, productdescription: productdesc, name: productname)
-                println(beaconobj.toString())
+                //println(beaconobj.toString())
                 returnarray.append(beaconobj)
             }
         }
         return returnarray
     }
-    
-    
-    
+
     //user functions
     
     public func checkinout(userID: Int){
@@ -168,7 +160,6 @@ public class ServerRequestHandler: NSObject {
         })
     }
     
-    
     public func uploadLikes(customerID: Int, categories: [Int]){
         var request = HTTPTask()
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
@@ -182,7 +173,7 @@ public class ServerRequestHandler: NSObject {
         })
     }
     
-    public func getLikes(userID: Int) -> Array<Int>{
+    /*public func getLikes(userID: Int) -> Array<Int>{
         
         var request = HTTPTask()
         var returnvalue = Array<Int>()
@@ -208,8 +199,53 @@ public class ServerRequestHandler: NSObject {
         })
         
         return returnvalue
+    }*/
+    
+    class func getLikes3 (userID : Int, responseMain: (Array<Int>!, error:NSError!) ->()){
+        //let queue = dispatch_get_main_queue()
+        
+        //dispatch_async(queue, {
+        
+            var error : NSError?
+            
+            var request = HTTPTask()
+            var returnvalue = Array<Int>()
+            //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+            let params: Dictionary<String,AnyObject> = ["customerID": userID]
+            request.POST(Config().GETLIKESURL, parameters: params, success: {(response: HTTPResponse) in
+                if let data = response.responseObject as? NSData {
+                    let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                    var sep = str.componentsSeparatedByString("<")
+                    var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
+                    
+                    var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
+                    
+                    if let json = allContacts as? Dictionary<String, Array<Int>> {
+                        
+                        returnvalue = json["returnvalue"]!
+                        
+                        for i : Int in returnvalue{
+                            println(i)
+                        }
+                    }
+                    responseMain(returnvalue, error: nil)
+                }
+                },failure: {(error: NSError, response: HTTPResponse?) in
+            })
+        //})
+    
     }
     
+    /*func getLikes2(userID: Int, respone: ((HTTPResponse) -> Void)!) -> Array<Int>{
+        var request = HTTPTask()
+        var returnvalue = Array<Int>()
+        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+        let params: Dictionary<String,AnyObject> = ["customerID": userID]
+        request.POST(Config().GETLIKESURL, parameters: params, success: respone ,failure: {(error: NSError, response: HTTPResponse?) in
+        })
+        return returnvalue
+        
+    }*/
     
     public func uploadImage(customerID: Int, image: String){
         var request = HTTPTask()
@@ -220,26 +256,66 @@ public class ServerRequestHandler: NSObject {
                 let str = NSString(data: data, encoding: NSUTF8StringEncoding)
                 println("response: \(str)") //prints the HTML of the page
             }
-            },failure: {(error: NSError, response: HTTPResponse?) in
+        },failure: {(error: NSError, response: HTTPResponse?) in
         })
     }
     
+    class func logIn (email : String, password : String, responseMain: (success : String, message : String, user : User?, error:NSError!) ->()){
+        //let queue = dispatch_get_main_queue()
+        
+        //dispatch_async(queue, {
+        var message : String!
+        var success : String!
+        var error : NSError?
+        var user : User?
+        
+        var request = HTTPTask()
+        var returnvalue = ""
+        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+        let params: Dictionary<String,AnyObject> = ["tag" : "login", "email" : email, "password" : password]
+        request.POST(Config().LOGINURL, parameters: params, success: {(response: HTTPResponse) in
+            
+            if let data = response.responseObject as? NSData {
+                let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                var sep = str.componentsSeparatedByString("<")
+                var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
+                
+                var allContacts = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil) as NSDictionary
+                // if there is an user, login went correct
+                if ((allContacts["user"]) != nil) {
+                   let dicUser : AnyObject = allContacts["user"]!
+                    if let collection = dicUser as? Dictionary<String, AnyObject> {
+                        let userFirstName = collection["fname"] as String!
+                        let userLastName = collection["lname"] as String!
+                        let userID = collection["customerID"] as String!
+                        let userEmail = collection["email"] as String!
+                        
+                        // create user object
+                        user = User()
+                        user?.createUserWithName(userFirstName, uLastName: userLastName, uEmail: userEmail)
+                        //user.setByteArrayImage(data: NSMutableData)
+                        user?.setUserID(userID!)
+                        
+                        message = ""
+                        success = "1"
+                    }
+                    // if there was no user object, give result message
+                } else {
+                    if let value : AnyObject = allContacts["success"] {
+                        let string : String = "\(value)"
+                        success = string
+                    }
+                    if let value : AnyObject = allContacts["error_msg"]{
+                        let string : String = "\(value)"
+                        message = string
+                    }
+                }
+                responseMain(success: success, message: message, user : user, error: nil)
+            }
+        },failure: {(error: NSError, response: HTTPResponse?) in
+            responseMain (success: success, message: message, user : nil, error: error)
+        })
+        
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    //    public func getAllOffers(){
-    //        var request = HTTPTask()
-    //        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
-    //        let params: Dictionary<String,AnyObject> = ["param": "param1", "array": ["first array element","second","third"], "num": 23, "dict": ["someKey": "someVal"]]
-    //        request.POST("http://domain.com/create", parameters: params, success: {(response: HTTPResponse) in
-    //
-    //            },failure: {(error: NSError, response: HTTPResponse?) in
-    //
-    //        })
-    //    }
 }

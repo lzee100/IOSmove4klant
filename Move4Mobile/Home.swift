@@ -12,32 +12,32 @@ class Home: UIViewController {
     @IBOutlet var settings: UIBarButtonItem!
     @IBOutlet var label_ijzerhandel: UILabel!
     @IBOutlet weak var button_checkFunctions: UIButton!
+    var user : User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        println(user?.getUserID())
+        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
+            self.user = user
+            println(user!.getUserID())
+        }
     }
     
 
     @IBAction func checkFunctionPressed(sender: AnyObject) {
         
-        ServerRequestHandler().getLikes(0)
-        
+        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
+            println("success code :\(success)")
+            println(message)
+        }
+        //ServerRequestHandler().getAllProducts()
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "segueToSettings" {
+            
+        }
     }
     */
-
 }

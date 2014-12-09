@@ -30,7 +30,41 @@ class Home: UIViewController {
             println("success code :\(success)")
             println(message)
         }
-        //ServerRequestHandler().getAllProducts()
+        
+        
+        var category = [NSManagedObject]()
+        
+        
+        //
+        //        var products = ServerRequestHandler().getAllProducts()
+        //        for offerobj : Product in products{
+        //            println(offerobj.toString())
+        //        }
+        //         var returnvalue = Array<Int>()
+        //
+        //        ServerRequestHandler().getLikes2(0, respone: {(response: HTTPResponse) -> Void in
+        //            if let data = response.responseObject as? NSData {
+        //                let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+        //                var sep = str.componentsSeparatedByString("<")
+        //                var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
+        //
+        //                var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
+        //
+        //                if let json = allContacts as? Dictionary<String, Array<Int>> {
+        //
+        //                    returnvalue = json["returnvalue"]!
+        //                    for i : Int in returnvalue{
+        //                        println(i)
+        //                    }
+        //                }
+        //            }
+        //        })
+        //
+        
+        //        let newitem = NSEntityDescription.insertNewObjectForEntityForName("Categories", inManagedObjectContext: self.managedObjectContext!) as Category
+        //        newitem.setInfo(0, Name: "spijkers", liked: 0)
+        //        presentItemInfo()
+
     }
 
     /*

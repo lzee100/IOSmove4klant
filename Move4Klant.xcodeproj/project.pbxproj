@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A35737E91A2777660021DD36 /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35737E81A2777660021DD36 /* Offer.swift */; };
 		A35737EB1A2777840021DD36 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35737EA1A2777840021DD36 /* Product.swift */; };
+		A3CC70CF1A36F1D50008A2C5 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC70CE1A36F1D50008A2C5 /* SwiftyJSON.swift */; };
+		A3CC70D11A36F26A0008A2C5 /* Move4Klant.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = A3CC70D01A36F26A0008A2C5 /* Move4Klant.xcdatamodel */; };
 		A3CC8D2F1A25FD6A00C0E513 /* ServerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC8D2E1A25FD6A00C0E513 /* ServerRequestHandler.swift */; };
 		A3CC8D311A26012E00C0E513 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC8D301A26012E00C0E513 /* Config.swift */; };
 		A3CC8D331A260E2D00C0E513 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC8D321A260E2D00C0E513 /* Category.swift */; };
@@ -34,7 +36,6 @@
 		B3A1A33F1A24784D0090BC17 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A1A33D1A24784D0090BC17 /* LaunchScreen.xib */; };
 		B3D49E921A2DBB8400982DF5 /* ScanForBeacons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E911A2DBB8400982DF5 /* ScanForBeacons.swift */; };
 		B3D49E941A2DBD9F00982DF5 /* ScanForBeaconsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E931A2DBD9F00982DF5 /* ScanForBeaconsCell.swift */; };
-		B3D49E961A2DD7AC00982DF5 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E951A2DD7AC00982DF5 /* SwiftyJSON.swift */; };
 		B3D49E981A31A4BE00982DF5 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E971A31A4BE00982DF5 /* LogIn.swift */; };
 		B3FF110D1A2718A600F3AE84 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF110C1A2718A600F3AE84 /* User.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,8 @@
 /* Begin PBXFileReference section */
 		A35737E81A2777660021DD36 /* Offer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
 		A35737EA1A2777840021DD36 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		A3CC70CE1A36F1D50008A2C5 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../../../../../../Downloads/SwiftyJSON.swift; sourceTree = "<group>"; };
+		A3CC70D01A36F26A0008A2C5 /* Move4Klant.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Move4Klant.xcdatamodel; path = ../../Move4Klant.xcdatamodeld/Move4Klant.xcdatamodel; sourceTree = "<group>"; };
 		A3CC8D2E1A25FD6A00C0E513 /* ServerRequestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRequestHandler.swift; sourceTree = "<group>"; };
 		A3CC8D301A26012E00C0E513 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		A3CC8D321A260E2D00C0E513 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -71,7 +74,6 @@
 		B3A1A34A1A24784D0090BC17 /* Move4MobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move4MobileTests.swift; sourceTree = "<group>"; };
 		B3D49E911A2DBB8400982DF5 /* ScanForBeacons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanForBeacons.swift; sourceTree = "<group>"; };
 		B3D49E931A2DBD9F00982DF5 /* ScanForBeaconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanForBeaconsCell.swift; sourceTree = "<group>"; };
-		B3D49E951A2DD7AC00982DF5 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "../../../../../Library/Containers/com.apple.mail/Data/Library/Mail Downloads/F9584DA6-FF4D-4B1A-B134-68A276EB3772/SwiftyJSON.swift"; sourceTree = "<group>"; };
 		B3D49E971A31A4BE00982DF5 /* LogIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		B3FF110C1A2718A600F3AE84 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,9 +139,9 @@
 				B3A1A3341A24784C0090BC17 /* AppDelegate.swift */,
 				B3A1A3381A24784C0090BC17 /* Main.storyboard */,
 				B3D49E971A31A4BE00982DF5 /* LogIn.swift */,
-				B3D49E951A2DD7AC00982DF5 /* SwiftyJSON.swift */,
 				B3A1A3361A24784C0090BC17 /* ViewController.swift */,
 				B30BA8981A249E0700B398CB /* LikedCategoriesCell.swift */,
+				A3CC70CE1A36F1D50008A2C5 /* SwiftyJSON.swift */,
 				B30BA8941A249D9F00B398CB /* LikedCategories.swift */,
 				B30BA89C1A24A0A900B398CB /* EditAccountCell.swift */,
 				B30BA8921A249D6000B398CB /* EditAccount.swift */,
@@ -155,6 +157,7 @@
 				B3A1A3321A24784C0090BC17 /* Supporting Files */,
 				A3CC8D2E1A25FD6A00C0E513 /* ServerRequestHandler.swift */,
 				A3CC8D301A26012E00C0E513 /* Config.swift */,
+				A3CC70D01A36F26A0008A2C5 /* Move4Klant.xcdatamodel */,
 			);
 			path = Move4Mobile;
 			sourceTree = "<group>";
@@ -270,8 +273,8 @@
 				A3CC8D311A26012E00C0E513 /* Config.swift in Sources */,
 				B30BA8991A249E0700B398CB /* LikedCategoriesCell.swift in Sources */,
 				A3CC8D2F1A25FD6A00C0E513 /* ServerRequestHandler.swift in Sources */,
-				B3D49E961A2DD7AC00982DF5 /* SwiftyJSON.swift in Sources */,
 				B3A1A3351A24784C0090BC17 /* AppDelegate.swift in Sources */,
+				A3CC70CF1A36F1D50008A2C5 /* SwiftyJSON.swift in Sources */,
 				B3D49E941A2DBD9F00982DF5 /* ScanForBeaconsCell.swift in Sources */,
 				B3D49E921A2DBB8400982DF5 /* ScanForBeacons.swift in Sources */,
 				B3FF110D1A2718A600F3AE84 /* User.swift in Sources */,
@@ -279,6 +282,7 @@
 				B30BA8911A249C9800B398CB /* ManageAccount.swift in Sources */,
 				B30BA8931A249D6000B398CB /* EditAccount.swift in Sources */,
 				B37373FA1A287D5600A35E2E /* HTTPRequestSerializer.swift in Sources */,
+				A3CC70D11A36F26A0008A2C5 /* Move4Klant.xcdatamodel in Sources */,
 				B37373FC1A287D5600A35E2E /* HTTPTask.swift in Sources */,
 				A3CC8D331A260E2D00C0E513 /* Category.swift in Sources */,
 				B37373FB1A287D5600A35E2E /* HTTPResponseSerializer.swift in Sources */,

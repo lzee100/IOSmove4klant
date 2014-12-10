@@ -51,14 +51,14 @@ class LogIn: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else {
-            ServerRequestHandler.logIn(userName, password: password, responseMain: { (success : String, message : String, user : User?, error : NSError!) -> () in
+            ServerRequestHandler.logIn(userName, password: password, responseMain: { (success : String, message : String, error : NSError!) -> () in
                 let successR = success.toInt()
                 if successR == 0 {
                     var alert = UIAlertController(title: "Onjuiste inloggegevens", message: message, preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 } else if successR == 1 {
-                    self.user = user
+                    
                     self.logInCorrect = true
                     //self.performSegueWithIdentifier("Home", sender: nil)
                     

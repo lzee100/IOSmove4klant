@@ -25,6 +25,8 @@ public class Config{
     public  let REGISTERURL = "http://playground.m4mapp.com/beacons/login_api/"
     public  let FORPASSURL = "http://playground.m4mapp.com/beacons/login_api/"
     public  let CHGPASSURL = "http://playground.m4mapp.com/beacons/login_api/"
+    
+    public let UUID = "f7826da6-4fa2-4e98-8024-bc5b71e0893e"
   
     
     

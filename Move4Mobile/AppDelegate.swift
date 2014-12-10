@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreLocation
+import Foundation
+import CoreData
 
 
 @UIApplicationMain
@@ -231,6 +233,5 @@ extension AppDelegate: CLLocationManagerDelegate {
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
-
 }
 

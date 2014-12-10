@@ -27,6 +27,10 @@
 		B37373FC1A287D5600A35E2E /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F81A287D5600A35E2E /* HTTPTask.swift */; };
 		B37373FD1A287D5600A35E2E /* HTTPUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F91A287D5600A35E2E /* HTTPUpload.swift */; };
 		B37374031A28909D00A35E2E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B37374021A28909D00A35E2E /* CoreData.framework */; };
+		B396E6E61A373F2E005B454A /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B396E6E51A373F2E005B454A /* ProductView.swift */; };
+		B396E6E81A374293005B454A /* Spijkers.png in Resources */ = {isa = PBXBuildFile; fileRef = B396E6E71A374293005B454A /* Spijkers.png */; };
+		B396E6EA1A38340F005B454A /* OfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B396E6E91A38340F005B454A /* OfferView.swift */; };
+		B396E6EC1A3835DE005B454A /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = B396E6EB1A3835DE005B454A /* cancel.png */; };
 		B3A1A3351A24784C0090BC17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A1A3341A24784C0090BC17 /* AppDelegate.swift */; };
 		B3A1A3371A24784C0090BC17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A1A3361A24784C0090BC17 /* ViewController.swift */; };
 		B3A1A33A1A24784C0090BC17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A1A3381A24784C0090BC17 /* Main.storyboard */; };
@@ -60,6 +64,10 @@
 		B37373F81A287D5600A35E2E /* HTTPTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		B37373F91A287D5600A35E2E /* HTTPUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPUpload.swift; sourceTree = "<group>"; };
 		B37374021A28909D00A35E2E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B396E6E51A373F2E005B454A /* ProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
+		B396E6E71A374293005B454A /* Spijkers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Spijkers.png; path = ../../../../../Desktop/Spijkers.png; sourceTree = "<group>"; };
+		B396E6E91A38340F005B454A /* OfferView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferView.swift; sourceTree = "<group>"; };
+		B396E6EB1A3835DE005B454A /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancel.png; path = ../../../../../Desktop/cancel.png; sourceTree = "<group>"; };
 		B3A1A32F1A24784C0090BC17 /* Move4Klant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move4Klant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A1A3331A24784C0090BC17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A1A3341A24784C0090BC17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +144,8 @@
 				A3D006B71A271116007FD6F6 /* SwiftHTTP */,
 				B3A1A3341A24784C0090BC17 /* AppDelegate.swift */,
 				B3A1A3381A24784C0090BC17 /* Main.storyboard */,
+				B396E6E91A38340F005B454A /* OfferView.swift */,
+				B396E6E51A373F2E005B454A /* ProductView.swift */,
 				B3D49E971A31A4BE00982DF5 /* LogIn.swift */,
 				B3D49E951A2DD7AC00982DF5 /* SwiftyJSON.swift */,
 				B3A1A3361A24784C0090BC17 /* ViewController.swift */,
@@ -152,6 +162,8 @@
 				B3D49E911A2DBB8400982DF5 /* ScanForBeacons.swift */,
 				B3A1A33B1A24784D0090BC17 /* Images.xcassets */,
 				B3A1A33D1A24784D0090BC17 /* LaunchScreen.xib */,
+				B396E6EB1A3835DE005B454A /* cancel.png */,
+				B396E6E71A374293005B454A /* Spijkers.png */,
 				B3A1A3321A24784C0090BC17 /* Supporting Files */,
 				A3CC8D2E1A25FD6A00C0E513 /* ServerRequestHandler.swift */,
 				A3CC8D301A26012E00C0E513 /* Config.swift */,
@@ -249,6 +261,8 @@
 			files = (
 				B3A1A33A1A24784C0090BC17 /* Main.storyboard in Resources */,
 				B3A1A33F1A24784D0090BC17 /* LaunchScreen.xib in Resources */,
+				B396E6E81A374293005B454A /* Spijkers.png in Resources */,
+				B396E6EC1A3835DE005B454A /* cancel.png in Resources */,
 				B3A1A33C1A24784D0090BC17 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,10 +284,12 @@
 				A3CC8D311A26012E00C0E513 /* Config.swift in Sources */,
 				B30BA8991A249E0700B398CB /* LikedCategoriesCell.swift in Sources */,
 				A3CC8D2F1A25FD6A00C0E513 /* ServerRequestHandler.swift in Sources */,
+				B396E6E61A373F2E005B454A /* ProductView.swift in Sources */,
 				B3D49E961A2DD7AC00982DF5 /* SwiftyJSON.swift in Sources */,
 				B3A1A3351A24784C0090BC17 /* AppDelegate.swift in Sources */,
 				B3D49E941A2DBD9F00982DF5 /* ScanForBeaconsCell.swift in Sources */,
 				B3D49E921A2DBB8400982DF5 /* ScanForBeacons.swift in Sources */,
+				B396E6EA1A38340F005B454A /* OfferView.swift in Sources */,
 				B3FF110D1A2718A600F3AE84 /* User.swift in Sources */,
 				B30BA8951A249D9F00B398CB /* LikedCategories.swift in Sources */,
 				B30BA8911A249C9800B398CB /* ManageAccount.swift in Sources */,

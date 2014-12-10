@@ -17,15 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var beacons: [CLBeacon]?
     var locationManager: CLLocationManager?
     var lastProximity: CLProximity?
-    let beaconID = 52607
+    let beaconID = 31690
     let adverticementHasBeenShown = 0
-    var timer = NSTimer()
+    var startTime : NSDate?
+    var endTime : NSDate?
     var elapsedTime = 0
-    var startTimer = true
+    var nav : UINavigationController?
+    var offersShown : [Offer]?
+    var productActive = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let uuid : NSUUID = NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524")!
+        self.window?.makeKeyAndVisible()
+        
+        if ((self.window?.rootViewController as? UINavigationController) != nil) {
+            nav = self.window!.rootViewController as UINavigationController!
+            println("navigationcontroller succeeded")
+        }
+        
+        let uuid : NSUUID = NSUUID(UUIDString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")!
         let beaconIdentifier = "iBeaconModules.us"
         let beaconUUID: NSUUID = uuid
         let beaconRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID,
@@ -81,6 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
 
 
+
 }
 
 extension AppDelegate: CLLocationManagerDelegate {
@@ -106,55 +117,46 @@ extension AppDelegate: CLLocationManagerDelegate {
         didRangeBeacons beacons: [AnyObject]!,
         inRegion region: CLBeaconRegion!) {
             self.beacons = beacons as [CLBeacon]?
-            println(String(beacons.count))
-            
-            //NSLog("didRangeBeacons")
+
             var message:String = ""
-            
             var playSound = false
             
+// -------- if beacon is found ------------------
             if(beacons.count > 0) {
-                
+                // get de nearest beacon
                 let nearestBeacon:CLBeacon = beacons[0] as CLBeacon
+                // set time when beacon is found
+                endTime = NSDate()
                 
-                if(nearestBeacon.proximity == lastProximity ||
-                    nearestBeacon.proximity == CLProximity.Unknown) {
-                        return;
-                }
+                // beacon information
                 lastProximity = nearestBeacon.proximity;
+                let major = nearestBeacon.major.integerValue
+                var rssi = nearestBeacon.rssi
+                println("\(rssi)")
                 
-                switch nearestBeacon.proximity {
-                case CLProximity.Far:
-                    message = "You are far away from the beacon"
-                    playSound = true
-                case CLProximity.Near:
-                    message = "You are near the beacon"
-                case CLProximity.Immediate:
-                    message = "You are in the immediate proximity of the beacon"
-                    // check the beacons for major
-                        let major = nearestBeacon.major.integerValue
-                    if major == beaconID {
-                        if major == 52607 {
-                            showProduct()
+                // check distance
+                
+// ------------ distance = immidiate ----------------
+                if (rssi > -60 && rssi != 0){
+                    if activateNewScreen() {
+                        productActive = true
+                        showProduct()
+                    }
+                
+// ------------ distance = near ----------------------
+                } else if (rssi < -60 && rssi > -90) {
+                    // get offer
+                    let offer = Offer(ID: 0, categoryID: 0, offerdescription: "0")
+                    // if product screen is not active
+                    if !productActive {
+                        // if offer is not yet shown to customer
+                        if !isOfferShown(offer) {
+                            showNotification("Speciale offer", swipeMessage: "zien wat de actie is!")
+                            showOffer()
                         }
                     }
-                case CLProximity.Unknown:
-                    return
                 }
-                
-            } else {
-                
-                if(lastProximity == CLProximity.Unknown) {
-                    return;
-                }
-                
-                message = "No beacons are nearby"
-                playSound = true
-                lastProximity = CLProximity.Unknown
             }
-            
-            //NSLog("%@", message)
-            sendLocalNotificationWithMessage(message, playSound: playSound)
     }
     
     func locationManager(manager: CLLocationManager!,
@@ -163,7 +165,7 @@ extension AppDelegate: CLLocationManagerDelegate {
             manager.startUpdatingLocation()
             
             NSLog("You entered the region")
-            sendLocalNotificationWithMessage("You entered the region", playSound: false)
+            //sendLocalNotificationWithMessage("You entered the region", playSound: false)
     }
     
     func locationManager(manager: CLLocationManager!,
@@ -172,13 +174,62 @@ extension AppDelegate: CLLocationManagerDelegate {
             manager.stopUpdatingLocation()
             
             NSLog("You exited the region")
-            sendLocalNotificationWithMessage("You exited the region", playSound: true)
+            //sendLocalNotificationWithMessage("You exited the region", playSound: true)
     }
     
     func showProduct() {
-        println("product screen")
-//        let navigation = self.window?.rootViewController
-//        navigation!.performSegueWithIdentifier("Home", sender: nil)
+        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+        let vc  = storyboard.instantiateViewControllerWithIdentifier("Product") as ProductView
+        
+        nav?.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    func showOffer() {
+        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+        let vc  = storyboard.instantiateViewControllerWithIdentifier("Offer") as OfferView
+        
+        nav?.presentViewController(vc, animated: true, completion: nil)
+
+        
+    }
+    
+    func activateNewScreen() -> Bool {
+        if startTime == nil {
+            startTime = NSDate()
+            return true
+        }else if startTime != nil {
+            let timeInterval: Double = self.endTime!.timeIntervalSinceDate(startTime!)
+            if (timeInterval > 3){
+                startTime = NSDate()
+                return true
+            }
+        }
+        return false
+    }
+    
+    func isOfferShown(offer : Offer) -> Bool {
+        if offersShown == nil {
+            offersShown = [Offer]()
+            offersShown!.append(offer)
+            return false
+        } else {
+            for offerCheck in offersShown! {
+                if offerCheck.ID == offer.ID {
+                    return true
+                }
+            }
+            offersShown!.append(offer)
+        }
+        
+        return false
+    } // if offer allready shown?
+    
+    func showNotification(message : String, swipeMessage : String) {
+        var localNotification:UILocalNotification = UILocalNotification()
+        localNotification.alertAction = swipeMessage
+        localNotification.alertBody = message
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
 
 }

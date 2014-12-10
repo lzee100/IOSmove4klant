@@ -20,39 +20,24 @@ class LogIn: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.hidden = true
         // Do any additional setup after loading the view.
         self.editText_UserName.delegate = self
         self.editText_Password.delegate = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func logInPressed(sender: AnyObject) {
-        self.logIn(sender)
+        logIn(sender)
     }
+    
     
     @IBAction func signUpPressed(sender: AnyObject) {
         ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
-            self.performSegueWithIdentifier("Home", sender: nil)
+            dispatch_sync(dispatch_get_main_queue()){
+            self.performSegueWithIdentifier("Home", sender: self.button_signUp)
+            }
         }
     }
-    
-    
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.editText_Password.resignFirstResponder()
-        self.editText_UserName.resignFirstResponder()
-        return true
-    }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.editText_UserName.resignFirstResponder()
-        self.editText_Password.resignFirstResponder()
-    }
-    
     
     func logIn(sender : AnyObject) {
         let userName = editText_UserName.text
@@ -75,16 +60,29 @@ class LogIn: UIViewController, UITextFieldDelegate {
                 } else if successR == 1 {
                     self.user = user
                     self.logInCorrect = true
-                    self.performSegueWithIdentifier("Home", sender: nil)
+                    //self.performSegueWithIdentifier("Home", sender: nil)
                     
-                    //let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-                    //let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
-                    //vc.user = user
-                    //self.presentViewController(vc, animated: true, completion: nil)
+                    let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+                    let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
+                    vc.user = user
+                    dispatch_sync(dispatch_get_main_queue()){
+                    self.showViewController(vc, sender: nil)
+                    }
                 }
             })
         }
     }
-
+    
+    // keyboard behavior
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.editText_Password.resignFirstResponder()
+        self.editText_UserName.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.editText_UserName.resignFirstResponder()
+        self.editText_Password.resignFirstResponder()
+    }
 
 }

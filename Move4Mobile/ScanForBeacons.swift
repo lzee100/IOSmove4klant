@@ -25,7 +25,7 @@ class ScanForBeacons: UIViewController, CLLocationManagerDelegate {
     }
     
     func initiateBeaconSetup(){
-        let uuid : NSUUID = NSUUID(UUIDString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!
+        let uuid : NSUUID = NSUUID(UUIDString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")!
         let beaconIdentifier = "iBeaconModules.us"
         let beaconUUID: NSUUID = uuid
         let beaconRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID,

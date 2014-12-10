@@ -29,7 +29,7 @@ class Home: UIViewController {
         
         
         DataHandler.updateAll()
-     
+        DataHandler.storeLikesFromServerLocally(0)
     }
     
 
@@ -38,9 +38,9 @@ class Home: UIViewController {
 
     @IBAction func checkFunctionPressed(sender: AnyObject) {
         
-        var beacons: [Beacon] = DataHandler.getBeaconsFromDB()
-        for b:Beacon in beacons{
-            println(b.toString())
+        var cats: [Category] = DataHandler.getLikedCategoriesFromDB()
+        for c:Category in cats{
+            println(c.toString())
         }
         
        // ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in

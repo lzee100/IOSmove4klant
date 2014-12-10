@@ -403,7 +403,7 @@ public class DataHandler{
                                         for i : Int in returnvalue{
                                             for category : NSManagedObject in cats{
                                                 if category.valueForKey("id") as Int==i{
-                                                    category.setValue("1", forKey: "liked")
+                                                    category.setValue(1, forKey: "liked")
                                                 }
                                             }
                                         }

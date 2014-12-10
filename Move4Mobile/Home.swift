@@ -13,7 +13,7 @@ class Home: UIViewController {
     @IBOutlet var settings: UIBarButtonItem!
     @IBOutlet var label_ijzerhandel: UILabel!
     @IBOutlet weak var button_checkFunctions: UIButton!
-    var user : User?
+    //var user : User?
     
     var products = [NSManagedObject]()
     
@@ -27,9 +27,10 @@ class Home: UIViewController {
 //            println(user!.getUserID())
 //        }
         
-        
+        var user = DataHandler.getUserFromDB()
+        println("logged in as: " + user.name!)
         DataHandler.updateAll()
-        DataHandler.storeLikesFromServerLocally(0)
+        DataHandler.storeLikesFromServerLocally(user.userID!)
     }
     
 

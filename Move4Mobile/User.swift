@@ -10,10 +10,10 @@ import UIKit
 
 class User: NSObject {
     
-    var userID      : NSString?
-    var name        : NSString?
-    var lastName    : NSString?
-    var email       : NSString?
+    var userID      : Int?
+    var name        : String?
+    var lastName    : String?
+    var email       : String?
     
     var filePath    : NSString?
     var byteArray   : NSMutableData?
@@ -22,7 +22,12 @@ class User: NSObject {
     }
     
     init(uName : NSString, uLastName : NSString, uEmail : NSString){}
-    init(uID : Int, uName : NSString, uLastName : NSString, uEmail : NSString){}
+    init(uID : Int, uName : NSString, uLastName : NSString, uEmail : NSString){
+        self.userID     = uID
+        self.name       = uName
+        self.lastName   = uLastName
+        self.email      = uEmail
+    }
     
     func createUserWithName (uName : NSString, uLastName : NSString, uEmail : NSString) {
         self.name       = uName
@@ -30,7 +35,7 @@ class User: NSObject {
         self.email      = uEmail
     }
     
-    func setUserID(id : NSString) {
+    func setUserID(id : Int) {
         self.userID = id
     }
     
@@ -42,7 +47,7 @@ class User: NSObject {
         self.byteArray = data
     }
     
-    func getUserID() -> String{
+    func getUserID() -> Int{
         return userID!
     }
     

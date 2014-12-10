@@ -32,11 +32,10 @@ class ManageAccount: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success, message, user, error) -> () in
-            self.user = user
+            self.user = DataHandler.getUserFromDB()
             self.execute()
             self.reloadInputViews()
-        }
+        
     }
     
     // table functions
@@ -92,7 +91,7 @@ class ManageAccount: UIViewController {
 
         
         allCategories = ServerRequestHandler().getAllCategories()
-        let userID = user?.getUserID().toInt()
+        let userID = user?.getUserID()
         
         let i: () = ServerRequestHandler.getLikes3(userID!, responseMain: { (array : Array<Int>!, error  : NSError!) -> () in
                 if (self.allCategories.count != 0){

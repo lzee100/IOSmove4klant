@@ -232,7 +232,7 @@ public class ServerRequestHandler: NSObject {
         })
     }
     
-    class func logIn (email : String, password : String, responseMain: (success : String, message : String, user : User?, error:NSError!) ->()){
+    class func logIn (email : String, password : String, responseMain: (success : String, message : String, error:NSError!) ->()){
         //let queue = dispatch_get_main_queue()
         
         //dispatch_async(queue, {
@@ -257,17 +257,12 @@ public class ServerRequestHandler: NSObject {
                 if ((allContacts["user"]) != nil) {
                    let dicUser : AnyObject = allContacts["user"]!
                     if let collection = dicUser as? Dictionary<String, AnyObject> {
-                        let userFirstName = collection["fname"] as String!
-                        let userLastName = collection["lname"] as String!
-                        let userID = collection["customerID"] as String!
-                        let userEmail = collection["email"] as String!
+                        let userFirstName : String = collection["fname"] as String
+                        let userLastName : String = collection["lname"]as String
+                        let userID : String = collection["customerID"]as String
+                        let userEmail : String = collection["email"]as String
                         
-                        // create user object
-                        user = User()
-                        user?.createUserWithName(userFirstName, uLastName: userLastName, uEmail: userEmail)
-                        //user.setByteArrayImage(data: NSMutableData)
-                        user?.setUserID(userID!)
-                        
+                        DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail)
                         message = ""
                         success = "1"
                     }
@@ -282,10 +277,10 @@ public class ServerRequestHandler: NSObject {
                         message = string
                     }
                 }
-                responseMain(success: success, message: message, user : user, error: nil)
+                responseMain(success: success, message: message, error: nil)
             }
         },failure: {(error: NSError, response: HTTPResponse?) in
-            responseMain (success: success, message: message, user : nil, error: error)
+            responseMain (success: success, message: message, error: error)
         })
         
     }

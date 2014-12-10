@@ -31,57 +31,7 @@ class LogIn: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func logInPressed(sender: AnyObject) {
-        //self.logIn(sender)
-//        var returnvalue = Array<Int>()
-//        
-//        ServerRequestHandler().getLikes2(0, respone: {(response: HTTPResponse) -> Void in
-//            if let data = response.responseObject as? NSData {
-//                let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
-//                var sep = str.componentsSeparatedByString("<")
-//                var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
-//                
-//                var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
-//                
-//                if let json = allContacts as? Dictionary<String, Array<Int>> {
-//                    
-//                    returnvalue = json["returnvalue"]!
-//                    self.laatzien(returnvalue)
-//                }
-//            }
-//        })
-        
-        
-        ServerRequestHandler().login2("sanderwubs@gmail.com", password: "testr", respone: {(response: HTTPResponse) -> Void in
-                        if let data = response.responseObject as? NSData {
-                            let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
-                            var sep = str.componentsSeparatedByString("<")
-                            var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
-                           // println(sep)
-                           // println()
-                            var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
-                            //println(allContacts)
-                            if let json = allContacts as? Dictionary<String, AnyObject> {
-                                
-                                if var succes = json["success"] as? Int{
-                                    if succes == 1{
-                                    self.loginuser(sender, waarde: succes)
-                                    }
-                                }
-                                if let user = json["user"] as? Dictionary<String, AnyObject>{
-                                if var name = user["fname"] as? String{
-                                println("logged in as: " + name)
-                                println()
-                                }
-                                }
-                            }
-                        }
-                    })
-
-        
-        
-  
-        
-
+        logIn(sender)
     }
     
     func loginuser(sender: AnyObject, waarde: Int)
@@ -98,7 +48,7 @@ class LogIn: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signUpPressed(sender: AnyObject) {
-        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
+        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, error) -> () in
             self.performSegueWithIdentifier("Home", sender: nil)
         }
     }
@@ -129,16 +79,19 @@ class LogIn: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else {
-            ServerRequestHandler.logIn(userName, password: password, responseMain: { (success : String, message : String, user : User?, error : NSError!) -> () in
+            ServerRequestHandler.logIn(userName, password: password, responseMain: { (success : String, message : String, error : NSError!) -> () in
                 let successR = success.toInt()
                 if successR == 0 {
                     var alert = UIAlertController(title: "Onjuiste inloggegevens", message: message, preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 } else if successR == 1 {
-                    self.user = user
+                    
                     self.logInCorrect = true
+                    dispatch_sync(dispatch_get_main_queue()){
+
                     self.performSegueWithIdentifier("Home", sender: nil)
+                    }
                     
                     //let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
                     //let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home

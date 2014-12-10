@@ -22,6 +22,7 @@ class User: NSObject {
     }
     
     init(uName : NSString, uLastName : NSString, uEmail : NSString){}
+    init(uID : Int, uName : NSString, uLastName : NSString, uEmail : NSString){}
     
     func createUserWithName (uName : NSString, uLastName : NSString, uEmail : NSString) {
         self.name       = uName

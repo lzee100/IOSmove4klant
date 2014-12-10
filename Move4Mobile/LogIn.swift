@@ -31,7 +31,70 @@ class LogIn: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func logInPressed(sender: AnyObject) {
-        self.logIn(sender)
+        //self.logIn(sender)
+//        var returnvalue = Array<Int>()
+//        
+//        ServerRequestHandler().getLikes2(0, respone: {(response: HTTPResponse) -> Void in
+//            if let data = response.responseObject as? NSData {
+//                let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+//                var sep = str.componentsSeparatedByString("<")
+//                var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
+//                
+//                var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
+//                
+//                if let json = allContacts as? Dictionary<String, Array<Int>> {
+//                    
+//                    returnvalue = json["returnvalue"]!
+//                    self.laatzien(returnvalue)
+//                }
+//            }
+//        })
+        
+        
+        ServerRequestHandler().login2("sanderwubs@gmail.com", password: "testr", respone: {(response: HTTPResponse) -> Void in
+                        if let data = response.responseObject as? NSData {
+                            let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                            var sep = str.componentsSeparatedByString("<")
+                            var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
+                           // println(sep)
+                           // println()
+                            var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
+                            //println(allContacts)
+                            if let json = allContacts as? Dictionary<String, AnyObject> {
+                                
+                                if var succes = json["success"] as? Int{
+                                    if succes == 1{
+                                    self.loginuser(sender, waarde: succes)
+                                    }
+                                }
+                                if let user = json["user"] as? Dictionary<String, AnyObject>{
+                                if var name = user["fname"] as? String{
+                                println("logged in as: " + name)
+                                println()
+                                }
+                                }
+                            }
+                        }
+                    })
+
+        
+        
+  
+        
+
+    }
+    
+    func loginuser(sender: AnyObject, waarde: Int)
+    {
+//        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+//        let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
+//        //vc.user = user
+//        self.showViewController(vc, sender: sender)
+       // println(NSThread.isMainThread())
+        dispatch_sync(dispatch_get_main_queue()){
+           // println(NSThread.isMainThread())
+        self.performSegueWithIdentifier("Home", sender: self)
+        }
     }
     
     @IBAction func signUpPressed(sender: AnyObject) {

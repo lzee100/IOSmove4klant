@@ -14,26 +14,64 @@ class Home: UIViewController {
     @IBOutlet var label_ijzerhandel: UILabel!
     @IBOutlet weak var button_checkFunctions: UIButton!
     var user : User?
+    
+    var products = [NSManagedObject]()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        println(user?.getUserID())
-        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
-            self.user = user
-            println(user!.getUserID())
-        }
+        //println(user?.getUserID())
+//        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
+//            self.user = user
+//            println(user!.getUserID())
+//        }
+        
+        
+        DataHandler.updateAll()
+     
     }
     
 
+    
+
+
     @IBAction func checkFunctionPressed(sender: AnyObject) {
         
-        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
-            println("success code :\(success)")
-            println(message)
+        var beacons: [Beacon] = DataHandler.getBeaconsFromDB()
+        for b:Beacon in beacons{
+            println(b.toString())
         }
         
+       // ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
+        //    println("success code :\(success)")
+        //    println(message)
         
-        var category = [NSManagedObject]()
+        
+        //}
+//        var returnvalue = Array<Int>()
+//        
+//                ServerRequestHandler().getLikes2(0, respone: {(response: HTTPResponse) -> Void in
+//                    if let data = response.responseObject as? NSData {
+//                        let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+//                        var sep = str.componentsSeparatedByString("<")
+//                        var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
+//        
+//                        var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
+//        
+//                        if let json = allContacts as? Dictionary<String, Array<Int>> {
+//        
+//                            returnvalue = json["returnvalue"]!
+//                            for i : Int in returnvalue{
+//                                println(i)
+//                            }
+//                        }
+//                    }
+//                })
+//        
+//        
+//        var category = [NSManagedObject]()
+//        
         
         
         //

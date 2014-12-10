@@ -113,36 +113,6 @@
             endingLineNumber = "35"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Move4Klant.ManageAccount.viewDidLoad (Move4Klant.ManageAccount)() -&gt; ()"
-                  moduleName = "Move4Klant"
-                  urlString = "file:///Users/Leo/Documents/XCode/git/IOSmove4klant/Move4Mobile/ManageAccount.swift"
-                  timestampString = "439908335.266841"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "72">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Move4Klant.ManageAccount.(viewDidLoad (Move4Klant.ManageAccount) -&gt; () -&gt; ()).(closure #1)"
-                  moduleName = "Move4Klant"
-                  urlString = "file:///Users/Leo/Documents/XCode/git/IOSmove4klant/Move4Mobile/ManageAccount.swift"
-                  timestampString = "439908335.266962"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

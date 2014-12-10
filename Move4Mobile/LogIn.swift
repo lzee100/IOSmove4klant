@@ -15,7 +15,6 @@ class LogIn: UIViewController, UITextFieldDelegate {
     @IBOutlet var button_signUp: UIButton!
     @IBOutlet var label_welcomeByThe: UILabel!
     @IBOutlet var label_IJzerWinkelApp: UILabel!
-    var user : User?
     var logInCorrect = false
 
     override func viewDidLoad() {
@@ -30,9 +29,21 @@ class LogIn: UIViewController, UITextFieldDelegate {
         logIn(sender)
     }
     
+    func loginuser(sender: AnyObject, waarde: Int)
+    {
+//        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+//        let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
+//        //vc.user = user
+//        self.showViewController(vc, sender: sender)
+       // println(NSThread.isMainThread())
+        dispatch_sync(dispatch_get_main_queue()){
+           // println(NSThread.isMainThread())
+        self.performSegueWithIdentifier("Home", sender: self)
+        }
+    }
     
     @IBAction func signUpPressed(sender: AnyObject) {
-        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
+        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, error) -> () in
             dispatch_sync(dispatch_get_main_queue()){
             self.performSegueWithIdentifier("Home", sender: self.button_signUp)
             }
@@ -60,14 +71,16 @@ class LogIn: UIViewController, UITextFieldDelegate {
                 } else if successR == 1 {
                     
                     self.logInCorrect = true
-                    //self.performSegueWithIdentifier("Home", sender: nil)
-                    
-                    let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-                    let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
-                    vc.user = user
                     dispatch_sync(dispatch_get_main_queue()){
-                    self.showViewController(vc, sender: nil)
+
+                    self.performSegueWithIdentifier("Home", sender: nil)
                     }
+                    
+//                    let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+//                    let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
+//                    dispatch_sync(dispatch_get_main_queue()){
+//                    self.showViewController(vc, sender: nil)
+//                    }
                 }
             })
         }

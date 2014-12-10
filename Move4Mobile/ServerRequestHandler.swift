@@ -280,7 +280,7 @@ public class ServerRequestHandler: NSObject {
                 responseMain(success: success, message: message, error: nil)
             }
         },failure: {(error: NSError, response: HTTPResponse?) in
-            responseMain (success: "0", message: message, user : nil, error: error)
+            responseMain (success: success, message: message, error: error)
         })
     }
     

@@ -21,8 +21,8 @@ class EditAccount: UIViewController {
     @IBOutlet var textinput_email: UITextField!
     @IBOutlet var label_titleLikes: UILabel!
     @IBOutlet var tableLikes: UITableView!
-    var allCategories = [Category]()
-    var likedCategories = [Category]()
+    var allCategories : [Category]?
+    var likedCategories : [Category]?
     
     var user : User = User()
     
@@ -44,6 +44,8 @@ class EditAccount: UIViewController {
         
         var image = UIImage(named: "emptyprofile")
         imageView_profilePicture.image = image
+        self.imageView_profilePicture.layer.cornerRadius = 20;
+        self.imageView_profilePicture.clipsToBounds = true;
         
     }
     
@@ -62,9 +64,9 @@ class EditAccount: UIViewController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if (likedCategories.count != 0)
+        if (likedCategories != nil)
         {
-            return likedCategories.count
+            return likedCategories!.count
         }
         else
         {
@@ -81,7 +83,7 @@ class EditAccount: UIViewController {
             cell = tableView.dequeueReusableCellWithIdentifier(id) as EditAccountCell!
         }
         
-        cell!.label_category.text = likedCategories[indexPath.row].name!
+        cell!.label_category.text = likedCategories![indexPath.row].name!
         
         return cell!
     }
@@ -110,7 +112,7 @@ class EditAccount: UIViewController {
         }
         if (segue.identifier == "changeLikedCategories"){
             let destinationVC = segue.destinationViewController as LikedCategories
-            destinationVC.allCategories = self.allCategories
+            destinationVC.allCategories = self.allCategories!
         }
     }
     

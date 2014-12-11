@@ -16,6 +16,9 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
+    let uuid : NSUUID = NSUUID(UUIDString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")!
+    var beaconsFromDataBase : [Beacon]?
+    var rangedBeacon : Beacon?
     var beacons: [CLBeacon]?
     var locationManager: CLLocationManager?
     var lastProximity: CLProximity?
@@ -40,8 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         }()
     
-    
-    
     lazy var managedObjectModel: NSManagedObjectModel = {
         
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
@@ -51,8 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         return NSManagedObjectModel(contentsOfURL: modelURL)!
         
         }()
-    
-    
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         
@@ -100,7 +99,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         }()
     
- 
     lazy var managedObjectContext: NSManagedObjectContext? = {
         
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
@@ -121,11 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         }()
     
-    
-    
     // MARK: - Core Data Saving support
-    
-    
     
     func saveContext () {
         
@@ -148,7 +142,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         
     }
-
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -160,7 +153,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             println("navigationcontroller succeeded")
         }
         
-        let uuid : NSUUID = NSUUID(UUIDString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")!
         let beaconIdentifier = "iBeaconModules.us"
         let beaconUUID: NSUUID = uuid
         let beaconRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID,
@@ -248,16 +240,34 @@ extension AppDelegate: CLLocationManagerDelegate {
             
 // -------- if beacon is found ------------------
             if(beacons.count > 0) {
+                
+                // get beacon info from database
+                DataHandler.updateBeacons()
+                beaconsFromDataBase = DataHandler.getBeaconsFromDB()
                 // get de nearest beacon
                 let nearestBeacon:CLBeacon = beacons[0] as CLBeacon
-                // set time when beacon is found
-                endTime = NSDate()
                 
                 // beacon information
                 lastProximity = nearestBeacon.proximity;
                 let major = nearestBeacon.major.integerValue
                 var rssi = nearestBeacon.rssi
                 println("\(rssi)")
+                
+                // get rangedBeacon and assign it to a beacon object
+                for beacon in beaconsFromDataBase! {
+                    if nearestBeacon.minor == beacon.minor {
+                        rangedBeacon = beacon
+                    }
+                }
+                
+                println("offerID : \(rangedBeacon?.offerID)")
+                println("productID : \(rangedBeacon?.productID)")
+                println("beaconID : \(rangedBeacon?.ID)")
+
+                
+                
+                // set time when beacon is found
+                endTime = NSDate()
                 
                 // check distance
                 
@@ -330,7 +340,7 @@ extension AppDelegate: CLLocationManagerDelegate {
             }
         }
         return false
-    }
+    } // screen will only appear every 3 seconds
     
     func isOfferShown(offer : Offer) -> Bool {
         if offersShown == nil {
@@ -355,7 +365,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         localNotification.alertBody = message
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-    }
+    } // if screen is locked, show swipe message
 
 }
 

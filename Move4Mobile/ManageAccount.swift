@@ -36,7 +36,7 @@ class ManageAccount: UIViewController {
         self.execute()
         self.reloadInputViews()
         println(self.imageView_profilePicture.frame.size)
-        self.imageView_profilePicture.layer.cornerRadius = self.imageView_profilePicture.frame.size.width / 2.5;
+        self.imageView_profilePicture.layer.cornerRadius = 20;
         self.imageView_profilePicture.clipsToBounds = true;
         
     }
@@ -76,7 +76,7 @@ class ManageAccount: UIViewController {
         let destinationVC = segue.destinationViewController as EditAccount
         destinationVC.user = user!
         var i = 0
-        for (i = 0; i < 3; i++){
+        for (i = 0; i < likedCategories.count; i++){
             for category in self.allCategories {
                 if (category.ID == likedCategories[i].ID){
                     category.liked = 1
@@ -95,7 +95,8 @@ class ManageAccount: UIViewController {
         
         allCategories = ServerRequestHandler().getAllCategories()
         let userID = user?.getUserID()
-        
+        dispatch_async(dispatch_get_main_queue()){
+
         let i: () = ServerRequestHandler.getLikes3(userID!, responseMain: { (array : Array<Int>!, error  : NSError!) -> () in
                 if (self.allCategories.count != 0){
                     for like in array {
@@ -110,7 +111,7 @@ class ManageAccount: UIViewController {
                 self.tableView_Likes.reloadData()
         })
 
-        
+        }
         tableView_Likes.reloadData()
         label_firstNameOutput.text  = user!.name!
         label_lastNameOutput.text   = user!.lastName!

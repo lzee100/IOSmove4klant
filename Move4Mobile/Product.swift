@@ -36,6 +36,13 @@ class Product: NSObject {
         self.name=name
     }
     
+    init(ID: Int, productdescription: String, name:String ){
+        self.ID = ID
+        self.productdescription=productdescription
+        self.name=name
+    }
+
+    
     func toString() -> String{
         return "ID: \(ID)  categoryiD: \(categoryID)  name: \(name)  description:  \(productdescription)"
     }

@@ -54,7 +54,7 @@ class LogIn: UIViewController, UITextFieldDelegate {
         let userName = editText_UserName.text
         let password = editText_Password.text
         if userName == "" {
-            var alert = UIAlertController(title: "Leeg veld", message: "Vult u alstublieft iets in bij gebruiktsnaam.", preferredStyle: UIAlertControllerStyle.Alert)
+            var alert = UIAlertController(title: "Leeg veld", message: "Vult u alstublieft iets in bij gebruikersnaam.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else if password == "" {

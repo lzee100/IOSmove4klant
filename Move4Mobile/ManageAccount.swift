@@ -32,9 +32,11 @@ class ManageAccount: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            self.user = DataHandler.getUserFromDB()
-            self.execute()
-            self.reloadInputViews()
+        self.user = DataHandler.getUserFromDB()
+        self.execute()
+        self.reloadInputViews()
+        self.imageView_profilePicture.layer.cornerRadius = self.imageView_profilePicture.frame.size.width / 2;
+        self.imageView_profilePicture.clipsToBounds = true;
         
     }
     

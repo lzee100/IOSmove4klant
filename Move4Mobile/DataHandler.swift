@@ -82,6 +82,43 @@ public class DataHandler{
         return products
     }
     
+    class func getProductByID(productID: Int) -> Product{
+        var dbdata = [NSManagedObject]()
+        
+        var products : Product = Product()
+        //stap 1
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        //stap 2
+        let fetchRequest = NSFetchRequest(entityName: "Product")
+        
+        //stap 3
+        var error: NSError?
+        
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        
+        if let results = fetchedResults {
+            dbdata=results
+        }else {
+            println("Could not fetch \(error), \(error!.userInfo)")
+        }
+        
+        for p: NSManagedObject in dbdata{
+            var id: Int = p.valueForKey("id") as Int
+            
+            if (id == productID){
+            var catid: Int = p.valueForKey("categoryID") as Int
+            var name: String = p.valueForKey("name") as String
+            var desc: String = p.valueForKey("productdescription") as String
+            
+            products = Product(ID: id, categoryID: catid, productdescription: name, name: desc)
+            }
+        }
+        return products
+  
+    }
+    
     
     
     //Categories
@@ -326,6 +363,43 @@ public class DataHandler{
         }
         
         return offers
+    }
+    
+    class func getOfferByID(offerID: Int) -> Offer{
+        var dbdata = [NSManagedObject]()
+        
+        var offer = Offer()
+        //stap 1
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        //stap 2
+        let fetchRequest = NSFetchRequest(entityName: "Offer")
+        
+        //stap 3
+        var error: NSError?
+        
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        
+        if let results = fetchedResults {
+            dbdata=results
+            for o: NSManagedObject in dbdata{
+                
+                let id = o.valueForKey("id") as Int
+                if id==offerID{
+                    let desc = o.valueForKey("offerDescription") as String
+                    let catid = o.valueForKey("categoryID") as Int
+                    
+                    offer = Offer(ID: id, categoryID: catid, offerdescription: desc)
+                }
+                
+              
+            }
+        }else {
+            println("Could not fetch \(error), \(error!.userInfo)")
+        }
+        
+        return offer
     }
     
     

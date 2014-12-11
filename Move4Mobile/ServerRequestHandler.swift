@@ -317,4 +317,12 @@ public class ServerRequestHandler: NSObject {
         
     }
     
+    class func uploadImage2(customerID: Int, image: String, respone: ((HTTPResponse) -> Void)!){
+        var request = HTTPTask()
+        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+        let params: Dictionary<String,AnyObject> = ["customerID": customerID, "image": image]
+        request.POST(Config().UPLOADIMAGE, parameters: params, success: respone,failure: {(error: NSError, response: HTTPResponse?) in
+        })
+    }
+    
 }

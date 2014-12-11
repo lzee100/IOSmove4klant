@@ -67,11 +67,22 @@ public class ServerRequestHandler: NSObject {
                 
                 let beacon : AnyObject? = json[index]
                 
-                let collection = beacon! as Dictionary<String, String>
+                let collection = beacon! as Dictionary<String, AnyObject>
                 
-                var offerid : String  = collection["id"]!
-                let offercat : String = collection["category"]!
-                let offerdesc : String = collection["description"]!
+                var offerid : String  = collection["id"] as String
+                var offercat : String
+                var temp : AnyObject = collection["category"]!
+                if temp.description == "<null>"{
+                    offercat = "99"
+                }
+                else{
+                    //productobj.categoryID = collection["categoryID"] as? Int
+                    offercat = collection["category"] as String
+                }
+
+                
+                //let offercat : String = collection["category"] as String
+                let offerdesc : String = collection["description"] as String
                 
                 let beaconobj : Offer = Offer(ID: offerid.toInt()!, categoryID: offercat.toInt()!, offerdescription: offerdesc)
                 //println(beaconobj.toString())
@@ -129,16 +140,27 @@ public class ServerRequestHandler: NSObject {
                 
                 let beacon : AnyObject? = json[index]
                // println(beacon)
-                let collection = beacon! as Dictionary<String, String>
+                let collection = beacon! as Dictionary<String, AnyObject>
                 
-                var productid : String  = collection["id"]!
-                let productname : String = collection["name"]!
-                let productcat : String = collection["categoryID"]!
-                let productdesc : String = collection["description"]!
+                var productid : String  = collection["id"] as String
+                let productname : String = collection["name"]as String
+               // println(collection["categoryID"])
+                var temp: AnyObject? = collection["categoryID"]
+              
+                let productdesc : String = collection["description"]as String
                 
-                let beaconobj : Product = Product(ID: productid.toInt()!, categoryID: productcat.toInt()!, productdescription: productdesc, name: productname)
+                let productobj : Product = Product(ID: productid.toInt()!, productdescription: productdesc, name: productname)
+                
+                var productcat : Int
+                if temp?.description == "<null>"{
+                }
+                else{
+                    productobj.categoryID = collection["categoryID"] as? Int
+                        
+                    }
+                
                 //println(beaconobj.toString())
-                returnarray.append(beaconobj)
+                returnarray.append(productobj)
             }
         }
         return returnarray
@@ -219,7 +241,7 @@ public class ServerRequestHandler: NSObject {
     
     }
     
-    public func uploadImage(customerID: Int, image: String){
+    class func uploadImage(customerID: Int, image: String){
         var request = HTTPTask()
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
         let params: Dictionary<String,AnyObject> = ["customerID": customerID, "image": image]

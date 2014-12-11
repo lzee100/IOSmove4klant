@@ -355,6 +355,27 @@ public class DataHandler{
         user.setValue(email, forKey: "email")
     }
     
+    class func getUserID()-> Int{
+        var id :Int = Int()
+        
+        //step 1 get context
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        //step 2 get user from coredata
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        
+        //step 3 fetch result
+        var error: NSError?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        if let results = fetchedResults {
+            for o: NSManagedObject in results{
+                id = o.valueForKey("id") as Int
+            }
+        }
+        return id
+    }
+    
     class func getUserFromDB() -> User {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!

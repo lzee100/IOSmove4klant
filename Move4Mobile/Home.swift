@@ -9,15 +9,16 @@
 import UIKit
 import CoreData
 
-class Home: UIViewController {
+class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     @IBOutlet var settings: UIBarButtonItem!
     @IBOutlet var label_ijzerhandel: UILabel!
     @IBOutlet weak var button_checkFunctions: UIButton!
     //var user : User?
     
     var products = [NSManagedObject]()
+    var uploadimage :UIImage = UIImage()
     
-    
+    var imagePicker = UIImagePickerController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +41,25 @@ class Home: UIViewController {
 
     @IBAction func checkFunctionPressed(sender: AnyObject) {
         
+        
         var cats: [Category] = DataHandler.getLikedCategoriesFromDB()
+        println("this user likes: ")
         for c:Category in cats{
             println(c.toString())
         }
         
-       // ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
+            println("")
+            
+            
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
+            imagePicker.allowsEditing = true
+            
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+               // ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
         //    println("success code :\(success)")
         //    println(message)
         
@@ -107,7 +121,22 @@ class Home: UIViewController {
         //        presentItemInfo()
 
     }
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+        
+        //uploadimage=image
+        var imagedata = UIImagePNGRepresentation(image)
+        let base64String = imagedata.base64EncodedDataWithOptions(NSDataBase64EncodingOptions(0))
+        //println(base64String.description)
+        //ServerRequestHandler.uploadImage(DataHandler.getUserID(), image: base64String.description)
+        
+    }
+    
 
+  
     /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueToSettings" {

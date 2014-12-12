@@ -283,8 +283,16 @@ public class ServerRequestHandler: NSObject {
                         let userLastName : String = collection["lname"]as String
                         let userID : String = collection["customerID"]as String
                         let userEmail : String = collection["email"]as String
+                        let profileImage : String = collection["profileImage"] as String
+                        //println("gedownloade user")
+                        //println(collection.description)
+                        //println("")
+                        let decodedData = NSData(base64EncodedString: profileImage, options: NSDataBase64DecodingOptions(0))
+                        var decodedimage = UIImage(data: decodedData!)
+                        //println(decodedimage)
+                        //decodedimage as UIImage
                         
-                        DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail)
+                        DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail, image: decodedimage!)
                         message = ""
                         success = "1"
                     }

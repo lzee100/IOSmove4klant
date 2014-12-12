@@ -14,7 +14,7 @@ class User: NSObject {
     var name        : String?
     var lastName    : String?
     var email       : String?
-    
+    var image       : UIImage?
     var filePath    : NSString?
     var byteArray   : NSMutableData?
     
@@ -41,6 +41,10 @@ class User: NSObject {
     
     func setFilePath (stringFilePath : NSString) {
         self.filePath = stringFilePath
+    }
+    
+    func setProfileImage (image : UIImage) {
+        self.image = image
     }
     
     func setByteArrayImage (data : NSMutableData) {

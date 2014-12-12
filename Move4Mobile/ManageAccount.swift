@@ -33,10 +33,17 @@ class ManageAccount: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.user = DataHandler.getUserFromDB()
-        self.execute()
-        self.reloadInputViews()
+        self.navigationController?.navigationBar.hidden = false
+
         self.imageView_profilePicture.layer.cornerRadius = 20;
         self.imageView_profilePicture.clipsToBounds = true;
+        
+        likedCategories = DataHandler.getLikedCategoriesFromDB()
+        tableView_Likes.reloadData()
+        
+        label_firstNameOutput.text  = user!.name!
+        label_lastNameOutput.text   = user!.lastName!
+        label_emailAdresOutput.text = user!.email!
         
     }
     
@@ -70,52 +77,5 @@ class ManageAccount: UIViewController {
         
         return cell!
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationVC = segue.destinationViewController as EditAccount
-        destinationVC.user = user!
-        var i = 0
-        for (i = 0; i < likedCategories.count; i++){
-            for category in self.allCategories {
-                if (category.ID == likedCategories[i].ID){
-                    category.liked = 1
-                }
-            }
-        }
-
-        destinationVC.allCategories = self.allCategories
-        destinationVC.likedCategories = self.likedCategories
-    }
-    
-    func execute() {
-        //var image = UIImage(named: "emptyprofile")
-        //imageView_profilePicture.image = image
-
-        
-        allCategories = ServerRequestHandler().getAllCategories()
-        let userID = user?.getUserID()
-
-        let i: () = ServerRequestHandler.getLikes3(userID!, responseMain: { (array : Array<Int>!, error  : NSError!) -> () in
-                if (self.allCategories.count != 0){
-                    for like in array {
-                        var i = like
-                        for category in self.allCategories {
-                            if category.ID == i {
-                                self.likedCategories.append(category)
-                            }
-                        }
-                    }
-                }
-            dispatch_async(dispatch_get_main_queue(), {
-                
-                // DO SOMETHING ON THE MAINTHREAD
-                self.tableView_Likes.reloadData()
-            })
-        })
-
-        label_firstNameOutput.text  = user!.name!
-        label_lastNameOutput.text   = user!.lastName!
-        label_emailAdresOutput.text = user!.email!
-    }    
     
 }

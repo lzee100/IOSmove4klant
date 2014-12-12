@@ -74,59 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Move4Mobile/LikedCategories.swift"
-            timestampString = "440065178.896701"
+            timestampString = "440081530.416223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Move4Mobile/LikedCategories.swift"
-            timestampString = "440065343.429028"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "switchChanged(_:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Move4Klant.LikedCategories.switchChanged (Move4Klant.LikedCategories)(ObjectiveC.UISwitch) -&gt; ()"
-                  moduleName = "Move4Klant"
-                  urlString = "file:///Users/Leo/Documents/XCode/git/IOSmove4klant/Move4Mobile/LikedCategories.swift"
-                  timestampString = "440065399.416459"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "788">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Move4Klant.LikedCategories.switchChanged (Move4Klant.LikedCategories)(ObjectiveC.UISwitch) -&gt; ()"
-                  moduleName = "Move4Klant"
-                  urlString = "file:///Users/Leo/Documents/XCode/git/IOSmove4klant/Move4Mobile/LikedCategories.swift"
-                  timestampString = "440065399.417174"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "1164">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

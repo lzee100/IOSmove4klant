@@ -76,7 +76,9 @@ class LogIn: UIViewController, UITextFieldDelegate {
                     appDelegate.logIn = true
                     
                     dispatch_sync(dispatch_get_main_queue()){
-                    self.performSegueWithIdentifier("Home", sender: nil)
+                        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+                        let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
+                        self.showViewController(vc, sender: nil)
                     }
                     
 //                    let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)

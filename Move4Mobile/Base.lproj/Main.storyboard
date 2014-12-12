@@ -108,12 +108,11 @@
                         <outlet property="editText_UserName" destination="KYG-pj-Dza" id="bSN-bF-UMr"/>
                         <outlet property="label_IJzerWinkelApp" destination="7Ej-H6-90O" id="Ai8-AP-GmS"/>
                         <outlet property="label_welcomeByThe" destination="37q-je-avU" id="vl5-0t-mH1"/>
-                        <segue destination="QSm-O1-6KZ" kind="show" identifier="Home" id="Q5s-GD-0b5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ju4-Wm-bXt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-231.5" y="959.5"/>
+            <point key="canvasLocation" x="-623.5" y="143.5"/>
         </scene>
         <!--Offer-->
         <scene sceneID="QCj-G2-Vbr">
@@ -245,7 +244,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRe-l3-c9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-231.5" y="143.5"/>
+            <point key="canvasLocation" x="-1085.5" y="143.5"/>
         </scene>
         <!--Home-->
         <scene sceneID="5pL-BK-t7M">
@@ -310,10 +309,46 @@
             </objects>
             <point key="canvasLocation" x="345.5" y="143.5"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ORj-iQ-aDn">
+            <objects>
+                <navigationController storyboardIdentifier="navHome" useStoryboardIdentifierAsRestorationIdentifier="YES" id="McL-sy-tD8" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ap8-QX-wQF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="QSm-O1-6KZ" kind="relationship" relationship="rootViewController" id="SRR-ze-g7u"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bQH-Ni-LhO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-119.5" y="143.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="U1d-01-4M8">
+            <objects>
+                <navigationController id="Qof-QY-SYd" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1XT-EG-aaa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="HN0-6C-MDM" kind="show" id="h4I-e0-lIh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rTJ-eS-rWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1374.5" y="575.5"/>
+        </scene>
         <!--Scan For Beacons-->
         <scene sceneID="VQg-Nx-ITl">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="HN0-6C-MDM" customClass="ScanForBeacons" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="scanForBeacons" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HN0-6C-MDM" customClass="ScanForBeacons" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pHC-Ta-wcw"/>
                         <viewControllerLayoutGuide type="bottom" id="TeI-Pm-8Le"/>
@@ -416,7 +451,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EVZ-hg-ASx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="804.5" y="922.5"/>
+            <point key="canvasLocation" x="1880.5" y="575.5"/>
         </scene>
         <!--Settings-->
         <scene sceneID="fez-0u-yZs">
@@ -468,19 +503,33 @@
                     </tableView>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <segue destination="bjk-PU-1bB" kind="show" identifier="manageAccount" id="Tly-kd-BdA"/>
-                        <segue destination="HN0-6C-MDM" kind="show" identifier="scanForBeacons" id="ytG-G1-9V1"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QWA-ET-3II" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="804.5" y="143.5"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="K8i-C3-Dvx">
+            <objects>
+                <navigationController storyboardIdentifier="navManageAccount" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BjW-Ma-g3V" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LED-Vg-FRM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bjk-PU-1bB" kind="show" identifier="manageAccount" id="uFk-wT-xrz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HKI-Vz-ejU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1419.5" y="-287.5"/>
+        </scene>
         <!--Manage Account-->
         <scene sceneID="bWA-FH-wzY">
             <objects>
-                <viewController title="Manage Account" automaticallyAdjustsScrollViewInsets="NO" id="bjk-PU-1bB" customClass="ManageAccount" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="manageAccount" title="Manage Account" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bjk-PU-1bB" customClass="ManageAccount" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pkw-Wp-hDa"/>
                         <viewControllerLayoutGuide type="bottom" id="fi9-9j-uk7"/>
@@ -546,7 +595,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accountinformatie" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBg-ot-h0b">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Accountinformatie" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBg-ot-h0b">
                                 <rect key="frame" x="16" y="28" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7HC-lc-u3v"/>
@@ -601,7 +650,7 @@
                                     <outlet property="delegate" destination="bjk-PU-1bB" id="Yd2-0G-aPN"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyprofile.png" translatesAutoresizingMaskIntoConstraints="NO" id="A25-LF-v5y">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="emptyprofile.png" translatesAutoresizingMaskIntoConstraints="NO" id="A25-LF-v5y">
                                 <rect key="frame" x="16" y="68" width="222" height="222"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="A25-LF-v5y" secondAttribute="height" multiplier="1:1" id="GEx-Eo-txT"/>
@@ -666,16 +715,16 @@
                                 <exclude reference="AnB-HC-Hrw"/>
                                 <exclude reference="yLh-jO-hIo"/>
                                 <exclude reference="C5A-Eg-hLk"/>
-                                <exclude reference="5gk-gz-TGs"/>
-                                <exclude reference="XvR-S6-dL5"/>
-                                <exclude reference="mam-zv-hdw"/>
-                                <exclude reference="veh-tl-XWe"/>
-                                <exclude reference="w2W-Q3-AID"/>
                                 <exclude reference="GI7-UD-wZ2"/>
                                 <exclude reference="WTR-Ip-EdT"/>
                                 <exclude reference="l48-FJ-65X"/>
                                 <exclude reference="nnD-Nm-itC"/>
                                 <exclude reference="twz-XL-C8w"/>
+                                <exclude reference="5gk-gz-TGs"/>
+                                <exclude reference="XvR-S6-dL5"/>
+                                <exclude reference="mam-zv-hdw"/>
+                                <exclude reference="veh-tl-XWe"/>
+                                <exclude reference="w2W-Q3-AID"/>
                             </mask>
                         </variation>
                     </view>
@@ -704,7 +753,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwM-Nv-9Hv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300.5" y="143.5"/>
+            <point key="canvasLocation" x="1880.5" y="-287.5"/>
         </scene>
         <!--Edit Account-->
         <scene sceneID="j9i-wB-uYL">
@@ -718,7 +767,7 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wijzig accountgegevens" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eF9-q5-JlQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Wijzig accountgegevens" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eF9-q5-JlQ">
                                 <rect key="frame" x="16" y="28" width="343" height="27.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27.5" id="ibB-KS-meP"/>
@@ -847,7 +896,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyprofile.png" translatesAutoresizingMaskIntoConstraints="NO" id="RGH-9g-yZO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="emptyprofile.png" translatesAutoresizingMaskIntoConstraints="NO" id="RGH-9g-yZO">
                                 <rect key="frame" x="16" y="63" width="236.5" height="236.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RGH-9g-yZO" secondAttribute="height" multiplier="1:1" id="70h-op-wcN"/>
@@ -887,7 +936,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="V7o-qW-CHq">
-                        <barButtonItem key="rightBarButtonItem" title="Opslaan" id="8wV-eP-lzn"/>
+                        <barButtonItem key="rightBarButtonItem" title="Opslaan" id="8wV-eP-lzn">
+                            <connections>
+                                <action selector="save:" destination="Ffw-h2-T0P" id="V5i-Fb-qNX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -908,7 +961,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cw4-XL-x6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1787.5" y="143.5"/>
+            <point key="canvasLocation" x="2367.5" y="-287.5"/>
         </scene>
         <!--Liked Categories-->
         <scene sceneID="LZz-pW-Lya">
@@ -922,7 +975,7 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dit is een overzicht van categorieen die u kunt aangeven als favoriet." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wd-3r-sr0">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Dit is een overzicht van categorieen die u kunt aangeven als favoriet." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wd-3r-sr0">
                                 <rect key="frame" x="16" y="30" width="343" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="FUE-8D-iIH"/>
@@ -931,7 +984,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PTf-xB-cxM">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PTf-xB-cxM">
                                 <rect key="frame" x="0.0" y="93" width="375" height="574"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -982,11 +1035,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Dhk-M2-T0g">
-                        <barButtonItem key="rightBarButtonItem" title="Opslaan" id="PVs-U2-RRO">
-                            <connections>
-                                <action selector="save:" destination="NkB-wq-LIV" id="pPw-yC-WPb"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Opslaan" id="PVs-U2-RRO"/>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -998,7 +1047,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZh-g0-n21" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2303.5" y="143.5"/>
+            <point key="canvasLocation" x="2883.5" y="-287.5"/>
         </scene>
     </scenes>
     <resources>

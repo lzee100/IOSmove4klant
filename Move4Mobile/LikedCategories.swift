@@ -99,16 +99,10 @@ class LikedCategories: UIViewController {
 //        alert.show()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        saveData()
-        println("after savedata")
-        
-    }
-    
     
     @IBAction func savePressed(sender: AnyObject) {
-        
-        
+        saveData()
+        self.navigationController?.popToRootViewControllerAnimated(true)
        // [self.navigationController popToRootViewControllerAnimated(NO)];
     }
     

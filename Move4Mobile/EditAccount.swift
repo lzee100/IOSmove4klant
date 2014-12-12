@@ -42,9 +42,7 @@ class EditAccount: UIViewController {
         textinput_sirName.placeholder = user.lastName!
         textinput_email.placeholder = user.email!
         
-        
-        var image = UIImage(named: "emptyprofile")
-        imageView_profilePicture.image = image
+        imageView_profilePicture.image = user.image
         self.imageView_profilePicture.layer.cornerRadius = 20;
         self.imageView_profilePicture.clipsToBounds = true;
         

@@ -343,7 +343,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rTJ-eS-rWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1374.5" y="575.5"/>
+            <point key="canvasLocation" x="1419.5" y="573.5"/>
         </scene>
         <!--Scan For Beacons-->
         <scene sceneID="VQg-Nx-ITl">
@@ -451,7 +451,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EVZ-hg-ASx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1880.5" y="575.5"/>
+            <point key="canvasLocation" x="1880.5" y="573.5"/>
         </scene>
         <!--Settings-->
         <scene sceneID="fez-0u-yZs">
@@ -1035,13 +1035,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Dhk-M2-T0g">
-                        <barButtonItem key="rightBarButtonItem" title="Opslaan" id="PVs-U2-RRO"/>
+                        <barButtonItem key="rightBarButtonItem" title="Opslaan" id="PVs-U2-RRO">
+                            <connections>
+                                <action selector="savePressed:" destination="NkB-wq-LIV" id="0Fi-sp-kmY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="button_save" destination="PVs-U2-RRO" id="V7P-Ta-1ls"/>
                         <outlet property="label_info" destination="8wd-3r-sr0" id="c7J-Cd-Ddj"/>
+                        <outlet property="savePressed" destination="PVs-U2-RRO" id="28N-8r-cEt"/>
                         <outlet property="tableLikes" destination="PTf-xB-cxM" id="hqG-Lc-syp"/>
                     </connections>
                 </viewController>

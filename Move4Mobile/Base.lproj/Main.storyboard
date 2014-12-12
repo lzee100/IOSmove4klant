@@ -47,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="IJzerwinkel app" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ej-H6-90O">
-                                <rect key="frame" x="16" y="80" width="343" height="58.5"/>
+                                <rect key="frame" x="16" y="80" width="343" height="59"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="49"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -538,8 +538,8 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voornaam:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4el-zA-7I6">
-                                <rect key="frame" x="16" y="300" width="100" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Voornaam:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4el-zA-7I6">
+                                <rect key="frame" x="16" y="300" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="eiM-mN-fQ7"/>
                                     <constraint firstAttribute="width" constant="100" id="w3M-nP-EhF"/>
@@ -549,7 +549,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emailadres:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EH8-RZ-pif">
-                                <rect key="frame" x="16" y="357" width="100" height="20.5"/>
+                                <rect key="frame" x="16" y="357" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="PNy-QP-FLf"/>
                                     <constraint firstAttribute="height" constant="20.5" id="mvm-AQ-9PJ"/>
@@ -559,19 +559,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFr-JN-HhQ">
-                                <rect key="frame" x="126" y="300" width="233" height="20.5"/>
+                                <rect key="frame" x="126" y="300" width="233" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saF-gJ-vnL">
-                                <rect key="frame" x="126" y="329" width="233" height="20.5"/>
+                                <rect key="frame" x="126" y="329" width="233" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="213-Eo-IiE">
-                                <rect key="frame" x="126" y="357" width="233" height="20.5"/>
+                                <rect key="frame" x="126" y="357" width="233" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="DVC-Uh-MJe"/>
                                     <constraint firstAttribute="width" constant="55" id="mr6-ws-G2e"/>
@@ -604,8 +604,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Achternaam:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28A-W9-JK2">
-                                <rect key="frame" x="16" y="329" width="100" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Achternaam:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28A-W9-JK2">
+                                <rect key="frame" x="16" y="329" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="9om-Hn-uZr"/>
                                     <constraint firstAttribute="width" constant="100" id="BLT-BC-GYc"/>
@@ -768,7 +768,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Wijzig accountgegevens" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eF9-q5-JlQ">
-                                <rect key="frame" x="16" y="28" width="343" height="27.5"/>
+                                <rect key="frame" x="16" y="28" width="343" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27.5" id="ibB-KS-meP"/>
                                 </constraints>
@@ -897,7 +897,7 @@
                                 </variation>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="emptyprofile.png" translatesAutoresizingMaskIntoConstraints="NO" id="RGH-9g-yZO">
-                                <rect key="frame" x="16" y="63" width="236.5" height="236.5"/>
+                                <rect key="frame" x="16" y="63" width="237" height="237"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RGH-9g-yZO" secondAttribute="height" multiplier="1:1" id="70h-op-wcN"/>
                                 </constraints>

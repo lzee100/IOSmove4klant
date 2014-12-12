@@ -103,16 +103,17 @@ class LogIn: UIViewController, UITextFieldDelegate {
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 } else if successR == 1 {
-                    // set delegate to login = true
-                    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-                    DataHandler.updateAll()
-                    DataHandler.storeLikesFromServerLocally(DataHandler.getUserID())
-                    appDelegate.logIn = true
-                    
+                    self.actInd.stopAnimating()
+                    self.container.removeFromSuperview()
+                    self.logInCorrect = true
+
                     dispatch_sync(dispatch_get_main_queue()){
-                        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-                        let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
-                        self.showViewController(vc, sender: nil)
+                        
+                    self.container.removeFromSuperview()
+                    let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+                    let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
+                    self.showViewController(vc, sender: nil)
+                        
                     }
                     
 //                    let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)

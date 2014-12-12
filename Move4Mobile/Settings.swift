@@ -60,7 +60,7 @@ class Settings: UITableViewController {
             
         case "manageAccount" :
             let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("manageAccount") as ManageAccount
+            let vc = storyboard.instantiateViewControllerWithIdentifier("navManageAccount") as UINavigationController
             self.showViewController(vc, sender: nil)
             
         case "scanForBeacons" :

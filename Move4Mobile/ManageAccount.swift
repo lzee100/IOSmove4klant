@@ -112,6 +112,9 @@ class ManageAccount: UIViewController {
         label_firstNameOutput.text  = user!.name!
         label_lastNameOutput.text   = user!.lastName!
         label_emailAdresOutput.text = user!.email!
+        if let image = user!.image as UIImage?{
+            imageView_profilePicture.image=image
+        }
     }
     
     

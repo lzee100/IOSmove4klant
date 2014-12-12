@@ -35,7 +35,6 @@ class ManageAccount: UIViewController {
         self.user = DataHandler.getUserFromDB()
         self.execute()
         self.reloadInputViews()
-        println(self.imageView_profilePicture.frame.size)
         self.imageView_profilePicture.layer.cornerRadius = 20;
         self.imageView_profilePicture.clipsToBounds = true;
         

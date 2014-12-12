@@ -14,25 +14,20 @@ class OfferView: UIViewController {
     @IBOutlet var label_description: UILabel!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var button_cancel: UIButton!
+    var labelDescriptionValue : String!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        label_description.text = labelDescriptionValue
+        // Do any additional setup after loading the view.
+    }
     
     @IBAction func cancelPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         appDel.startTime = NSDate()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     /*
     // MARK: - Navigation
 

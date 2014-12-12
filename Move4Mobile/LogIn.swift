@@ -69,10 +69,13 @@ class LogIn: UIViewController, UITextFieldDelegate {
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 } else if successR == 1 {
+                    // set delegate to login = true
+                    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                    DataHandler.updateAll()
+                    DataHandler.storeLikesFromServerLocally(DataHandler.getUserID())
+                    appDelegate.logIn = true
                     
-                    self.logInCorrect = true
                     dispatch_sync(dispatch_get_main_queue()){
-
                     self.performSegueWithIdentifier("Home", sender: nil)
                     }
                     

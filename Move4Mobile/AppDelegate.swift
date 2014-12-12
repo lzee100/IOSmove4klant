@@ -16,9 +16,12 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
+    var logIn = false
+    var user : User?
     let uuid : NSUUID = NSUUID(UUIDString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")!
     var beaconsFromDataBase : [Beacon]?
     var rangedBeacon : Beacon?
+    var offer : Offer?
     var beacons: [CLBeacon]?
     var locationManager: CLLocationManager?
     var lastProximity: CLProximity?
@@ -150,7 +153,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         if ((self.window?.rootViewController as? UINavigationController) != nil) {
             nav = self.window!.rootViewController as UINavigationController!
-            println("navigationcontroller succeeded")
         }
         
         let beaconIdentifier = "iBeaconModules.us"
@@ -238,11 +240,15 @@ extension AppDelegate: CLLocationManagerDelegate {
             var message:String = ""
             var playSound = false
             
-// -------- if beacon is found ------------------
-            if(beacons.count > 0) {
-                
-                // get beacon info from database
-                DataHandler.updateBeacons()
+            // check if user is logged in
+            if logIn {
+// ------------ if beacon is found ------------------
+                if(beacons.count > 0) {
+                    
+                    // get user from db
+                    user = DataHandler.getUserFromDB()
+
+
                 beaconsFromDataBase = DataHandler.getBeaconsFromDB()
                 // get de nearest beacon
                 let nearestBeacon:CLBeacon = beacons[0] as CLBeacon
@@ -251,7 +257,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                 lastProximity = nearestBeacon.proximity;
                 let major = nearestBeacon.major.integerValue
                 var rssi = nearestBeacon.rssi
-                println("\(rssi)")
+                //println("\(rssi)")
                 
                 // get rangedBeacon and assign it to a beacon object
                 for beacon in beaconsFromDataBase! {
@@ -260,11 +266,8 @@ extension AppDelegate: CLLocationManagerDelegate {
                     }
                 }
                 
-                println("offerID : \(rangedBeacon?.offerID)")
-                println("productID : \(rangedBeacon?.productID)")
-                println("beaconID : \(rangedBeacon?.ID)")
-
-                
+                // get user likes
+                var likes = DataHandler.getLikedCategoriesFromDB()
                 
                 // set time when beacon is found
                 endTime = NSDate()
@@ -281,17 +284,31 @@ extension AppDelegate: CLLocationManagerDelegate {
 // ------------ distance = near ----------------------
                 } else if (rssi < -60 && rssi > -90) {
                     // get offer
-                    let offer = Offer(ID: 0, categoryID: 0, offerdescription: "0")
+                    offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
+                    
+                    // see if offer is liked by user
+                    //println("offerID : \(offer!.ID)")
+                    var userWantsOffer = false
+                    for like in likes {
+                        //println("LikedID : \(like.ID)")
+                        if like.ID == offer!.ID {
+                            userWantsOffer = true
+                        }
+                    }
+                    // if offer is liked by user
+                    if userWantsOffer {
                     // if product screen is not active
-                    if !productActive {
-                        // if offer is not yet shown to customer
-                        if !isOfferShown(offer) {
-                            showNotification("Speciale offer", swipeMessage: "zien wat de actie is!")
+                        if !productActive {
+                            // if offer is not yet shown to customer (customer recieves only once an offer)
+                            if !isOfferShown(offer!) {
+                            showNotification("Speciale aanbieding", swipeMessage: "zien wat de actie is!")
                             showOffer()
+                            }
                         }
                     }
                 }
             }
+            } // end check if user is loggedIn
     }
     
     func locationManager(manager: CLLocationManager!,
@@ -322,6 +339,8 @@ extension AppDelegate: CLLocationManagerDelegate {
     func showOffer() {
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let vc  = storyboard.instantiateViewControllerWithIdentifier("Offer") as OfferView
+        vc.labelDescriptionValue = offer!.offerdescription
+        
         
         nav?.presentViewController(vc, animated: true, completion: nil)
 

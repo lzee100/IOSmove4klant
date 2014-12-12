@@ -32,10 +32,11 @@ class EditAccount: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // check if user has not been set by previous segue (ManageAccount)
-        if (user.name == nil){
-            user.createUserWithName("Leo", uLastName: "van der Zee", uEmail: "lzee100@gmail.com")
-        }
+        user = DataHandler.getUserFromDB()
+        
+        likedCategories = DataHandler.getLikedCategoriesFromDB()
+        allCategories = DataHandler.getCategoriesFromDB()
+        tableLikes.reloadData()
         
         textinput_firstName.placeholder = user.name!
         textinput_sirName.placeholder = user.lastName!
@@ -44,6 +45,8 @@ class EditAccount: UIViewController {
         
         var image = UIImage(named: "emptyprofile")
         imageView_profilePicture.image = image
+        self.imageView_profilePicture.layer.cornerRadius = 20;
+        self.imageView_profilePicture.clipsToBounds = true;
         
     }
     
@@ -88,29 +91,28 @@ class EditAccount: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if (segue.identifier == "saveManageAccount"){
-            var name = textinput_firstName.text
-            var lastname = textinput_sirName.text
-            var email = textinput_email.text
-            
-            if (name == "") {
-                name = textinput_firstName.placeholder!
-            }
-            if (lastname == ""){
-                lastname = textinput_sirName.placeholder!
-            }
-            if (email == ""){
-                email = textinput_email.placeholder!
-            }
-            
-            let newUser : User = User()
-            newUser.createUserWithName(name, uLastName: lastname, uEmail: email)
-            let destinationVC = segue.destinationViewController as ManageAccount
-            destinationVC.user = newUser
-        }
+//        if (segue.identifier == "saveManageAccount"){
+//            var name = textinput_firstName.text
+//            var lastname = textinput_sirName.text
+//            var email = textinput_email.text
+//            
+//            if (name == "") {
+//                name = textinput_firstName.placeholder!
+//            }
+//            if (lastname == ""){
+//                lastname = textinput_sirName.placeholder!
+//            }
+//            if (email == ""){
+//                email = textinput_email.placeholder!
+//            }
+//            
+//            let newUser : User = User()
+//            newUser.createUserWithName(name, uLastName: lastname, uEmail: email)
+//            let destinationVC = segue.destinationViewController as ManageAccount
+//            destinationVC.user = newUser
+//        }
         if (segue.identifier == "changeLikedCategories"){
             let destinationVC = segue.destinationViewController as LikedCategories
-            destinationVC.allCategories = self.allCategories
         }
     }
     
@@ -129,18 +131,32 @@ class EditAccount: UIViewController {
             email = textinput_email.placeholder!
         }
         
+        let newUser = User(uID: user.getUserID(), uName: name, uLastName: lastname, uEmail: email)
         
-        [self.performSegueWithIdentifier("saveAccountInfo", sender: sender)]
+        var userToSave = "UserID: \(newUser.getUserID())\nName: \(newUser.name)\nLastName: \(newUser.lastName)\nEmail: \(newUser.email)"
+        
+        let alert = UIAlertView()
+        alert.title = "Title"
+        alert.message = "To save: " + userToSave
+        alert.addButtonWithTitle("Ok")
+        alert.show()
+        
+        
+        //[self.performSegueWithIdentifier("saveAccountInfo", sender: sender)]
     }
     
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+    // keyboard behavior
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.textinput_firstName.resignFirstResponder()
+        self.textinput_sirName.resignFirstResponder()
+        self.textinput_email.resignFirstResponder()
+        return true
     }
-    */
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.textinput_firstName.resignFirstResponder()
+        self.textinput_sirName.resignFirstResponder()
+        self.textinput_email.resignFirstResponder()
+    }
     
 }

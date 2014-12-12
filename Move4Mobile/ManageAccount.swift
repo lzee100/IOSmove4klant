@@ -32,9 +32,18 @@ class ManageAccount: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            self.user = DataHandler.getUserFromDB()
-            self.execute()
-            self.reloadInputViews()
+        self.user = DataHandler.getUserFromDB()
+        self.navigationController?.navigationBar.hidden = false
+
+        self.imageView_profilePicture.layer.cornerRadius = 20;
+        self.imageView_profilePicture.clipsToBounds = true;
+        
+        likedCategories = DataHandler.getLikedCategoriesFromDB()
+        tableView_Likes.reloadData()
+        
+        label_firstNameOutput.text  = user!.name!
+        label_lastNameOutput.text   = user!.lastName!
+        label_emailAdresOutput.text = user!.email!
         
     }
     

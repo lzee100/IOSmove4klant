@@ -17,6 +17,9 @@ class LikedCategories: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        allCategories = DataHandler.getCategoriesFromDB()
+        likedCategories = DataHandler.getLikedCategoriesFromDB()
+        tableLikes.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,44 +72,38 @@ class LikedCategories: UIViewController {
         let cell : UITableViewCell = sender.superview!.superview as UITableViewCell
         let indexPath : NSIndexPath = tableLikes.indexPathForCell(cell)!
         
-        if (allCategories[indexPath.row].liked == 0){
+        if (allCategories[indexPath.row].liked == 0 || allCategories[indexPath.row].liked == nil){
                 allCategories[indexPath.row].liked = 1
             }
             else {
                 allCategories[indexPath.row].liked = 0
             }
-        
-        
-//        if (allCategories[indexPath.row].liked == 1){
-//            allCategories[indexPath.row].liked = 0
-//        }
-//        else{
-//            allCategories[indexPath.row].liked = 1
-//        }
     }
     
-    @IBAction func save(sender: AnyObject) {
-        var categoriesToSave = ""
-        var i = 0
-        for category in allCategories {
-            if (category.liked! == 1){
-                categoriesToSave += category.name!
-            }
-            i++
-        }
-        let alert = UIAlertView()
-        alert.title = "Title"
-        alert.message = "To save: " + categoriesToSave
-        alert.addButtonWithTitle("Ok")
-        alert.show()
-        
+    func saveData() {
+        DataHandler.saveLikes(allCategories)
+//        var categoriesToSave = ""
+//        var i = 0
+//        for category in allCategories {
+//            if (category.liked != nil || category.liked == 0){
+//                if category.liked! == 1 {
+//                    categoriesToSave += "\n" + category.name!
+//                }
+//            }
+//            i++
+//        }
+//        let alert = UIAlertView()
+//        alert.title = "Title"
+//        alert.message = "To save: " + categoriesToSave
+//        alert.addButtonWithTitle("Ok")
+//        alert.show()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationVC = segue.destinationViewController as ManageAccount
-        destinationVC.allCategories = self.allCategories
+        saveData()
+        println("after savedata")
+        
     }
-    
     
     
 }

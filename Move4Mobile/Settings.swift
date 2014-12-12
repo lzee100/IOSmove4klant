@@ -54,20 +54,23 @@ class Settings: UITableViewController {
         return cell!
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
-//    {
-//        if (segue.identifier == "manageAccount") {
-//            let view: ManageAccount = segue.destinationViewController as ManageAccount
-//        }
-//        if (segue.identifier == "scanForBeacons"){
-//            let view: ScanForBeacons = segue.destinationViewController as ScanForBeacons
-//        }
-//    } // go to next screen (overview scanned beacons) if clicked on a cell
-    
-    
-    // action to be taken when a cell is selected
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(segueID[indexPath.row], sender: nil)
+        
+        switch segueID[indexPath.row] {
+            
+        case "manageAccount" :
+            let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("manageAccount") as ManageAccount
+            self.showViewController(vc, sender: nil)
+            
+        case "scanForBeacons" :
+            let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("scanForBeacons") as ScanForBeacons
+            self.showViewController(vc, sender: nil)
+            
+        default :
+            ""
+        }
     }
 
 }

@@ -22,7 +22,7 @@ public class Config{
     public  let CHECKINGSTATUS = "http://playground.m4mapp.com/beacons/checkinstatus.php"
     public  let EDITUSER = "http://playground.m4mapp.com/beacons/editcostumer.php"
     
-    public  let LOGINURL = "http://playground.m4mapp.com/beacons/login_api/"
+    public  let LOGINURL = "http://ibeacontest.herobo.com/login_api/"
     public  let REGISTERURL = "http://playground.m4mapp.com/beacons/login_api/"
     public  let FORPASSURL = "http://playground.m4mapp.com/beacons/login_api/"
     public  let CHGPASSURL = "http://playground.m4mapp.com/beacons/login_api/"

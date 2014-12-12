@@ -289,7 +289,6 @@ public class DataHandler{
 
     
     
-    
     //Beacons
     
     class func updateBeacons(){
@@ -473,7 +472,7 @@ public class DataHandler{
     
     //User
     
-    class func saveUser(id : Int, firstname:String, lastname: String, email:String){
+    class func saveUser(id : Int, firstname:String, lastname: String, email:String, image: UIImage){
         
         //step 1 get context
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -494,6 +493,8 @@ public class DataHandler{
         user.setValue(firstname, forKey: "firstname")
         user.setValue(lastname, forKey: "lastname")
         user.setValue(email, forKey: "email")
+
+        user.setValue(UIImagePNGRepresentation(image), forKey: "profileImage")
     }
     
     class func getUserID()-> Int{
@@ -539,6 +540,10 @@ public class DataHandler{
                 let lastname = o.valueForKey("lastname") as String
                 let email = o.valueForKey("email") as String
                 user = User(uID: id, uName: firstname, uLastName: lastname, uEmail: email)
+                if o.valueForKey("profileImage") != nil{
+                    var image = UIImage(data: o.valueForKey("profileImage" ) as NSData )
+                    user.setProfileImage(image!)
+                }
             }
         }
         return user

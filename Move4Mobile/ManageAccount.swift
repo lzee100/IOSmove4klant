@@ -37,6 +37,7 @@ class ManageAccount: UIViewController {
 
         self.imageView_profilePicture.layer.cornerRadius = 20;
         self.imageView_profilePicture.clipsToBounds = true;
+        self.imageView_profilePicture.image = user!.image
         
         likedCategories = DataHandler.getLikedCategoriesFromDB()
         tableView_Likes.reloadData()

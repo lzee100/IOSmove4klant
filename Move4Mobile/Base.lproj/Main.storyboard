@@ -985,7 +985,6 @@
                         <barButtonItem key="rightBarButtonItem" title="Opslaan" id="PVs-U2-RRO">
                             <connections>
                                 <action selector="save:" destination="NkB-wq-LIV" id="pPw-yC-WPb"/>
-                                <segue destination="bjk-PU-1bB" kind="show" identifier="saveLikesToManageAccount" id="Fj9-Ux-uoC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1007,7 +1006,4 @@
         <image name="cancel.png" width="846" height="845"/>
         <image name="emptyprofile.png" width="150" height="150"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Fj9-Ux-uoC"/>
-    </inferredMetricsTieBreakers>
 </document>

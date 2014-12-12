@@ -69,7 +69,7 @@ class LikedCategories: UIViewController {
         let cell : UITableViewCell = sender.superview!.superview as UITableViewCell
         let indexPath : NSIndexPath = tableLikes.indexPathForCell(cell)!
         
-        if (allCategories[indexPath.row].liked == 0){
+        if (allCategories[indexPath.row].liked == 0 || allCategories[indexPath.row].liked == nil){
                 allCategories[indexPath.row].liked = 1
             }
             else {
@@ -89,8 +89,10 @@ class LikedCategories: UIViewController {
         var categoriesToSave = ""
         var i = 0
         for category in allCategories {
-            if (category.liked! == 1){
-                categoriesToSave += category.name!
+            if (category.liked != nil || category.liked == 0){
+                if category.liked! == 1 {
+                    categoriesToSave += "\n" + category.name!
+                }
             }
             i++
         }

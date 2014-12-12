@@ -94,7 +94,6 @@ class ManageAccount: UIViewController {
         
         allCategories = ServerRequestHandler().getAllCategories()
         let userID = user?.getUserID()
-        dispatch_async(dispatch_get_main_queue()){
 
         let i: () = ServerRequestHandler.getLikes3(userID!, responseMain: { (array : Array<Int>!, error  : NSError!) -> () in
                 if (self.allCategories.count != 0){
@@ -107,15 +106,16 @@ class ManageAccount: UIViewController {
                         }
                     }
                 }
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                // DO SOMETHING ON THE MAINTHREAD
                 self.tableView_Likes.reloadData()
+            })
         })
 
-        }
-        tableView_Likes.reloadData()
         label_firstNameOutput.text  = user!.name!
         label_lastNameOutput.text   = user!.lastName!
         label_emailAdresOutput.text = user!.email!
-    }
-    
+    }    
     
 }

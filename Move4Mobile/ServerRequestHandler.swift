@@ -322,6 +322,7 @@ public class ServerRequestHandler: NSObject {
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
         let params: Dictionary<String,AnyObject> = ["customerID": customerID, "image": image]
         request.POST(Config().UPLOADIMAGE, parameters: params, success: respone,failure: {(error: NSError, response: HTTPResponse?) in
+            
         })
     }
     

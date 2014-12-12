@@ -221,6 +221,73 @@ public class DataHandler{
         return categories
     }
     
+    class func storeLikesFromServerLocally(userID: Int) -> [Int]{
+        var returnvalue: [Int] = [Int]()
+        
+        ServerRequestHandler.getLikes(userID, respone: {(response: HTTPResponse) -> Void in
+            if let data = response.responseObject as? NSData {
+                let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                var sep = str.componentsSeparatedByString("<")
+                var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
+                
+                var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
+                
+                if let json = allContacts as? Dictionary<String, Array<Int>> {
+                    
+                    returnvalue = json["returnvalue"]!
+                    
+                    var cats:[NSManagedObject] = self.getManagedObjects("Categories")
+                    
+                    
+                    for i : Int in returnvalue{
+                        for category : NSManagedObject in cats{
+                            if category.valueForKey("id") as Int==i{
+                                category.setValue(1, forKey: "liked")
+                            }
+                        }
+                    }
+                }
+            }
+            
+        })
+        return returnvalue
+    }
+    
+    class func saveLikes(categories :[Category]) {
+        var dbdata = [NSManagedObject]()
+        
+        //stap 1
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        //stap 2
+        let fetchRequest = NSFetchRequest(entityName: "Categories")
+        
+        //stap 3
+        var error: NSError?
+        
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        
+        if let results = fetchedResults {
+            dbdata=results
+            for p: NSManagedObject in dbdata{
+                var id: Int = p.valueForKey("id") as Int
+                var name: String = p.valueForKey("name") as String
+                var liked: Int = p.valueForKey("liked") as Int
+                
+                for cat : Category in categories{
+                    if cat.ID==id{
+                        p.setValue(cat.liked, forKey: "liked")
+                    }
+                }
+            }
+        }else {
+            println("Could not fetch \(error), \(error!.userInfo)")
+        }
+        
+    }
+
+    
     
     
     //Beacons
@@ -475,38 +542,6 @@ public class DataHandler{
             }
         }
         return user
-    }
-    
-    class func storeLikesFromServerLocally(userID: Int) -> [Int]{
-        var returnvalue: [Int] = [Int]()
-        
-        ServerRequestHandler.getLikes(userID, respone: {(response: HTTPResponse) -> Void in
-                                if let data = response.responseObject as? NSData {
-                                    let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
-                                    var sep = str.componentsSeparatedByString("<")
-                                    var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
-            
-                                    var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
-            
-                                    if let json = allContacts as? Dictionary<String, Array<Int>> {
-            
-                                        returnvalue = json["returnvalue"]!
-                                        
-                                        var cats:[NSManagedObject] = self.getManagedObjects("Categories")
-                                        
-                                        
-                                        for i : Int in returnvalue{
-                                            for category : NSManagedObject in cats{
-                                                if category.valueForKey("id") as Int==i{
-                                                    category.setValue(1, forKey: "liked")
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-           
-        })
-        return returnvalue
     }
     
     

@@ -49,15 +49,16 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
         }
         
         
+        dispatch_async(dispatch_get_main_queue()) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
             println("")
             
+            self.imagePicker.delegate = self
+            self.imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
+            self.imagePicker.allowsEditing = true
             
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
-            imagePicker.allowsEditing = true
+                self.presentViewController(self.imagePicker, animated: true, completion: nil)}
             
-            self.presentViewController(imagePicker, animated: true, completion: nil)
         }
                // ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
         //    println("success code :\(success)")
@@ -129,7 +130,7 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
         
         //uploadimage=image
         var imagedata = UIImagePNGRepresentation(image)
-        //let base64String = imagedata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
+        let base64String = imagedata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
    
         //println(base64String.description)
         
@@ -140,7 +141,7 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
         //println(baseimage)
         //dispatch_sync(dispatch_get_main_queue()){
         //ServerRequestHandler.uploadImage(DataHandler.getUserID(), image: baseimage)
-        uploadimage(DataHandler.getUserID(), image: baseimage)
+        uploadimage(DataHandler.getUserID(), image: base64String)
         
         //}
         
@@ -154,10 +155,6 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
                                     let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
                                     var sep = str.componentsSeparatedByString("<")
                                     var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
-                                    println(str)
-                                    println()
-                                    println(sep)
-                                    println()
                                     println(henk)
                                     println()
                                     var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)

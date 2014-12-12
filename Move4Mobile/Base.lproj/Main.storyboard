@@ -330,7 +330,7 @@
         <!--Navigation Controller-->
         <scene sceneID="U1d-01-4M8">
             <objects>
-                <navigationController id="Qof-QY-SYd" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navScanForBeacons" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qof-QY-SYd" sceneMemberID="viewController">
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1XT-EG-aaa">
@@ -338,7 +338,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="HN0-6C-MDM" kind="show" id="h4I-e0-lIh"/>
+                        <segue destination="HN0-6C-MDM" kind="relationship" relationship="rootViewController" id="Y1k-Pf-Ya0"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rTJ-eS-rWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -442,6 +442,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="a65-of-3Of"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -519,7 +520,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="bjk-PU-1bB" kind="show" identifier="manageAccount" id="uFk-wT-xrz"/>
+                        <segue destination="bjk-PU-1bB" kind="relationship" relationship="rootViewController" id="M2W-R3-y2g"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HKI-Vz-ejU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1046,7 +1047,6 @@
                     <connections>
                         <outlet property="button_save" destination="PVs-U2-RRO" id="V7P-Ta-1ls"/>
                         <outlet property="label_info" destination="8wd-3r-sr0" id="c7J-Cd-Ddj"/>
-                        <outlet property="savePressed" destination="PVs-U2-RRO" id="28N-8r-cEt"/>
                         <outlet property="tableLikes" destination="PTf-xB-cxM" id="hqG-Lc-syp"/>
                     </connections>
                 </viewController>

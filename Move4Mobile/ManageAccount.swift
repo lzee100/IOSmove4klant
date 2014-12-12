@@ -47,6 +47,11 @@ class ManageAccount: UIViewController {
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        viewDidLoad()
+        tableView_Likes.reloadData()
+    }
+    
     // table functions
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -125,6 +130,5 @@ class ManageAccount: UIViewController {
             imageView_profilePicture.image=image
         }
     }
-    
     
 }

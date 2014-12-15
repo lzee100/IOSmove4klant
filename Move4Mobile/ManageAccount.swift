@@ -22,7 +22,6 @@ class ManageAccount: UIViewController {
     @IBOutlet var label_titleLikes: UILabel!
     @IBOutlet var tableView_Likes: UITableView!
     @IBOutlet var button_Change: UIBarButtonItem!
-    var allCategories = [Category]()
     var likedCategories = [Category]()
     var likes = [Int]()
     
@@ -86,50 +85,7 @@ class ManageAccount: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destinationVC = segue.destinationViewController as EditAccount
-        destinationVC.user = user!
-        var i = 0
-        for (i = 0; i < 3; i++){
-            for category in self.allCategories {
-                if (category.ID == likedCategories[i].ID){
-                    category.liked = 1
-                }
-            }
-        }
-
-        destinationVC.allCategories = self.allCategories
-        destinationVC.likedCategories = self.likedCategories
     }
     
-    func execute() {
-        //var image = UIImage(named: "emptyprofile")
-        //imageView_profilePicture.image = image
-
-        
-        allCategories = ServerRequestHandler().getAllCategories()
-        let userID = user?.getUserID()
-        
-        let i: () = ServerRequestHandler.getLikes3(userID!, responseMain: { (array : Array<Int>!, error  : NSError!) -> () in
-                if (self.allCategories.count != 0){
-                    for like in array {
-                        var i = like
-                        for category in self.allCategories {
-                            if category.ID == i {
-                                self.likedCategories.append(category)
-                            }
-                        }
-                    }
-                }
-                self.tableView_Likes.reloadData()
-        })
-
-        
-        tableView_Likes.reloadData()
-        label_firstNameOutput.text  = user!.name!
-        label_lastNameOutput.text   = user!.lastName!
-        label_emailAdresOutput.text = user!.email!
-        if let image = user!.image as UIImage?{
-            imageView_profilePicture.image=image
-        }
-    }
     
 }

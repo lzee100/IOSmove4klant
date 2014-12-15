@@ -103,6 +103,8 @@ class LogIn: UIViewController, UITextFieldDelegate {
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 } else if successR == 1 {
+                    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                    appDelegate.logIn = true
                     self.actInd.stopAnimating()
                     self.container.removeFromSuperview()
                     self.logInCorrect = true

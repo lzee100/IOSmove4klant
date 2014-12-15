@@ -183,6 +183,7 @@ public class DataHandler{
         }else {
             println("Could not fetch \(error), \(error!.userInfo)")
         }
+            categories.sort({ $0.ID < $1.ID })
         return categories
     }
     
@@ -218,6 +219,7 @@ public class DataHandler{
         }else {
             println("Could not fetch \(error), \(error!.userInfo)")
         }
+            categories.sort({ $0.ID < $1.ID })
         return categories
     }
     

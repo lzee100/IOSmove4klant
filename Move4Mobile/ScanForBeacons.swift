@@ -114,8 +114,8 @@ class ScanForBeacons: UIViewController, CLLocationManagerDelegate {
                 lastProximity = CLProximity.Unknown
             }
             
-            NSLog("%@", message)
-            sendLocalNotificationWithMessage(message, playSound: playSound)
+            //NSLog("%@", message)
+            //sendLocalNotificationWithMessage(message, playSound: playSound)
     }
     
     func locationManager(manager: CLLocationManager!,

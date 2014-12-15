@@ -14,10 +14,11 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
-
+    
     var window: UIWindow?
     var logIn = false
     var user : User?
+    var likes : [Category]?
     let uuid : NSUUID = NSUUID(UUIDString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")!
     var beaconsFromDataBase : [Beacon]?
     var rangedBeacon : Beacon?
@@ -34,6 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var offersShown : [Offer]?
     var productActive = false
     var startTimer = true
+    var customerInStore = false
+    var inStore : NSDate?
+    var outStore : NSDate?
     
     
     lazy var applicationDocumentsDirectory: NSURL = {
@@ -146,7 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
     }
     
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         self.window?.makeKeyAndVisible()
@@ -183,34 +187,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 )
             )
         }
-
+        
         return true
     }
-
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
-
+    
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
-
+    
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
-
+    
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
+    
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
-
+    
+    
+    
 }
 
 extension AppDelegate: CLLocationManagerDelegate {
@@ -236,78 +240,95 @@ extension AppDelegate: CLLocationManagerDelegate {
         didRangeBeacons beacons: [AnyObject]!,
         inRegion region: CLBeaconRegion!) {
             self.beacons = beacons as [CLBeacon]?
-
+            
             var message:String = ""
             var playSound = false
             
             // check if user is logged in
             if logIn {
-// ------------ if beacon is found ------------------
+                // ------------ if beacon is found ------------------
                 if(beacons.count > 0) {
                     
-                    // get user from db
+                    // get info db
                     user = DataHandler.getUserFromDB()
-
-
-                beaconsFromDataBase = DataHandler.getBeaconsFromDB()
-                // get de nearest beacon
-                let nearestBeacon:CLBeacon = beacons[0] as CLBeacon
-                
-                // beacon information
-                lastProximity = nearestBeacon.proximity;
-                let major = nearestBeacon.major.integerValue
-                var rssi = nearestBeacon.rssi
-                //println("\(rssi)")
-                
-                // get rangedBeacon and assign it to a beacon object
-                for beacon in beaconsFromDataBase! {
-                    if nearestBeacon.minor == beacon.minor {
-                        rangedBeacon = beacon
-                    }
-                }
-                
-                // get user likes
-                var likes = DataHandler.getLikedCategoriesFromDB()
-                
-                // set time when beacon is found
-                endTime = NSDate()
-                
-                // check distance
-                
-// ------------ distance = immidiate ----------------
-                if (rssi > -60 && rssi != 0){
-                    if activateNewScreen() {
-                        productActive = true
-                        showProduct()
-                    }
-                
-// ------------ distance = near ----------------------
-                } else if (rssi < -60 && rssi > -90) {
-                    // get offer
-                    offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
+                    beaconsFromDataBase = DataHandler.getBeaconsFromDB()
+                    likes = DataHandler.getLikedCategoriesFromDB()
                     
-                    // see if offer is liked by user
-                    //println("offerID : \(offer!.ID)")
-                    var userWantsOffer = false
-                    for like in likes {
-                        //println("LikedID : \(like.ID)")
-                        if like.ID == offer!.ID {
-                            userWantsOffer = true
+                    // get de nearest beacon
+                    let nearestBeacon:CLBeacon = beacons[0] as CLBeacon
+                    
+                    // beacon information
+                    lastProximity = nearestBeacon.proximity;
+                    let major = nearestBeacon.major.integerValue
+                    var rssi = nearestBeacon.rssi
+                    
+                    /* rssi is not nil, because beacon is found
+                    if rssi is 0 when beacon is found, signal is not interpreted, no information available */
+                    if rssi != 0 {
+                        println("login beacon")
+                        customerInStore = true
+                        inStore = NSDate()
+                        // set time when beacon is found
+                        endTime = NSDate()
+                    }
+                    
+                    // get rangedBeacon and assign it to a beacon object
+                    for beacon in beaconsFromDataBase! {
+                        if nearestBeacon.minor == beacon.minor {
+                            rangedBeacon = beacon
+                            break
                         }
                     }
-                    // if offer is liked by user
-                    if userWantsOffer {
-                    // if product screen is not active
-                        if !productActive {
-                            // if offer is not yet shown to customer (customer recieves only once an offer)
-                            if !isOfferShown(offer!) {
-                            showNotification("Speciale aanbieding", swipeMessage: "zien wat de actie is!")
-                            showOffer()
+                    
+                    // ------------ distance == immidiate ----------------
+                    if (rssi > -60 && rssi != 0){
+                        
+                        // get product from beacon
+                        let product : Product = DataHandler.getProductByID(rangedBeacon!.productID!)
+                        
+                        // only once per 3 seconds
+                        if activateNewScreen() {
+                            productActive = true
+                            showProduct(product)
+                        }
+                        
+                        // ------------ distance == near ----------------------
+                    } else if (rssi < -60 && rssi > -90) {
+                        
+                        // get offer from ranged beacon
+                        offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
+                                                                        //println("ranged beacon offer ID: \(rangedBeacon?.offerID)")
+                        
+                        // see if offer is liked by user
+                                                                        //println("offerID : \(offer!.ID)")
+                        var userWantsOffer = false
+                        for like : Category in likes! {
+                                                                        //println("LikedID : \(like.ID)")
+                            if like.ID == offer!.categoryID {
+                                userWantsOffer = true
+                                                                        //println("userWantsOffer")
                             }
                         }
+                        // if offer is liked by user
+                        if userWantsOffer {
+                            // if product screen is not active
+                            if !productActive {
+                                // if offer is not yet shown to customer (customer recieves only once an offer)
+                                if !isOfferShown(offer!) {
+                                    showNotification("Speciale aanbieding", swipeMessage: "zien wat de actie is!")
+                                    showOffer(offer!)
+                                }
+                            }
+                        }
+                        
+                    } else if beacons.count == 0 {
+                        // if customer is instore, set outStore date to compare with instore date
+                        if customerInStore {
+                            outStore = NSDate()
+                            shouldCheckOut(inStore!, outStore: outStore!)
+                        }
                     }
                 }
-            }
             } // end check if user is loggedIn
     }
     
@@ -329,21 +350,27 @@ extension AppDelegate: CLLocationManagerDelegate {
             //sendLocalNotificationWithMessage("You exited the region", playSound: true)
     }
     
-    func showProduct() {
+    func showProduct(product : Product) {
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let vc  = storyboard.instantiateViewControllerWithIdentifier("Product") as ProductView
+        vc.label_description.text = product.productdescription
+        //ToDo Sander:
+        // let image = product.image (toImage in product).... (from string64 to image)
+        //vc.imageView_productImage.image = image
         
         nav?.presentViewController(vc, animated: true, completion: nil)
     }
     
-    func showOffer() {
+    func showOffer(offer : Offer) {
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let vc  = storyboard.instantiateViewControllerWithIdentifier("Offer") as OfferView
-        vc.labelDescriptionValue = offer!.offerdescription
-        
+        vc.label_description.text = offer.offerdescription
+        // ToDo Sander:
+        // let image = offer.image (toImage in offer).... (from string64 to image)
+        //vc.imageView.image = image
         
         nav?.presentViewController(vc, animated: true, completion: nil)
-
+        
         
     }
     
@@ -369,14 +396,13 @@ extension AppDelegate: CLLocationManagerDelegate {
         } else {
             for offerCheck in offersShown! {
                 if offerCheck.ID == offer.ID {
+                    offersShown!.append(offer)
                     return true
                 }
             }
-            offersShown!.append(offer)
         }
-        
         return false
-    } // if offer allready shown?
+    } // is offer allready shown?
     
     func showNotification(message : String, swipeMessage : String) {
         var localNotification:UILocalNotification = UILocalNotification()
@@ -385,6 +411,15 @@ extension AppDelegate: CLLocationManagerDelegate {
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     } // if screen is locked, show swipe message
-
+    
+    func shouldCheckOut (inStore : NSDate, outStore : NSDate) {
+        let timeInterval: Double = outStore.timeIntervalSinceDate(inStore); // < Difference in seconds (double)
+        // if no beacon ranged in 60 seconds, check out
+        if timeInterval > 60 {
+            // ServiceRequestHandler.checkOutCustomer() << check out the customer online
+        }
+        
+    }
+    
 }
 

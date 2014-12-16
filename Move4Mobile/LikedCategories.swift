@@ -15,7 +15,7 @@ class LikedCategories: UIViewController {
     var allCategories = [Category]()
     var likedCategories = [Category]()
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         allCategories = DataHandler.getCategoriesFromDB()
         likedCategories = DataHandler.getLikedCategoriesFromDB()
@@ -102,6 +102,10 @@ class LikedCategories: UIViewController {
     
     @IBAction func savePressed(sender: AnyObject) {
         saveData()
+        //reset de likes in de appdel
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.likes = DataHandler.getLikedCategoriesFromDB()
+        
         self.navigationController?.popToRootViewControllerAnimated(true)
        // [self.navigationController popToRootViewControllerAnimated(NO)];
     }

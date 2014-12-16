@@ -23,7 +23,6 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
     @IBOutlet var textinput_email: UITextField!
     @IBOutlet var label_titleLikes: UILabel!
     @IBOutlet var tableLikes: UITableView!
-    var allCategories = [Category]()
     var likedCategories = [Category]()
     
     var imagePicker = UIImagePickerController()
@@ -38,7 +37,6 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
         user = DataHandler.getUserFromDB()
         
         likedCategories = DataHandler.getLikedCategoriesFromDB()
-        allCategories = DataHandler.getCategoriesFromDB()
         tableLikes.reloadData()
         
         textinput_firstName.placeholder = user.name!
@@ -158,16 +156,14 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
         let newUser = User(uID: user.getUserID(), uName: name, uLastName: lastname, uEmail: email)
         
         var userToSave = "UserID: \(newUser.getUserID())\nName: \(newUser.name)\nLastName: \(newUser.lastName)\nEmail: \(newUser.email)"
-        
+        // go to first screen (Manage Account)
+        //self.navigationController?.popToRootViewControllerAnimated(true)
         let alert = UIAlertView()
         alert.title = "Title"
         alert.message = "To save: " + userToSave
         alert.addButtonWithTitle("Ok")
         alert.show()
-        
-        
-        //[self.performSegueWithIdentifier("saveAccountInfo", sender: sender)]
-    }
+        }
     
     
     

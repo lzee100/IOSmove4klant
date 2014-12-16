@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Foundation
+import CoreData
 
-class EditAccount: UIViewController {
+class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @IBOutlet var button_save: UIBarButtonItem!
     @IBOutlet var button_changeLikes: UIButton!
     @IBOutlet var label_titleEditAccountinfo: UILabel!
@@ -24,6 +26,7 @@ class EditAccount: UIViewController {
     var allCategories = [Category]()
     var likedCategories = [Category]()
     
+    var imagePicker = UIImagePickerController()
     var user : User = User()
     
     
@@ -46,12 +49,35 @@ class EditAccount: UIViewController {
         self.imageView_profilePicture.layer.cornerRadius = 20;
         self.imageView_profilePicture.clipsToBounds = true;
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: "tapGesture:")
+        
+        imageView_profilePicture.addGestureRecognizer(tapGesture)
+        imageView_profilePicture.userInteractionEnabled = true
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    func tapGesture(gesture: UIGestureRecognizer) {
+        
+        if let imageView = gesture.view as? UIImageView {  // if you subclass UIImageView
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
+                println("")
+                
+                self.imagePicker.delegate = self
+                self.imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
+                self.imagePicker.allowsEditing = true
+                
+                self.presentViewController(self.imagePicker, animated: true, completion: nil)}
+            
+        }
+    }
+    
     
     // table functions
     
@@ -143,6 +169,8 @@ class EditAccount: UIViewController {
         //[self.performSegueWithIdentifier("saveAccountInfo", sender: sender)]
     }
     
+    
+    
     // keyboard behavior
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.textinput_firstName.resignFirstResponder()
@@ -157,4 +185,62 @@ class EditAccount: UIViewController {
         self.textinput_email.resignFirstResponder()
     }
     
+    
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
+        
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            var imagedata = UIImagePNGRepresentation(image)
+            let base64String = imagedata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
+            var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
+            actInd.center = self.imagePicker.view.center
+            actInd.hidesWhenStopped = true
+            actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            self.imagePicker.view.addSubview(actInd)
+            actInd.startAnimating()
+            
+            for m: NSManagedObject in DataHandler.getManagedObjects("User"){
+                m.setValue(UIImagePNGRepresentation(image), forKey: "profileImage")
+            }
+            //println(baseimage)
+            //dispatch_sync(dispatch_get_main_queue()){
+            //ServerRequestHandler.uploadImage(DataHandler.getUserID(), image: baseimage)
+            print("UserID: ")
+            println(DataHandler.getUserID())
+            self.uploadimage(DataHandler.getUserID(), image: base64String)
+            
+        })
+        
+        //uploadimage=image
+        var imagedata = UIImagePNGRepresentation(image)
+        let base64String = imagedata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
+        
+        
+        //println(base64String.description)
+        
+        
+        
+        //}
+        
+    }
+    
+    func uploadimage(id:Int , image:String){
+        var returnvalue = String()
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+       dispatch_async(dispatch_get_global_queue(priority, 0)) {
+//            ServerRequestHandler.uploadImage2(id, image: image, respone: {(response: HTTPResponse) -> Void in
+//                
+//           })
+         ServerRequestHandler.uploadImage(id, image: image)
+            dispatch_async(dispatch_get_main_queue()) {
+                // update some UI
+            }
+        }
+
 }
+
+        
+    }
+
+    
+

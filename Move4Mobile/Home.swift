@@ -34,6 +34,8 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
         println("logged in as: " + user.name!)
         DataHandler.updateAll()
         DataHandler.storeLikesFromServerLocally(user.userID!)
+        
+   
     }
     
 
@@ -44,10 +46,7 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
         
         
         var cats: [Category] = DataHandler.getLikedCategoriesFromDB()
-        println("this user likes: ")
-        for c:Category in cats{
-            println(c.toString())
-        }
+       
         
         
         dispatch_async(dispatch_get_main_queue()) {

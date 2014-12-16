@@ -257,6 +257,7 @@ public class DataHandler{
     
     class func saveLikes(categories :[Category]) {
         var dbdata = [NSManagedObject]()
+        var likes = [Int]()
         
         //stap 1
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -272,6 +273,9 @@ public class DataHandler{
         
         if let results = fetchedResults {
             dbdata=results
+            
+            
+            
             for p: NSManagedObject in dbdata{
                 var id: Int = p.valueForKey("id") as Int
                 var name: String = p.valueForKey("name") as String
@@ -280,14 +284,22 @@ public class DataHandler{
                 for cat : Category in categories{
                     if cat.ID==id{
                         p.setValue(cat.liked, forKey: "liked")
+                        if cat.liked==1{
+                            likes.append(cat.ID!)
+                        }
                     }
+                   
                 }
             }
+        ServerRequestHandler.uploadLikes(DataHandler.getUserID(), categories: likes)
         }else {
             println("Could not fetch \(error), \(error!.userInfo)")
         }
         
+        
     }
+    
+  
 
     
     
@@ -474,7 +486,7 @@ public class DataHandler{
     
     //User
     
-    class func saveUser(id : Int, firstname:String, lastname: String, email:String, image: UIImage){
+    class func saveUser(id : Int, firstname:String, lastname: String, email:String){
         
         //step 1 get context
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -496,7 +508,11 @@ public class DataHandler{
         user.setValue(lastname, forKey: "lastname")
         user.setValue(email, forKey: "email")
 
-        user.setValue(UIImagePNGRepresentation(image), forKey: "profileImage")
+        //user.setValue(UIImagePNGRepresentation(image), forKey: "profileImage")
+        
+       ServerRequestHandler.uploadUserInfo(id, name: firstname, lastname: lastname, email: email)
+    
+        
     }
     
     class func getUserID()-> Int{

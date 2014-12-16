@@ -158,11 +158,14 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
         var userToSave = "UserID: \(newUser.getUserID())\nName: \(newUser.name)\nLastName: \(newUser.lastName)\nEmail: \(newUser.email)"
         // go to first screen (Manage Account)
         //self.navigationController?.popToRootViewControllerAnimated(true)
-        let alert = UIAlertView()
-        alert.title = "Title"
-        alert.message = "To save: " + userToSave
-        alert.addButtonWithTitle("Ok")
-        alert.show()
+//        let alert = UIAlertView()
+//        alert.title = "Title"
+//        alert.message = "To save: " + userToSave
+//        alert.addButtonWithTitle("Ok")
+//        alert.show()
+        DataHandler.saveUser(newUser.getUserID(), firstname: newUser.name!, lastname: newUser.lastName!, email: newUser.email!)
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
         }
     
     

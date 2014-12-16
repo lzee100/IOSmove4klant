@@ -166,6 +166,8 @@ public class ServerRequestHandler: NSObject {
         return returnarray
     }
 
+    
+    
     //user functions
     
     public func checkinout(userID: Int){
@@ -182,11 +184,32 @@ public class ServerRequestHandler: NSObject {
         })
     }
     
-    public func uploadLikes(customerID: Int, categories: [Int]){
+    class func checkinStatus(userID: Int, response: ((HTTPResponse) -> Void)!){
+        var request = HTTPTask()
+        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+        let params: Dictionary<String,AnyObject> = ["customerID": userID]
+        request.POST(Config().CHECKINGSTATUS, parameters: params, success: response,failure: {(error: NSError, response: HTTPResponse?) in
+        })
+    }
+    
+    class func uploadLikes(customerID: Int, categories: [Int]){
         var request = HTTPTask()
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
         let params: Dictionary<String,AnyObject> = ["customerID": customerID, "categories":  categories.description]
         request.POST(Config().EDITLIKESURL, parameters: params, success: {(response: HTTPResponse) in
+            if let data = response.responseObject as? NSData {
+                let str = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println("response: \(str)") //prints the HTML of the page
+            }
+            },failure: {(error: NSError, response: HTTPResponse?) in
+        })
+    }
+    
+    class func uploadUserInfo(customerID: Int, name: String, lastname: String, email: String){
+        var request = HTTPTask()
+        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+        let params: Dictionary<String,AnyObject> = ["customerID": customerID, "name":  name, "email": email, "lastname": lastname]
+        request.POST(Config().EDITUSER, parameters: params, success: {(response: HTTPResponse) in
             if let data = response.responseObject as? NSData {
                 let str = NSString(data: data, encoding: NSUTF8StringEncoding)
                 println("response: \(str)") //prints the HTML of the page
@@ -245,6 +268,8 @@ public class ServerRequestHandler: NSObject {
         var request = HTTPTask()
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
         let params: Dictionary<String,AnyObject> = ["customerID": customerID, "image": image]
+        print("posted customerID :")
+        println(toString(customerID))
         request.POST(Config().UPLOADIMAGE, parameters: params, success: {(response: HTTPResponse) in
             if let data = response.responseObject as? NSData {
                 let str = NSString(data: data, encoding: NSUTF8StringEncoding)
@@ -292,7 +317,7 @@ public class ServerRequestHandler: NSObject {
                         //println(decodedimage)
                         //decodedimage as UIImage
                         
-                        DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail, image: decodedimage!)
+                        DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail)
                         message = ""
                         success = "1"
                     }

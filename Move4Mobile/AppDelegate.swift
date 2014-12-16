@@ -265,7 +265,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                     /* rssi is not nil, because beacon is found
                     if rssi is 0 when beacon is found, signal is not interpreted, no information available */
                     if rssi != 0 {
-                        println("login beacon")
+                        //println("login beacon")
                         customerInStore = true
                         inStore = NSDate()
                         // set time when beacon is found
@@ -296,7 +296,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                     } else if (rssi < -60 && rssi > -90) {
                         
                         // get offer from ranged beacon
-                        offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
+                        //offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
                                                                         //println("ranged beacon offer ID: \(rangedBeacon?.offerID)")
                         
                         // see if offer is liked by user
@@ -304,10 +304,10 @@ extension AppDelegate: CLLocationManagerDelegate {
                         var userWantsOffer = false
                         for like : Category in likes! {
                                                                         //println("LikedID : \(like.ID)")
-                            if like.ID == offer!.categoryID {
-                                userWantsOffer = true
+                           // if like.ID == offer!.categoryID {
+                            //    userWantsOffer = true
                                                                         //println("userWantsOffer")
-                            }
+                           // }
                         }
                         // if offer is liked by user
                         if userWantsOffer {
@@ -353,7 +353,7 @@ extension AppDelegate: CLLocationManagerDelegate {
     func showProduct(product : Product) {
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let vc  = storyboard.instantiateViewControllerWithIdentifier("Product") as ProductView
-        vc.label_description.text = product.productdescription
+        //vc.label_description.text = product.productdescription
         //ToDo Sander:
         // let image = product.image (toImage in product).... (from string64 to image)
         //vc.imageView_productImage.image = image
@@ -364,7 +364,8 @@ extension AppDelegate: CLLocationManagerDelegate {
     func showOffer(offer : Offer) {
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let vc  = storyboard.instantiateViewControllerWithIdentifier("Offer") as OfferView
-        vc.label_description.text = offer.offerdescription
+        ///vc.label_description.text = offer.offerdescription
+        
         // ToDo Sander:
         // let image = offer.image (toImage in offer).... (from string64 to image)
         //vc.imageView.image = image

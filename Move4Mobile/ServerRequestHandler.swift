@@ -273,7 +273,7 @@ public class ServerRequestHandler: NSObject {
         request.POST(Config().UPLOADIMAGE, parameters: params, success: {(response: HTTPResponse) in
             if let data = response.responseObject as? NSData {
                 let str = NSString(data: data, encoding: NSUTF8StringEncoding)
-                println("response: \(str)") //prints the HTML of the page
+                println("response upload image: \(str)") //prints the HTML of the page
             }
         },failure: {(error: NSError, response: HTTPResponse?) in
         })

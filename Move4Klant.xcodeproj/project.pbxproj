@@ -42,6 +42,7 @@
 		B3D49E921A2DBB8400982DF5 /* ScanForBeacons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E911A2DBB8400982DF5 /* ScanForBeacons.swift */; };
 		B3D49E941A2DBD9F00982DF5 /* ScanForBeaconsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E931A2DBD9F00982DF5 /* ScanForBeaconsCell.swift */; };
 		B3D49E981A31A4BE00982DF5 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D49E971A31A4BE00982DF5 /* LogIn.swift */; };
+		B3D89FD31A417EE700A57FD1 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D89FD21A417EE700A57FD1 /* SignUp.swift */; };
 		B3FF110D1A2718A600F3AE84 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF110C1A2718A600F3AE84 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		B3D49E911A2DBB8400982DF5 /* ScanForBeacons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanForBeacons.swift; sourceTree = "<group>"; };
 		B3D49E931A2DBD9F00982DF5 /* ScanForBeaconsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanForBeaconsCell.swift; sourceTree = "<group>"; };
 		B3D49E971A31A4BE00982DF5 /* LogIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
+		B3D89FD21A417EE700A57FD1 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		B3FF110C1A2718A600F3AE84 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +172,7 @@
 				A3D006B71A271116007FD6F6 /* SwiftHTTP */,
 				B3A1A3341A24784C0090BC17 /* AppDelegate.swift */,
 				B3A1A3381A24784C0090BC17 /* Main.storyboard */,
+				B3D89FD21A417EE700A57FD1 /* SignUp.swift */,
 				B396E6E91A38340F005B454A /* OfferView.swift */,
 				B396E6E51A373F2E005B454A /* ProductView.swift */,
 				B3D49E971A31A4BE00982DF5 /* LogIn.swift */,
@@ -316,6 +319,7 @@
 				B3FF110D1A2718A600F3AE84 /* User.swift in Sources */,
 				B30BA8951A249D9F00B398CB /* LikedCategories.swift in Sources */,
 				B30BA8911A249C9800B398CB /* ManageAccount.swift in Sources */,
+				B3D89FD31A417EE700A57FD1 /* SignUp.swift in Sources */,
 				B30BA8931A249D6000B398CB /* EditAccount.swift in Sources */,
 				B37373FA1A287D5600A35E2E /* HTTPRequestSerializer.swift in Sources */,
 				B37373FC1A287D5600A35E2E /* HTTPTask.swift in Sources */,

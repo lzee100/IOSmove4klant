@@ -254,80 +254,83 @@ extension AppDelegate: CLLocationManagerDelegate {
                     beaconsFromDataBase = DataHandler.getBeaconsFromDB()
                     likes = DataHandler.getLikedCategoriesFromDB()
                     
-                    // get de nearest beacon
-                    let nearestBeacon:CLBeacon = beacons[0] as CLBeacon
-                    
-                    // beacon information
-                    lastProximity = nearestBeacon.proximity;
-                    let major = nearestBeacon.major.integerValue
-                    var rssi = nearestBeacon.rssi
-                    
-                    /* rssi is not nil, because beacon is found
-                    if rssi is 0 when beacon is found, signal is not interpreted, no information available */
-                    if rssi != 0 {
-                        //println("login beacon")
-                        customerInStore = true
-                        inStore = NSDate()
-                        // set time when beacon is found
-                        endTime = NSDate()
-                    }
-                    
-                    // get rangedBeacon and assign it to a beacon object
-                    for beacon in beaconsFromDataBase! {
-                        if nearestBeacon.minor == beacon.minor {
-                            rangedBeacon = beacon
-                            break
-                        }
-                    }
-                    
-                    // ------------ distance == immidiate ----------------
-                    if (rssi > -60 && rssi != 0){
+                    if beaconsFromDataBase!.count != 0 {
                         
-                        // get product from beacon
-                        let product : Product = DataHandler.getProductByID(rangedBeacon!.productID!)
+                        // get de nearest beacon
+                        let nearestBeacon:CLBeacon = beacons[0] as CLBeacon
                         
-                        // only once per 3 seconds
-                        if activateNewScreen() {
-                            productActive = true
-                            showProduct(product)
+                        // beacon information
+                        lastProximity = nearestBeacon.proximity;
+                        let major = nearestBeacon.major.integerValue
+                        var rssi = nearestBeacon.rssi
+                        
+                        /* rssi is not nil, because beacon is found
+                        if rssi is 0 when beacon is found, signal is not interpreted, no information available */
+                        if rssi != 0 {
+                            //println("login beacon")
+                            customerInStore = true
+                            inStore = NSDate()
+                            // set time when beacon is found
+                            endTime = NSDate()
                         }
                         
-                        // ------------ distance == near ----------------------
-                    } else if (rssi < -60 && rssi > -90) {
-                        
-                        // get offer from ranged beacon
-                        //offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
-                                                                        //println("ranged beacon offer ID: \(rangedBeacon?.offerID)")
-                        
-                        // see if offer is liked by user
-                                                                        //println("offerID : \(offer!.ID)")
-                        var userWantsOffer = false
-                        for like : Category in likes! {
-                                                                        //println("LikedID : \(like.ID)")
-                           // if like.ID == offer!.categoryID {
-                            //    userWantsOffer = true
-                                                                        //println("userWantsOffer")
-                           // }
-                        }
-                        // if offer is liked by user
-                        if userWantsOffer {
-                            // if product screen is not active
-                            if !productActive {
-                                // if offer is not yet shown to customer (customer recieves only once an offer)
-                                if !isOfferShown(offer!) {
-                                    showNotification("Speciale aanbieding", swipeMessage: "zien wat de actie is!")
-                                    showOffer(offer!)
-                                }
+                        // get rangedBeacon and assign it to a beacon object
+                        for beacon in beaconsFromDataBase! {
+                            if nearestBeacon.minor == beacon.minor {
+                                rangedBeacon = beacon
+                                break
                             }
                         }
                         
-                    } else if beacons.count == 0 {
-                        // if customer is instore, set outStore date to compare with instore date
-                        if customerInStore {
-                            outStore = NSDate()
-                            shouldCheckOut(inStore!, outStore: outStore!)
+                        // ------------ distance == immidiate ----------------
+                        if (rssi > -60 && rssi != 0){
+                            
+                            // get product from beacon
+                            let product : Product = DataHandler.getProductByID(rangedBeacon!.productID!)
+                            
+                            // only once per 3 seconds
+                            if activateNewScreen() {
+                                productActive = true
+                                showProduct(product)
+                            }
+                            
+                            // ------------ distance == near ----------------------
+                        } else if (rssi < -60 && rssi > -90) {
+                            
+                            // get offer from ranged beacon
+                            offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
+                            //println("ranged beacon offer ID: \(rangedBeacon?.offerID)")
+                            
+                            // see if offer is liked by user
+                            //println("offerID : \(offer!.ID)")
+                            var userWantsOffer = false
+                            for like : Category in likes! {
+                                //println("LikedID : \(like.ID)")
+                                if like.ID == offer!.categoryID {
+                                    userWantsOffer = true
+                                    //println("userWantsOffer")
+                                }
+                            }
+                            // if offer is liked by user
+                            if userWantsOffer {
+                                // if product screen is not active
+                                if !productActive {
+                                    // if offer is not yet shown to customer (customer recieves only once an offer)
+                                    if !isOfferShown(offer!) {
+                                        showNotification("Speciale aanbieding", swipeMessage: "zien wat de actie is!")
+                                        showOffer(offer!)
+                                    }
+                                }
+                            }
                         }
+                    } // end if no beacons yet in db.
+                } else if beacons.count == 0 {
+                    // if customer is instore, set outStore date to compare with instore date
+                    if customerInStore {
+                        outStore = NSDate()
+                        shouldCheckOut(inStore!, outStore: outStore!)
                     }
+                    
                 }
             } // end check if user is loggedIn
     }

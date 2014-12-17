@@ -70,14 +70,6 @@ class LogIn: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func signUpPressed(sender: AnyObject) {
-        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, error) -> () in
-            dispatch_sync(dispatch_get_main_queue()){
-            self.performSegueWithIdentifier("Home", sender: self.button_signUp)
-            }
-        }
-    }
-    
     func logIn(sender : AnyObject) {
         let userName = editText_UserName.text
         let password = editText_Password.text
@@ -108,21 +100,9 @@ class LogIn: UIViewController, UITextFieldDelegate {
                     self.actInd.stopAnimating()
                     self.container.removeFromSuperview()
                     self.logInCorrect = true
-
-                    dispatch_sync(dispatch_get_main_queue()){
-                        
                     self.container.removeFromSuperview()
-                    let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-                    let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
-                    self.showViewController(vc, sender: nil)
-                        
-                    }
-                    
-//                    let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-//                    let vc = storyboard.instantiateViewControllerWithIdentifier("Home") as Home
-//                    dispatch_sync(dispatch_get_main_queue()){
-//                    self.showViewController(vc, sender: nil)
-//                    }
+                    DataHandler.updateAll()
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
             })
         }

@@ -14,7 +14,6 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
     @IBOutlet var label_ijzerhandel: UILabel!
     @IBOutlet weak var button_checkFunctions: UIButton!
     var actInd : UIActivityIndicatorView?
-    //var user : User?
     
     var products = [NSManagedObject]()
     var uploadimage :UIImage = UIImage()
@@ -24,16 +23,13 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.hidden = false
-        //println(user?.getUserID())
-//        ServerRequestHandler.logIn("sanderwubs@gmail.com", password: "testr") { (success : String, message : String, user : User?, error) -> () in
-//            self.user = user
-//            println(user!.getUserID())
-//        }
         
-        var user = DataHandler.getUserFromDB()
-        println("logged in as: " + user.name!)
-        DataHandler.updateAll()
-        DataHandler.storeLikesFromServerLocally(user.userID!)
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let nav = appDelegate.nav
+        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+        let vc  = storyboard.instantiateViewControllerWithIdentifier("navLogIn") as UINavigationController
+        
+        nav?.presentViewController(vc, animated: true, completion: nil)
         
    
     }

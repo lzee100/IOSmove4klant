@@ -19,8 +19,12 @@ class Settings: UITableViewController {
         self.menuDescription.append("Beheer hier je accountinformatie")
         self.menuTitle.append("Scan for Beacons")
         self.menuDescription.append("Test beacon Scanning")
+        self.menuTitle.append("Ontkoppel account")
+        self.menuDescription.append("Log uit en verwijder account gegevens")
+
         self.segueID.append("manageAccount")
         self.segueID.append("scanForBeacons")
+        self.segueID.append("login")
     }
     
     // MARK: - Table view data source
@@ -67,6 +71,13 @@ class Settings: UITableViewController {
             let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
             let vc = storyboard.instantiateViewControllerWithIdentifier("navScanForBeacons") as UINavigationController
             self.showViewController(vc, sender: nil)
+            
+            
+//        case "login" :
+//            let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+//            let vc = storyboard.instantiateViewControllerWithIdentifier("navScanForBeacons") as UINavigationController
+//            self.showViewController(vc, sender: nil)
+
             
         default :
             ""

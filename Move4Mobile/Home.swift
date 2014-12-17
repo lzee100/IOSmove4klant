@@ -123,64 +123,9 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
 
     }
     
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
-        
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            var imagedata = UIImagePNGRepresentation(image)
-            let base64String = imagedata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
-            var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
-            actInd.center = self.imagePicker.view.center
-            actInd.hidesWhenStopped = true
-            actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-            self.imagePicker.view.addSubview(actInd)
-            actInd.startAnimating()
-            
-            for m: NSManagedObject in DataHandler.getManagedObjects("User"){
-                m.setValue(UIImagePNGRepresentation(image), forKey: "profileImage")
-            }
-            //println(baseimage)
-            //dispatch_sync(dispatch_get_main_queue()){
-            //ServerRequestHandler.uploadImage(DataHandler.getUserID(), image: baseimage)
-            self.uploadimage(DataHandler.getUserID(), image: base64String)
-            
-        })
-        
-        //uploadimage=image
-        var imagedata = UIImagePNGRepresentation(image)
-        let base64String = imagedata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
-   
-        
-        //println(base64String.description)
-        
-      
-        
-        //}
-        
-    }
-   
-    func uploadimage(id:Int , image:String){
-         var returnvalue = String()
-             ServerRequestHandler.uploadImage2(id, image: image, respone: {(response: HTTPResponse) -> Void in
-                                if let data = response.responseObject as? NSData {
-                                    let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
-                                    var sep = str.componentsSeparatedByString("<")
-                                    var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
-                                    println(henk)
-                                    println()
-                                    var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
-            
-                                    if let json = allContacts as? Dictionary<String, String> {
-            
-                                        returnvalue = json["returnvalue"]!
-                                       println(returnvalue)
-                                    }
-                                }
-                            })
-        
-
-    }
-  
-    /*
+    
+    
+     /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueToSettings" {
             

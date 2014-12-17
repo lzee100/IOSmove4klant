@@ -312,12 +312,18 @@ public class ServerRequestHandler: NSObject {
                         //println("gedownloade user")
                         //println(collection.description)
                         //println("")
-                        let decodedData = NSData(base64EncodedString: profileImage, options: NSDataBase64DecodingOptions(0))
-                        var decodedimage = UIImage(data: decodedData!)
-                        //println(decodedimage)
-                        //decodedimage as UIImage
+                        if profileImage != ""{
+                        if let decodedData = NSData(base64EncodedString: profileImage, options: NSDataBase64DecodingOptions(0)){
+                            var decodedimage : UIImage = UIImage(data: decodedData)!
+                            //println(decodedimage)
                         
-                        DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail)
+                        
+                            DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail, image: decodedimage)
+                        }
+                        }
+                        else{
+                            DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail)
+                        }
                         message = ""
                         success = "1"
                     }

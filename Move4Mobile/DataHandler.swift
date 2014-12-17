@@ -494,11 +494,58 @@ public class DataHandler{
         
         //step 2 delete current stored data
         var dbdata = getManagedObjects("User")
+        var imageExcists = false
+        
+        var image = UIImagePNGRepresentation(getUserFromDB().image)
+        
+        for m :NSManagedObject in dbdata{
+//            managedContext.deleteObject(m)
+            m.setValue(id, forKey: "id")
+            m.setValue(firstname, forKey: "firstname")
+            m.setValue(lastname, forKey: "lastname")
+            m.setValue(email, forKey: "email")
+        }
+        if dbdata.count < 1 {
+            let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedContext)
+            var user = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            
+            user.setValue(id, forKey: "id")
+                    user.setValue(firstname, forKey: "firstname")
+                   user.setValue(lastname, forKey: "lastname")
+                   user.setValue(email, forKey: "email")
+
+        }
+
+        //step 3 store user
+//        let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedContext)
+//        var user = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+//        
+//        user.setValue(id, forKey: "id")
+//        user.setValue(firstname, forKey: "firstname")
+//        user.setValue(lastname, forKey: "lastname")
+//        user.setValue(email, forKey: "email")
+//        user.setValue(image, forKey: "profileImage")
+//        
+
+        //user.setValue(UIImagePNGRepresentation(image), forKey: "profileImage")
+        
+       ServerRequestHandler.uploadUserInfo(id, name: firstname, lastname: lastname, email: email)
+    
+        
+    }
+    class func saveUser(id : Int, firstname:String, lastname: String, email:String, image:UIImage){
+        
+        //step 1 get context
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        //step 2 delete current stored data
+        var dbdata = getManagedObjects("User")
         
         for m :NSManagedObject in dbdata{
             managedContext.deleteObject(m)
         }
-
+        
         //step 3 store user
         let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedContext)
         var user = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
@@ -507,11 +554,10 @@ public class DataHandler{
         user.setValue(firstname, forKey: "firstname")
         user.setValue(lastname, forKey: "lastname")
         user.setValue(email, forKey: "email")
-
-        //user.setValue(UIImagePNGRepresentation(image), forKey: "profileImage")
+        user.setValue(UIImagePNGRepresentation(image), forKey: "profileImage")
         
-       ServerRequestHandler.uploadUserInfo(id, name: firstname, lastname: lastname, email: email)
-    
+        ServerRequestHandler.uploadUserInfo(id, name: firstname, lastname: lastname, email: email)
+        
         
     }
     

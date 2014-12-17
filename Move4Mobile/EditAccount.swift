@@ -189,7 +189,10 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
         
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            var imagedata = UIImagePNGRepresentation(image)
+            
+            var resizedImage : UIImage = self.resizeImage(image)
+            var imagedata = UIImagePNGRepresentation(resizedImage)
+            
             let base64String = imagedata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
             var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
             actInd.center = self.imagePicker.view.center
@@ -207,6 +210,7 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
             print("UserID: ")
             println(DataHandler.getUserID())
             self.uploadimage(DataHandler.getUserID(), image: base64String)
+            self.imageView_profilePicture.image=image
             
         })
         
@@ -236,10 +240,23 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
             }
         }
 
-}
-
+    }
+    
+    func resizeImage(image :UIImage)->UIImage{
+        var newSize:CGSize = CGSize(width: 200,height: 200)
+        let rect = CGRectMake(0,0, newSize.width, newSize.height)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
         
+        // image is a variable of type UIImage
+        image.drawInRect(rect)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 
     
+}
+
+
 

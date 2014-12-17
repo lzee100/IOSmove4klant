@@ -278,7 +278,7 @@ public class ServerRequestHandler: NSObject {
                         //println("")
                         if profileImage != ""{
                             var decodedimage = ImageHandler.base64ToUIImage(profileImage)
-                            DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail, image: decodedimage)
+                            DataHandler.saveUserWithImage(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail, image: decodedimage)
                         }
                         else{
                             DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail)
@@ -303,6 +303,15 @@ public class ServerRequestHandler: NSObject {
             responseMain (success: success, message: message, error: error)
         })
     }
+    
+    class func signUp(firstname: String, lastname: String, email: String, password: String, response: ((HTTPResponse) -> Void)!){
+        var request = HTTPTask()
+        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+        let params: Dictionary<String,AnyObject> = ["tag" : "register", "email" : email, "password" : password, "fname" : firstname, "lname" : lastname ]
+        request.POST(Config().REGISTERURL, parameters: params, success: response ,failure: {(error: NSError, response: HTTPResponse?) in
+        })
+    }
+    
     
 //    func login2(email: String, password: String, respone: ((HTTPResponse) -> Void)!) -> User{
 //        var request = HTTPTask()

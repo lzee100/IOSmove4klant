@@ -102,6 +102,7 @@ class LogIn: UIViewController, UITextFieldDelegate {
                     self.logInCorrect = true
                     self.container.removeFromSuperview()
                     DataHandler.updateAll()
+                    DataHandler.storeLikesFromServerLocally(DataHandler.getUserID())
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
             })

@@ -73,10 +73,15 @@ class Settings: UITableViewController {
             self.showViewController(vc, sender: nil)
             
             
-//        case "login" :
-//            let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-//            let vc = storyboard.instantiateViewControllerWithIdentifier("navScanForBeacons") as UINavigationController
-//            self.showViewController(vc, sender: nil)
+        case "login" :
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            let nav = appDelegate.nav
+            let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+            let vc  = storyboard.instantiateViewControllerWithIdentifier("navLogIn") as UINavigationController
+            DataHandler.deleteUser()
+            nav?.presentViewController(vc, animated: true, completion: nil)
+            self.navigationController?.popToRootViewControllerAnimated(true)
+
 
             
         default :

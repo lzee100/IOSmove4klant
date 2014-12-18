@@ -179,7 +179,7 @@ public class ServerRequestHandler: NSObject {
     
     //user functions
     
-    public func checkinout(userID: Int){
+    class func checkinout(userID: Int){
         var request = HTTPTask()
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
         let params: Dictionary<String,AnyObject> = ["customerID": userID]
@@ -193,12 +193,36 @@ public class ServerRequestHandler: NSObject {
         })
     }
     
-    class func checkinStatus(userID: Int, response: ((HTTPResponse) -> Void)!){
+    class func checkinStatus(userID: Int, responseMain:(success : Bool, error:NSError!) ->()){
+        var bool = false
         var request = HTTPTask()
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
         let params: Dictionary<String,AnyObject> = ["customerID": userID]
-        request.POST(Config().CHECKINGSTATUS, parameters: params, success: response,failure: {(error: NSError, response: HTTPResponse?) in
+        
+        request.POST(Config().CHECKINGSTATUS, parameters: params, success: {(response: HTTPResponse) in
+            
+            if let data = response.responseObject as? NSData {
+                let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                var sep = str.componentsSeparatedByString("<")
+                var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
+                
+                var allContacts = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil) as NSDictionary
+                // if there is an user, login went correct
+                if ((allContacts["returnvalue"]) != nil) {
+                    let returnBool = allContacts["returnvalue"] as Int
+                    if returnBool == 1 {
+                        bool = true
+                    }
+                
+                }
+            }
+            responseMain(success: bool, error: nil)
+            
+        },failure: {(error: NSError, response: HTTPResponse?) in
+            responseMain(success: bool, error: error)
         })
+    
+    
     }
     
     class func uploadLikes(customerID: Int, categories: [Int]){

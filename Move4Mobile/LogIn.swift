@@ -111,6 +111,7 @@ class LogIn: UIViewController, UITextFieldDelegate {
                     DataHandler.updateAll()
                     DataHandler.storeLikesFromServerLocally(DataHandler.getUserID())
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    println("dismiss viewcontroller login")
                 }
             })
         }

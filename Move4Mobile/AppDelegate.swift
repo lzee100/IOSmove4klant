@@ -36,8 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var productActive = false
     var startTimer = true
     var customerInStore = false
-    var inStore : NSDate?
-    var outStore : NSDate?
+    var timer : NSTimer?
+    var timerActive = false
+    var checkingLogIn = false
     
     
     lazy var applicationDocumentsDirectory: NSURL = {
@@ -164,6 +165,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let beaconRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID,
             identifier: beaconIdentifier)
         
+        beaconRegion.notifyEntryStateOnDisplay = true
+        
         locationManager = CLLocationManager()
         
         if(locationManager!.respondsToSelector("requestAlwaysAuthorization")) {
@@ -213,8 +216,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    
-    
 }
 
 extension AppDelegate: CLLocationManagerDelegate {
@@ -248,11 +249,17 @@ extension AppDelegate: CLLocationManagerDelegate {
             if logIn {
                 // ------------ if beacon is found ------------------
                 if(beacons.count > 0) {
-                    
+
                     // get info db
                     user = DataHandler.getUserFromDB()
                     beaconsFromDataBase = DataHandler.getBeaconsFromDB()
                     likes = DataHandler.getLikedCategoriesFromDB()
+                    
+                    // check if checker is not checking
+                    if (!checkingLogIn) {
+                        // check if customer is in store
+                        checkUserInStore()
+                    }
                     
                     if beaconsFromDataBase!.count != 0 {
                         
@@ -263,16 +270,6 @@ extension AppDelegate: CLLocationManagerDelegate {
                         lastProximity = nearestBeacon.proximity;
                         let major = nearestBeacon.major.integerValue
                         var rssi = nearestBeacon.rssi
-                        
-                        /* rssi is not nil, because beacon is found
-                        if rssi is 0 when beacon is found, signal is not interpreted, no information available */
-                        if rssi != 0 {
-                            //println("login beacon")
-                            customerInStore = true
-                            inStore = NSDate()
-                            // set time when beacon is found
-                            endTime = NSDate()
-                        }
                         
                         // get rangedBeacon and assign it to a beacon object
                         for beacon in beaconsFromDataBase! {
@@ -324,13 +321,6 @@ extension AppDelegate: CLLocationManagerDelegate {
                             }
                         }
                     } // end if no beacons yet in db.
-                } else if beacons.count == 0 {
-                    // if customer is instore, set outStore date to compare with instore date
-                    if customerInStore {
-                        outStore = NSDate()
-                        shouldCheckOut(inStore!, outStore: outStore!)
-                    }
-                    
                 }
             } // end check if user is loggedIn
     }
@@ -339,15 +329,23 @@ extension AppDelegate: CLLocationManagerDelegate {
         didEnterRegion region: CLRegion!) {
             manager.startRangingBeaconsInRegion(region as CLBeaconRegion)
             manager.startUpdatingLocation()
-            
+            showNotification("Je bent bij onze winkel. Open de app.", swipeMessage: "activeren")
             NSLog("You entered the region")
             //sendLocalNotificationWithMessage("You entered the region", playSound: false)
     }
     
     func locationManager(manager: CLLocationManager!,
         didExitRegion region: CLRegion!) {
-            manager.stopRangingBeaconsInRegion(region as CLBeaconRegion)
-            manager.stopUpdatingLocation()
+            //manager.stopRangingBeaconsInRegion(region as CLBeaconRegion)
+            //manager.stopUpdatingLocation()
+            // if customer is instore, set outStore date to compare with instore date
+            if customerInStore {
+                if !timerActive {
+                    timer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("checkOut"), userInfo: nil, repeats: true)
+                    println("timer started")
+                    timerActive = true
+                }
+            }
             
             NSLog("You exited the region")
             //sendLocalNotificationWithMessage("You exited the region", playSound: true)
@@ -416,13 +414,31 @@ extension AppDelegate: CLLocationManagerDelegate {
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     } // if screen is locked, show swipe message
     
-    func shouldCheckOut (inStore : NSDate, outStore : NSDate) {
-        let timeInterval: Double = outStore.timeIntervalSinceDate(inStore); // < Difference in seconds (double)
-        // if no beacon ranged in 60 seconds, check out
-        if timeInterval > 60 {
-            // ServiceRequestHandler.checkOutCustomer() << check out the customer online
-        }
-        
+    func checkIn(){
+        ServerRequestHandler.checkinout(user!.userID!)
+        timerActive = false
+    }
+    
+    func checkOut(){
+        ServerRequestHandler.checkinout(user!.userID!)
+        timerActive = false
+        customerInStore = false
+        timer?.invalidate()
+        println("user is checked out due timer")
+    }
+    
+    func checkUserInStore() {
+        checkingLogIn = true
+        ServerRequestHandler.checkinStatus(user!.userID!, responseMain: { (success, error) -> () in
+            self.customerInStore = success
+            if (success) {
+            println("check= in store")
+            } else {
+                println("check = not in store")
+                self.checkIn()
+            }
+            self.checkingLogIn = false
+        })
     }
     
 }

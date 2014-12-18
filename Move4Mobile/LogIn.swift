@@ -17,6 +17,8 @@ class LogIn: UIViewController, UITextFieldDelegate {
     @IBOutlet var label_welcomeByThe: UILabel!
     @IBOutlet var label_IJzerWinkelApp: UILabel!
     var logInCorrect = false
+    
+    var keyboardUp: Bool = false
     var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
     
     var container: UIView = UIView()
@@ -28,6 +30,12 @@ class LogIn: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         self.editText_UserName.delegate = self
         self.editText_Password.delegate = self
+     
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+
+
 
         
         container.frame = self.view.frame
@@ -109,6 +117,20 @@ class LogIn: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        println("segue")
+        hideKeyBoardIfShown()
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+      //keyboardUp=false
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    
     // keyboard behavior
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.editText_Password.resignFirstResponder()
@@ -128,5 +150,41 @@ class LogIn: UIViewController, UITextFieldDelegate {
         
         return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
     }
+
+    func keyboardWillShow(sender: NSNotification) {
+        if !keyboardUp{
+        var info = sender.userInfo!
+        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+        //self.view.frame.origin.y -= 200
+        self.view.frame.origin.y-=keyboardFrame.size.height - 10
+        
+          keyboardUp = true
+        }
+    }
+    func keyboardWillHide(sender: NSNotification) {
+        if keyboardUp{
+        var info = sender.userInfo!
+        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+        //self.view.frame.origin.y += 200
+        self.view.frame.origin.y+=keyboardFrame.size.height - 10
+          keyboardUp = false
+        }
+    }
+    
+    func hideKeyBoardIfShown(){
+        if keyboardUp == true{
+            //self.view.frame.origin.y += 200
+            
+            for txt: AnyObject in self.view.subviews{
+                if txt.isKindOfClass(UITextField) && txt.isFirstResponder(){
+                    txt.resignFirstResponder()
+                }
+            }
+        }
+        //self.navigationController?.popToRootViewControllerAnimated(true)
+        
+        
+    }
+
 
 }

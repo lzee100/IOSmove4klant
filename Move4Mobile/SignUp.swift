@@ -15,9 +15,9 @@ class SignUp: UIViewController {
     @IBOutlet var editText_password: UITextField!
     @IBOutlet var button_signUp: UIButton!
     var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
-    
+    //var backbutton : UIBarButtonItem!
     var container: UIView = UIView()
-    
+    var keyboardUp: Bool = false
 
 
     override func viewDidLoad() {
@@ -25,6 +25,12 @@ class SignUp: UIViewController {
         self.navigationController?.navigationBar.hidden = false
         // Do any additional setup after loading the view.
         
+       
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        //var backButton: UIBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Bordered, target: self, action: "hideKeyBoardIfShown")
+        //self.navigationItem.backBarButtonItem.action="hideKeyBoardIfShown:"
+        self.navigationItem.backBarButtonItem?.action="hideKeyBoardIfShown:"
         
         container.frame = self.view.frame
         container.center = self.view.center
@@ -210,6 +216,36 @@ class SignUp: UIViewController {
         let blue = CGFloat(rgbValue & 0xFF)/256.0
         
         return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
+    }
+    
+    func keyboardWillShow(sender: NSNotification) {
+        var info = sender.userInfo!
+        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+        //self.view.frame.origin.y -= 200
+        self.view.frame.origin.y-=keyboardFrame.size.height - 10
+        keyboardUp = true
+    }
+    func keyboardWillHide(sender: NSNotification) {
+        var info = sender.userInfo!
+        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+        //self.view.frame.origin.y += 200
+        self.view.frame.origin.y+=keyboardFrame.size.height - 10
+        keyboardUp = false
+    }
+    
+    func hideKeyBoardIfShown(){
+        if keyboardUp == true{
+        //self.view.frame.origin.y += 200
+            
+            for txt: AnyObject in self.view.subviews{
+                if txt.isKindOfClass(UITextField) && txt.isFirstResponder(){
+                    txt.resignFirstResponder()
+                }
+            }
+        }
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        
+        
     }
 
 }

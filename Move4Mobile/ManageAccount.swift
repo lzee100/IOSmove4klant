@@ -78,6 +78,8 @@ class ManageAccount: UIViewController {
             cell = tableView.dequeueReusableCellWithIdentifier(id) as ManageAccountCell!
         }
         
+        cell!.selectionStyle = UITableViewCellSelectionStyle.None
+        
         cell!.label_Category.text = likedCategories[indexPath.row].name
         
         return cell!

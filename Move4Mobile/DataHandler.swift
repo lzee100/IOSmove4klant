@@ -112,11 +112,11 @@ public class DataHandler{
             var id: Int = p.valueForKey("id") as Int
             
             if (id == productID){
-            var catid: Int = p.valueForKey("categoryID") as Int
+            //var catid: Int = p.valueForKey("categoryID") as Int
             var name: String = p.valueForKey("name") as String
             var desc: String = p.valueForKey("productdescription") as String
             
-            products = Product(ID: id, categoryID: catid, productdescription: name, name: desc)
+            products = Product(ID: id, productdescription: name, name: desc)
             }
         }
         return products

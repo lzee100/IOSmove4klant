@@ -39,6 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var timer : NSTimer?
     var timerActive = false
     var checkingLogIn = false
+    var rssi : Int?
+    var product : Product?
+    var didEnterBackground = false
+    var notificationProductShown = false
+    var timerProductNotification : NSTimer?
     
     
     lazy var applicationDocumentsDirectory: NSURL = {
@@ -200,11 +205,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func applicationDidEnterBackground(application: UIApplication) {
+        didEnterBackground = true
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
+        didEnterBackground = false
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
     
@@ -261,6 +268,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                         checkUserInStore()
                     }
                     
+                    
                     if beaconsFromDataBase!.count != 0 {
                         
                         // get de nearest beacon
@@ -269,7 +277,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                         // beacon information
                         lastProximity = nearestBeacon.proximity;
                         let major = nearestBeacon.major.integerValue
-                        var rssi = nearestBeacon.rssi
+                        rssi = nearestBeacon.rssi
                         
                         // get rangedBeacon and assign it to a beacon object
                         for beacon in beaconsFromDataBase! {
@@ -281,18 +289,33 @@ extension AppDelegate: CLLocationManagerDelegate {
                         
                         // ------------ distance == immidiate ----------------
                         if (rssi > -60 && rssi != 0){
-                            
                             // get product from beacon
-                            let product : Product = DataHandler.getProductByID(rangedBeacon!.productID!)
+                            product = DataHandler.getProductByID(rangedBeacon!.productID!)
+                            
+                            // if in background
+                            if didEnterBackground {
+                                // beacon moet ontvangen zijn
+                                if rssi != nil {
+                                    if rssi > -60 && rssi != 0 {
+                                        if product != nil {
+                                            if !notificationProductShown {
+                                                showNotificationProduct(product!)
+                                                println("background notification")
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
                             
                             // only once per 3 seconds
                             if activateNewScreen() {
                                 productActive = true
-                                showProduct(product)
+                                showProduct(product!)
                             }
                             
                             // ------------ distance == near ----------------------
-                        } else if (rssi < -60 && rssi > -90) {
+                            } else if (rssi < -60 && rssi > -90) {
                             
                             // get offer from ranged beacon
                             offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
@@ -314,15 +337,18 @@ extension AppDelegate: CLLocationManagerDelegate {
                                 if !productActive {
                                     // if offer is not yet shown to customer (customer recieves only once an offer)
                                     if !isOfferShown(offer!) {
-                                        showNotification("Speciale aanbieding", swipeMessage: "zien wat de actie is!")
                                         showOffer(offer!)
+                                        if didEnterBackground {
+                                            showNotificationOffer(offer!)
+                                        }
                                     }
                                 }
                             }
                         }
                     } // end if no beacons yet in db.
-                }
+                } // no beacons found when counting them
             } // end check if user is loggedIn
+    
     }
     
     func locationManager(manager: CLLocationManager!,
@@ -354,7 +380,7 @@ extension AppDelegate: CLLocationManagerDelegate {
     func showProduct(product : Product) {
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let vc  = storyboard.instantiateViewControllerWithIdentifier("Product") as ProductView
-        //vc.label_description.text = product.productdescription
+        //vc.lab= product.productdescription
         //ToDo Sander:
         // let image = product.image (toImage in product).... (from string64 to image)
         //vc.imageView_productImage.image = image
@@ -365,7 +391,7 @@ extension AppDelegate: CLLocationManagerDelegate {
     func showOffer(offer : Offer) {
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let vc  = storyboard.instantiateViewControllerWithIdentifier("Offer") as OfferView
-        ///vc.label_description.text = offer.offerdescription
+        vc.labelDescriptionValue = offer.offerdescription
         
         // ToDo Sander:
         // let image = offer.image (toImage in offer).... (from string64 to image)
@@ -381,6 +407,7 @@ extension AppDelegate: CLLocationManagerDelegate {
             startTime = NSDate()
             return true
         }else if startTime != nil {
+            endTime = NSDate()
             let timeInterval: Double = self.endTime!.timeIntervalSinceDate(startTime!)
             if (timeInterval > 3){
                 startTime = NSDate()
@@ -391,19 +418,20 @@ extension AppDelegate: CLLocationManagerDelegate {
     } // screen will only appear every 3 seconds
     
     func isOfferShown(offer : Offer) -> Bool {
+        
         if offersShown == nil {
             offersShown = [Offer]()
             offersShown!.append(offer)
             return false
-        } else {
-            for offerCheck in offersShown! {
-                if offerCheck.ID == offer.ID {
+        }
+            
+        for offerCheck in offersShown! {
+            if offerCheck.ID != offer.ID {
                     offersShown!.append(offer)
-                    return true
-                }
+                    return false
             }
         }
-        return false
+        return true
     } // is offer allready shown?
     
     func showNotification(message : String, swipeMessage : String) {
@@ -411,8 +439,37 @@ extension AppDelegate: CLLocationManagerDelegate {
         localNotification.alertAction = swipeMessage
         localNotification.alertBody = message
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
+        localNotification.soundName = "tos_beep.caf"
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     } // if screen is locked, show swipe message
+    
+    func showNotificationProduct(product : Product) {
+        var localNotification:UILocalNotification = UILocalNotification()
+        localNotification.alertAction = "Actie: " + product.productdescription!
+        localNotification.alertBody = "Actie: " + product.productdescription!
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
+        localNotification.soundName = "tos_beep.caf"
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+
+        // product notification is shown
+        notificationProductShown = true
+        // set timer for 30 seconds to not show notification again
+        timerProductNotification = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "resetNotificationProductShown", userInfo: nil, repeats: false)
+    } // if screen is locked, show swipe message
+    
+    func showNotificationOffer(offer : Offer) {
+        var localNotification:UILocalNotification = UILocalNotification()
+        localNotification.alertAction = "Actie: " + offer.offerdescription!
+        localNotification.alertBody = "Actie: " + offer.offerdescription!
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
+        localNotification.soundName = "tos_beep.caf"
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    } // if screen is locked, show swipe message
+    
+    func resetNotificationProductShown() {
+        notificationProductShown = false
+        timerProductNotification?.invalidate()
+    }
     
     func checkIn(){
         ServerRequestHandler.checkinout(user!.userID!)
@@ -432,9 +489,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         ServerRequestHandler.checkinStatus(user!.userID!, responseMain: { (success, error) -> () in
             self.customerInStore = success
             if (success) {
-            println("check= in store")
             } else {
-                println("check = not in store")
                 self.checkIn()
             }
             self.checkingLogIn = false

@@ -12,7 +12,6 @@ import CoreData
 class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     @IBOutlet var settings: UIBarButtonItem!
     @IBOutlet var label_ijzerhandel: UILabel!
-    @IBOutlet weak var button_checkFunctions: UIButton!
     var actInd : UIActivityIndicatorView?
     
     var products = [NSManagedObject]()

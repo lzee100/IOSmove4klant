@@ -106,6 +106,8 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
             cell = tableView.dequeueReusableCellWithIdentifier(id) as EditAccountCell!
         }
         
+        cell!.selectionStyle = UITableViewCellSelectionStyle.None
+        
         cell!.label_category.text = likedCategories[indexPath.row].name!
         
         return cell!
@@ -134,11 +136,18 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
 //            destinationVC.user = newUser
 //        }
         if (segue.identifier == "changeLikedCategories"){
+            saveUserInfo()
             let destinationVC = segue.destinationViewController as LikedCategories
         }
     }
     
     @IBAction func save(sender: AnyObject) {
+        saveUserInfo()
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        }
+    
+    
+    func saveUserInfo() {
         var name = textinput_firstName.text
         var lastname = textinput_sirName.text
         var email = textinput_email.text
@@ -156,13 +165,9 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
         let newUser = User(uID: user.getUserID(), uName: name, uLastName: lastname, uEmail: email)
         
         var userToSave = "UserID: \(newUser.getUserID())\nName: \(newUser.name)\nLastName: \(newUser.lastName)\nEmail: \(newUser.email)"
-
-        DataHandler.saveUser(newUser.getUserID(), firstname: newUser.name!, lastname: newUser.lastName!, email: newUser.email!)
         
-        self.navigationController?.popToRootViewControllerAnimated(true)
-        }
-    
-    
+        DataHandler.saveUser(newUser.getUserID(), firstname: newUser.name!, lastname: newUser.lastName!, email: newUser.email!)
+    }
     
     // keyboard behavior
     func textFieldShouldReturn(textField: UITextField) -> Bool {

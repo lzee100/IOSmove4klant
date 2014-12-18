@@ -28,6 +28,8 @@
 		B3351B231A3891CC0060759A /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = B3351B211A3891CC0060759A /* cancel.png */; };
 		B3351B241A3891CC0060759A /* Spijkers.png in Resources */ = {isa = PBXBuildFile; fileRef = B3351B221A3891CC0060759A /* Spijkers.png */; };
 		B3351B271A3999290060759A /* emptyprofile.png in Resources */ = {isa = PBXBuildFile; fileRef = B3351B261A3999290060759A /* emptyprofile.png */; };
+		B34A1BCE1A43152B0068EACB /* hardware_tools_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B34A1BCD1A43152B0068EACB /* hardware_tools_1.png */; };
+		B34A1BD21A431B960068EACB /* signUp.png in Resources */ = {isa = PBXBuildFile; fileRef = B34A1BD11A431B960068EACB /* signUp.png */; };
 		B37373FA1A287D5600A35E2E /* HTTPRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F61A287D5600A35E2E /* HTTPRequestSerializer.swift */; };
 		B37373FB1A287D5600A35E2E /* HTTPResponseSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F71A287D5600A35E2E /* HTTPResponseSerializer.swift */; };
 		B37373FC1A287D5600A35E2E /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37373F81A287D5600A35E2E /* HTTPTask.swift */; };
@@ -69,6 +71,8 @@
 		B3351B211A3891CC0060759A /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		B3351B221A3891CC0060759A /* Spijkers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spijkers.png; sourceTree = "<group>"; };
 		B3351B261A3999290060759A /* emptyprofile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptyprofile.png; sourceTree = "<group>"; };
+		B34A1BCD1A43152B0068EACB /* hardware_tools_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hardware_tools_1.png; sourceTree = "<group>"; };
+		B34A1BD11A431B960068EACB /* signUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signUp.png; sourceTree = "<group>"; };
 		B37373F61A287D5600A35E2E /* HTTPRequestSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestSerializer.swift; sourceTree = "<group>"; };
 		B37373F71A287D5600A35E2E /* HTTPResponseSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponseSerializer.swift; sourceTree = "<group>"; };
 		B37373F81A287D5600A35E2E /* HTTPTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				B3351B211A3891CC0060759A /* cancel.png */,
+				B34A1BCD1A43152B0068EACB /* hardware_tools_1.png */,
+				B34A1BD11A431B960068EACB /* signUp.png */,
 				B3351B261A3999290060759A /* emptyprofile.png */,
 				B3351B221A3891CC0060759A /* Spijkers.png */,
 			);
@@ -288,7 +294,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3A1A33A1A24784C0090BC17 /* Main.storyboard in Resources */,
+				B34A1BCE1A43152B0068EACB /* hardware_tools_1.png in Resources */,
 				B3351B241A3891CC0060759A /* Spijkers.png in Resources */,
+				B34A1BD21A431B960068EACB /* signUp.png in Resources */,
 				B3A1A33F1A24784D0090BC17 /* LaunchScreen.xib in Resources */,
 				B3351B271A3999290060759A /* emptyprofile.png in Resources */,
 				B3A1A33C1A24784D0090BC17 /* Images.xcassets in Resources */,

@@ -118,11 +118,9 @@ class LogIn: UIViewController, UITextFieldDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("segue")
         hideKeyBoardIfShown()
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-      //keyboardUp=false
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -155,7 +153,6 @@ class LogIn: UIViewController, UITextFieldDelegate {
         if !keyboardUp{
         var info = sender.userInfo!
         var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
-        //self.view.frame.origin.y -= 200
         self.view.frame.origin.y-=keyboardFrame.size.height - 10
         
           keyboardUp = true
@@ -165,7 +162,6 @@ class LogIn: UIViewController, UITextFieldDelegate {
         if keyboardUp{
         var info = sender.userInfo!
         var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
-        //self.view.frame.origin.y += 200
         self.view.frame.origin.y+=keyboardFrame.size.height - 10
           keyboardUp = false
         }
@@ -173,18 +169,11 @@ class LogIn: UIViewController, UITextFieldDelegate {
     
     func hideKeyBoardIfShown(){
         if keyboardUp == true{
-            //self.view.frame.origin.y += 200
-            
             for txt: AnyObject in self.view.subviews{
                 if txt.isKindOfClass(UITextField) && txt.isFirstResponder(){
                     txt.resignFirstResponder()
                 }
             }
         }
-        //self.navigationController?.popToRootViewControllerAnimated(true)
-        
-        
     }
-
-
 }

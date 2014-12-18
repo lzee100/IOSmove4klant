@@ -21,6 +21,7 @@
     <entity name="Product" syncable="YES">
         <attribute name="categoryID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productdescription" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -32,10 +33,10 @@
         <attribute name="profileImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Categories" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="Product" positionX="-63" positionY="0" width="128" height="105"/>
         <element name="Beacon" positionX="-54" positionY="27" width="128" height="120"/>
+        <element name="Categories" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="Offer" positionX="-36" positionY="72" width="128" height="105"/>
+        <element name="Product" positionX="-63" positionY="0" width="128" height="120"/>
         <element name="User" positionX="-18" positionY="81" width="128" height="118"/>
     </elements>
 </model>

@@ -156,13 +156,7 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
         let newUser = User(uID: user.getUserID(), uName: name, uLastName: lastname, uEmail: email)
         
         var userToSave = "UserID: \(newUser.getUserID())\nName: \(newUser.name)\nLastName: \(newUser.lastName)\nEmail: \(newUser.email)"
-        // go to first screen (Manage Account)
-        //self.navigationController?.popToRootViewControllerAnimated(true)
-//        let alert = UIAlertView()
-//        alert.title = "Title"
-//        alert.message = "To save: " + userToSave
-//        alert.addButtonWithTitle("Ok")
-//        alert.show()
+
         DataHandler.saveUser(newUser.getUserID(), firstname: newUser.name!, lastname: newUser.lastName!, email: newUser.email!)
         
         self.navigationController?.popToRootViewControllerAnimated(true)
@@ -190,51 +184,22 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
         
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             
-            var resizedImage : UIImage = self.resizeImage(image)
-            var imagedata = UIImagePNGRepresentation(resizedImage)
-            
-            let base64String = imagedata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
-            var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
-            actInd.center = self.imagePicker.view.center
-            actInd.hidesWhenStopped = true
-            actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-            self.imagePicker.view.addSubview(actInd)
-            actInd.startAnimating()
+            let base64String = ImageHandler.UIImageToBase64(ImageHandler.resizeImage(image))
             
             for m: NSManagedObject in DataHandler.getManagedObjects("User"){
                 m.setValue(UIImagePNGRepresentation(image), forKey: "profileImage")
             }
-            //println(baseimage)
-            //dispatch_sync(dispatch_get_main_queue()){
-            //ServerRequestHandler.uploadImage(DataHandler.getUserID(), image: baseimage)
-            print("UserID: ")
-            println(DataHandler.getUserID())
             self.uploadimage(DataHandler.getUserID(), image: base64String)
             self.imageView_profilePicture.image=image
-            
         })
-        
-        //uploadimage=image
-        var imagedata = UIImagePNGRepresentation(image)
-        let base64String = imagedata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
-        
-        
-        //println(base64String.description)
-        
-        
-        
-        //}
-        
-    }
+            }
     
     func uploadimage(id:Int , image:String){
         var returnvalue = String()
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-//            ServerRequestHandler.uploadImage2(id, image: image, respone: {(response: HTTPResponse) -> Void in
-//                
-//           })
-         ServerRequestHandler.uploadImage(id, image: image)
+
+         ServerRequestHandler.uploadImage(id, base64image: image)
             dispatch_async(dispatch_get_main_queue()) {
                 // update some UI
             }
@@ -242,18 +207,6 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
 
     }
     
-    func resizeImage(image :UIImage)->UIImage{
-        var newSize:CGSize = CGSize(width: 200,height: 200)
-        let rect = CGRectMake(0,0, newSize.width, newSize.height)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        
-        // image is a variable of type UIImage
-        image.drawInRect(rect)
-        
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
 
     
 }

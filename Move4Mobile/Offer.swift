@@ -13,12 +13,12 @@ class Offer: NSObject {
     var ID: Int?
     var categoryID : Int?
     var offerdescription: String?
-    var image: String?
+    var image: UIImage?
     
     override init(){}
     
     
-    init(ID: Int, categoryID : Int , offerdescription: String, image: String?)
+    init(ID: Int, categoryID : Int , offerdescription: String, image: UIImage)
     {
         self.ID = ID
         self.categoryID=categoryID
@@ -35,6 +35,10 @@ class Offer: NSObject {
     
     func toString() -> String{
         return "ID: \(ID)  categoryID: \(categoryID)  Description: \(offerdescription) "
+    }
+    
+    func setImage(image: UIImage){
+        self.image=image
     }
     
     

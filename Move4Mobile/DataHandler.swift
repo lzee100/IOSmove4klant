@@ -44,6 +44,10 @@ public class DataHandler{
                 product.setValue(p.ID, forKey: "id")
                 product.setValue(p.name, forKey: "name")
                 product.setValue(p.productdescription, forKey: "productdescription")
+                if p.image != nil {
+                    product.setValue(UIImagePNGRepresentation(p.image), forKey: "image")
+                }
+                
             }
         }
     }
@@ -299,8 +303,6 @@ public class DataHandler{
         
     }
     
-  
-
     
     
     //Beacons
@@ -533,7 +535,8 @@ public class DataHandler{
     
         
     }
-    class func saveUser(id : Int, firstname:String, lastname: String, email:String, image:UIImage){
+    
+    class func saveUserWithImage(id : Int, firstname:String, lastname: String, email: String, image: UIImage){
         
         //step 1 get context
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -611,6 +614,18 @@ public class DataHandler{
             }
         }
         return user
+    }
+    
+    class func deleteUser(){
+        //step 1 get context
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+
+        var user = getManagedObjects("User")
+        
+        for m : NSManagedObject in user{
+            managedContext.deleteObject(m)
+        }
     }
     
     

@@ -146,6 +146,8 @@ public class ServerRequestHandler: NSObject {
                 let productname : String = collection["name"]as String
                // println(collection["categoryID"])
                 var temp: AnyObject? = collection["categoryID"]
+                
+                
               
                 let productdesc : String = collection["description"]as String
                 
@@ -159,6 +161,14 @@ public class ServerRequestHandler: NSObject {
                         
                     }
                 
+                if collection["image"] != nil{
+                    var img : String = collection["image"] as String
+                    if img != "none" && img != "null" && img != "" && countElements(img) > 70 {
+                    productobj.setImage(ImageHandler.base64ToUIImage(img))
+                    }
+                }
+                
+                
                 //println(beaconobj.toString())
                 returnarray.append(productobj)
             }
@@ -166,7 +176,6 @@ public class ServerRequestHandler: NSObject {
         return returnarray
     }
 
-    
     
     //user functions
     
@@ -253,45 +262,10 @@ public class ServerRequestHandler: NSObject {
         
     }
     
-    class func getLikes3 (userID : Int, responseMain: (Array<Int>!, error:NSError!) ->()){
-        //let queue = dispatch_get_main_queue()
-        
-        //dispatch_async(queue, {
-        
-            var error : NSError?
-            
-            var request = HTTPTask()
-            var returnvalue = Array<Int>()
-            //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
-            let params: Dictionary<String,AnyObject> = ["customerID": userID]
-            request.POST(Config().GETLIKESURL, parameters: params, success: {(response: HTTPResponse) in
-                if let data = response.responseObject as? NSData {
-                    let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
-                    var sep = str.componentsSeparatedByString("<")
-                    var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
-                    
-                    var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
-                    
-                    if let json = allContacts as? Dictionary<String, Array<Int>> {
-                        
-                        returnvalue = json["returnvalue"]!
-                        
-                        for i : Int in returnvalue{
-                            println(i)
-                        }
-                    }
-                    responseMain(returnvalue, error: nil)
-                }
-                },failure: {(error: NSError, response: HTTPResponse?) in
-            })
-        //})
-    
-    }
-    
-    class func uploadImage(customerID: Int, image: String){
+    class func uploadImage(customerID: Int, base64image: String){
         var request = HTTPTask()
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
-        let params: Dictionary<String,AnyObject> = ["customerID": customerID, "image": image]
+        let params: Dictionary<String,AnyObject> = ["customerID": customerID, "image": base64image]
         print("posted customerID :")
         println(toString(customerID))
         request.POST(Config().UPLOADIMAGE, parameters: params, success: {(response: HTTPResponse) in
@@ -337,13 +311,8 @@ public class ServerRequestHandler: NSObject {
                         //println(collection.description)
                         //println("")
                         if profileImage != ""{
-                        if let decodedData = NSData(base64EncodedString: profileImage, options: NSDataBase64DecodingOptions(0)){
-                            var decodedimage : UIImage = UIImage(data: decodedData)!
-                            //println(decodedimage)
-                        
-                        
-                            DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail, image: decodedimage)
-                        }
+                            var decodedimage = ImageHandler.base64ToUIImage(profileImage)
+                            DataHandler.saveUserWithImage(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail, image: decodedimage)
                         }
                         else{
                             DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail)
@@ -369,24 +338,82 @@ public class ServerRequestHandler: NSObject {
         })
     }
     
-    func login2(email: String, password: String, respone: ((HTTPResponse) -> Void)!) -> User{
-        var request = HTTPTask()
-        var returnvalue = User()
-        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
-        let params: Dictionary<String,AnyObject> = ["tag": "login", "email": email, "password": password]
-        request.POST(Config().LOGINURL, parameters: params, success: respone ,failure: {(error: NSError, response: HTTPResponse?) in
-        })
-        return returnvalue
-        
-    }
-    
-    class func uploadImage2(customerID: Int, image: String, respone: ((HTTPResponse) -> Void)!){
+    class func signUp(firstname: String, lastname: String, email: String, password: String, response: ((HTTPResponse) -> Void)!){
         var request = HTTPTask()
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
-        let params: Dictionary<String,AnyObject> = ["customerID": customerID, "image": image]
-        request.POST(Config().UPLOADIMAGE, parameters: params, success: respone,failure: {(error: NSError, response: HTTPResponse?) in
-            
+        let params: Dictionary<String,AnyObject> = ["tag" : "register", "email" : email, "password" : password, "fname" : firstname, "lname" : lastname ]
+        request.POST(Config().REGISTERURL, parameters: params, success: response ,failure: {(error: NSError, response: HTTPResponse?) in
         })
     }
     
+    
+    
+    
+    //other 
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+//    func login2(email: String, password: String, respone: ((HTTPResponse) -> Void)!) -> User{
+//        var request = HTTPTask()
+//        var returnvalue = User()
+//        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+//        let params: Dictionary<String,AnyObject> = ["tag": "login", "email": email, "password": password]
+//        request.POST(Config().LOGINURL, parameters: params, success: respone ,failure: {(error: NSError, response: HTTPResponse?) in
+//        })
+//        return returnvalue
+//        
+//    }
+//    
+//    class func uploadImage2(customerID: Int, image: String, respone: ((HTTPResponse) -> Void)!){
+//        var request = HTTPTask()
+//        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+//        let params: Dictionary<String,AnyObject> = ["customerID": customerID, "image": image]
+//        request.POST(Config().UPLOADIMAGE, parameters: params, success: respone,failure: {(error: NSError, response: HTTPResponse?) in
+//            
+//        })
+//    }
+//    
+    
+    //    class func getLikes3 (userID : Int, responseMain: (Array<Int>!, error:NSError!) ->()){
+    //        //let queue = dispatch_get_main_queue()
+    //
+    //        //dispatch_async(queue, {
+    //
+    //            var error : NSError?
+    //
+    //            var request = HTTPTask()
+    //            var returnvalue = Array<Int>()
+    //            //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+    //            let params: Dictionary<String,AnyObject> = ["customerID": userID]
+    //            request.POST(Config().GETLIKESURL, parameters: params, success: {(response: HTTPResponse) in
+    //                if let data = response.responseObject as? NSData {
+    //                    let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+    //                    var sep = str.componentsSeparatedByString("<")
+    //                    var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
+    //
+    //                    var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
+    //
+    //                    if let json = allContacts as? Dictionary<String, Array<Int>> {
+    //
+    //                        returnvalue = json["returnvalue"]!
+    //
+    //                        for i : Int in returnvalue{
+    //                            println(i)
+    //                        }
+    //                    }
+    //                    responseMain(returnvalue, error: nil)
+    //                }
+    //                },failure: {(error: NSError, response: HTTPResponse?) in
+    //            })
+    //        //})
+    //    
+    //    }
+    //
 }

@@ -11,6 +11,7 @@
 		A35737EB1A2777840021DD36 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35737EA1A2777840021DD36 /* Product.swift */; };
 		A365FF6E1A370D2B001706F5 /* Move4Klant.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A365FF6C1A370D2B001706F5 /* Move4Klant.xcdatamodeld */; };
 		A365FF701A37449E001706F5 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365FF6F1A37449E001706F5 /* DataHandler.swift */; };
+		A3AAFC271A4178A30026D744 /* ImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AAFC261A4178A30026D744 /* ImageHandler.swift */; };
 		A3CC8D2F1A25FD6A00C0E513 /* ServerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC8D2E1A25FD6A00C0E513 /* ServerRequestHandler.swift */; };
 		A3CC8D311A26012E00C0E513 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC8D301A26012E00C0E513 /* Config.swift */; };
 		A3CC8D331A260E2D00C0E513 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CC8D321A260E2D00C0E513 /* Category.swift */; };
@@ -51,6 +52,7 @@
 		A35737EA1A2777840021DD36 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		A365FF6D1A370D2B001706F5 /* Move4Klant.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Move4Klant.xcdatamodel; sourceTree = "<group>"; };
 		A365FF6F1A37449E001706F5 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
+		A3AAFC261A4178A30026D744 /* ImageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHandler.swift; sourceTree = "<group>"; };
 		A3CC8D2E1A25FD6A00C0E513 /* ServerRequestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRequestHandler.swift; sourceTree = "<group>"; };
 		A3CC8D301A26012E00C0E513 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		A3CC8D321A260E2D00C0E513 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				A3CC8D2E1A25FD6A00C0E513 /* ServerRequestHandler.swift */,
 				A3CC8D301A26012E00C0E513 /* Config.swift */,
 				A365FF6F1A37449E001706F5 /* DataHandler.swift */,
+				A3AAFC261A4178A30026D744 /* ImageHandler.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				A3CC8D311A26012E00C0E513 /* Config.swift in Sources */,
 				B30BA8991A249E0700B398CB /* LikedCategoriesCell.swift in Sources */,
 				A3CC8D2F1A25FD6A00C0E513 /* ServerRequestHandler.swift in Sources */,
+				A3AAFC271A4178A30026D744 /* ImageHandler.swift in Sources */,
 				B396E6E61A373F2E005B454A /* ProductView.swift in Sources */,
 				B3A1A3351A24784C0090BC17 /* AppDelegate.swift in Sources */,
 				B3D49E941A2DBD9F00982DF5 /* ScanForBeaconsCell.swift in Sources */,

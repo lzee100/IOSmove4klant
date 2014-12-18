@@ -44,6 +44,10 @@ public class DataHandler{
                 product.setValue(p.ID, forKey: "id")
                 product.setValue(p.name, forKey: "name")
                 product.setValue(p.productdescription, forKey: "productdescription")
+                if p.image != nil {
+                    product.setValue(UIImagePNGRepresentation(p.image), forKey: "image")
+                }
+                
             }
         }
     }

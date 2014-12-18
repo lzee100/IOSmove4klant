@@ -146,6 +146,8 @@ public class ServerRequestHandler: NSObject {
                 let productname : String = collection["name"]as String
                // println(collection["categoryID"])
                 var temp: AnyObject? = collection["categoryID"]
+                
+                
               
                 let productdesc : String = collection["description"]as String
                 
@@ -158,6 +160,14 @@ public class ServerRequestHandler: NSObject {
                     productobj.categoryID = collection["categoryID"] as? Int
                         
                     }
+                
+                if collection["image"] != nil{
+                    var img : String = collection["image"] as String
+                    if img != "none" && img != "null" && img != "" && countElements(img) > 70 {
+                    productobj.setImage(ImageHandler.base64ToUIImage(img))
+                    }
+                }
+                
                 
                 //println(beaconobj.toString())
                 returnarray.append(productobj)
@@ -311,6 +321,19 @@ public class ServerRequestHandler: NSObject {
         request.POST(Config().REGISTERURL, parameters: params, success: response ,failure: {(error: NSError, response: HTTPResponse?) in
         })
     }
+    
+    
+    
+    
+    //other 
+    
+
+    
+    
+    
+    
+    
+    
     
     
 //    func login2(email: String, password: String, respone: ((HTTPResponse) -> Void)!) -> User{

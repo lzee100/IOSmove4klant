@@ -19,9 +19,10 @@ class LogIn: UIViewController, UITextFieldDelegate {
     var logInCorrect = false
     
     var keyboardUp: Bool = false
-    var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
     
+    var actInd : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
     var container: UIView = UIView()
+    var loadingView: UIView = UIView()
 
 
     override func viewDidLoad() {
@@ -36,13 +37,11 @@ class LogIn: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
 
 
-
         
         container.frame = self.view.frame
         container.center = self.view.center
         container.backgroundColor = UIColorFromHex(0xffffff, alpha: 0.3)
         
-        var loadingView: UIView = UIView()
         loadingView.frame = CGRectMake(0, 0, 80, 80)
         loadingView.center = self.view.center
         loadingView.backgroundColor = UIColorFromHex(0x444444, alpha: 0.7)
@@ -50,7 +49,7 @@ class LogIn: UIViewController, UITextFieldDelegate {
         loadingView.layer.cornerRadius = 10
         
         actInd.center = CGPointMake(loadingView.frame.size.width / 2,
-            loadingView.frame.size.height / 2);
+        loadingView.frame.size.height / 2);
         actInd.hidesWhenStopped = true
         actInd.backgroundColor = UIColorFromHex(0xffffff, alpha: 0.3)
         actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
@@ -176,4 +175,38 @@ class LogIn: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+// rotate loading indicator when orientation changed
+   override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    coordinator.animateAlongsideTransition(nil, completion: { (control: UIViewControllerTransitionCoordinatorContext!) -> Void in
+                self.container = UIView()
+                 self.container.frame = self.view.frame
+                 self.container.center = self.view.center
+                 self.container.backgroundColor = self.UIColorFromHex(0xffffff, alpha: 0.3)
+        
+                 self.container.frame = self.view.frame
+                 self.container.center = self.view.center
+                 self.container.backgroundColor = self.UIColorFromHex(0xffffff, alpha: 0.3)
+        
+                self.loadingView = UIView()
+                 self.loadingView.frame = CGRectMake(0, 0, 80, 80)
+                 self.loadingView.center = self.view.center
+                 self.loadingView.backgroundColor = self.UIColorFromHex(0x444444, alpha: 0.7)
+                 self.loadingView.clipsToBounds = true
+                 self.loadingView.layer.cornerRadius = 10
+                 self.actInd  = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
+        
+                 self.actInd.center = CGPointMake(self.loadingView.frame.size.width / 2,
+                 self.loadingView.frame.size.height / 2);
+                 self.actInd.hidesWhenStopped = true
+                 self.actInd.backgroundColor = self.UIColorFromHex(0xffffff, alpha: 0.3)
+                 self.actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+                 self.loadingView.addSubview(self.actInd)
+                 self.container.addSubview(self.loadingView)
+    })
+    
+    
+    }
+    
+    
 }

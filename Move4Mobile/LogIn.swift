@@ -103,6 +103,7 @@ class LogIn: UIViewController, UITextFieldDelegate {
                     self.container.removeFromSuperview()
                     DataHandler.updateAll()
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    println("dismiss viewcontroller login")
                 }
             })
         }

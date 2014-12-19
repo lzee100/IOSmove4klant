@@ -155,9 +155,11 @@ class SignUp: UIViewController {
 //                                            else{
                                                 DataHandler.updateAll()
                                                 DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail)
+                                            dispatch_sync(dispatch_get_main_queue()){
                                                 let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
                                                 appDelegate.logIn = true
                                                 self.dismissViewControllerAnimated(true, completion: nil)
+                                            }
 
                                             //}
                                         }
@@ -183,7 +185,9 @@ class SignUp: UIViewController {
                      errorMessage = "Controleer uw gegevens en probeer het later nogmaals"
                 }
                 if errorMessage != "" {
+                    dispatch_sync(dispatch_get_main_queue()){
                     self.showAlert("Server Error", message: errorMessage)
+                    }
                 }
             })
             

@@ -84,6 +84,7 @@ class Settings: UITableViewController {
             }
             DataHandler.deleteUser()
             appDelegate.logIn = false
+            appDelegate.offersShown = nil
             nav?.presentViewController(vc, animated: true, completion: nil)
             self.navigationController?.popToRootViewControllerAnimated(true)
 

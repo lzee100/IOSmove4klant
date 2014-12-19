@@ -156,6 +156,8 @@ class SignUp: UIViewController {
                                                 DataHandler.updateAll()
                                                 DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail)
                                             dispatch_sync(dispatch_get_main_queue()){
+                                                let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                                                appDelegate.logIn = true
                                                 self.dismissViewControllerAnimated(true, completion: nil)
                                             }
 

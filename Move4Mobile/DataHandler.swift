@@ -49,6 +49,9 @@ public class DataHandler{
                 }
                 
             }
+            var error: NSError?
+            if !managedContext.save(&error) {
+            }
         }
     }
     
@@ -155,6 +158,9 @@ public class DataHandler{
                 cat.setValue(p.name, forKey: "name")
                 cat.setValue(0, forKey: "liked")
             }
+            var error: NSError?
+            if !managedContext.save(&error) {
+            }
         }
     }
     
@@ -252,6 +258,12 @@ public class DataHandler{
                             }
                         }
                     }
+                    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                    let managedContext = appDelegate.managedObjectContext!
+                    var error: NSError?
+                    if !managedContext.save(&error) {
+                    }
+                    
                 }
             }
             
@@ -294,6 +306,9 @@ public class DataHandler{
                     }
                    
                 }
+            }
+            var error: NSError?
+            if !managedContext.save(&error) {
             }
         ServerRequestHandler.uploadLikes(DataHandler.getUserID(), categories: likes)
         }else {
@@ -517,6 +532,9 @@ public class DataHandler{
                    user.setValue(email, forKey: "email")
 
         }
+        var error: NSError?
+        if !managedContext.save(&error) {
+        }
 
         //step 3 store user
 //        let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedContext)
@@ -558,6 +576,10 @@ public class DataHandler{
         user.setValue(lastname, forKey: "lastname")
         user.setValue(email, forKey: "email")
         user.setValue(UIImagePNGRepresentation(image), forKey: "profileImage")
+        
+        var error: NSError?
+        if !managedContext.save(&error) {
+        }
         
         ServerRequestHandler.uploadUserInfo(id, name: firstname, lastname: lastname, email: email)
         
@@ -625,6 +647,10 @@ public class DataHandler{
         
         for m : NSManagedObject in user{
             managedContext.deleteObject(m)
+        }
+        
+        var error: NSError?
+        if !managedContext.save(&error) {
         }
     }
     

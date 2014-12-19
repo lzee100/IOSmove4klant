@@ -79,6 +79,7 @@ class Settings: UITableViewController {
             let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
             let vc  = storyboard.instantiateViewControllerWithIdentifier("navLogIn") as UINavigationController
             DataHandler.deleteUser()
+            appDelegate.logIn = false
             nav?.presentViewController(vc, animated: true, completion: nil)
             self.navigationController?.popToRootViewControllerAnimated(true)
 

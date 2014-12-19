@@ -125,7 +125,7 @@ class SignUp: UIViewController {
         } else if email == "" {
             showAlert("Leeg veld", message: "vul een email in")
         } else {
-            ServerRequestHandler.signUp(firstName, lastname: "test", email: email, password: password, response: { (httpResponse: HTTPResponse) -> Void in
+            ServerRequestHandler.signUp(firstName, lastname: lastName, email: email, password: password, response: { (httpResponse: HTTPResponse) -> Void in
                 if let data = httpResponse.responseObject as? NSData {
                     let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
                     //var sep = str.componentsSeparatedByString("<")
@@ -155,7 +155,8 @@ class SignUp: UIViewController {
 //                                            else{
                                                 DataHandler.updateAll()
                                                 DataHandler.saveUser(userID.toInt()!, firstname: userFirstName, lastname: userLastName, email: userEmail)
-                                            
+                                                let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+                                                appDelegate.logIn = true
                                                 self.dismissViewControllerAnimated(true, completion: nil)
 
                                             //}

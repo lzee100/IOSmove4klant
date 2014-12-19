@@ -29,6 +29,9 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
         var user = DataHandler.getUserFromDB()
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         appDelegate.user = user
+        if (user.email != nil){
+        appDelegate.logIn = true
+        }
         if user.email == nil {
         let nav = appDelegate.nav
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)

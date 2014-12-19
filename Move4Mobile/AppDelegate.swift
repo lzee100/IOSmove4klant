@@ -220,9 +220,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
 }
 
 extension AppDelegate: CLLocationManagerDelegate {
@@ -481,7 +479,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         timerActive = false
         customerInStore = false
         timer?.invalidate()
-        println("user is checked out due timer")
+        println("user is checked out")
     }
     
     func checkUserInStore() {
@@ -489,8 +487,12 @@ extension AppDelegate: CLLocationManagerDelegate {
         ServerRequestHandler.checkinStatus(user!.userID!, responseMain: { (success, error) -> () in
             self.customerInStore = success
             if (success) {
+                println("In store")
+                self.checkingLogIn = false
             } else {
+                println("Out store")
                 self.checkIn()
+                self.checkingLogIn = false
             }
             self.checkingLogIn = false
         })

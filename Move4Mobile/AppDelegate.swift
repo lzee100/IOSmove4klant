@@ -439,8 +439,9 @@ extension AppDelegate: CLLocationManagerDelegate {
                     return true
             }
         }
+
         offersShown!.append(offer)
-        return true
+        return false
     } // is offer allready shown?
     
     func showNotification(message : String, swipeMessage : String) {

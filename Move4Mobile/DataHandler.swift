@@ -83,7 +83,7 @@ public class DataHandler{
             var name: String = p.valueForKey("name") as String
             var desc: String = p.valueForKey("productdescription") as String
             
-           var pr : Product = Product(ID: id, categoryID: catid, productdescription: name, name: desc)
+           var pr : Product = Product(ID: id, categoryID: catid, productdescription: desc, name: name)
             products.append(pr)
         }
         return products
@@ -119,7 +119,7 @@ public class DataHandler{
             var name: String = p.valueForKey("name") as String
             var desc: String = p.valueForKey("productdescription") as String
             
-            products = Product(ID: id, productdescription: name, name: desc)
+            products = Product(ID: id, productdescription: desc, name: name)
             }
         }
         return products

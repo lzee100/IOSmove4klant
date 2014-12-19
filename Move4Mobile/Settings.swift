@@ -82,9 +82,11 @@ class Settings: UITableViewController {
                 appDelegate.customerInStore = false
                 ServerRequestHandler.checkinout(DataHandler.getUserID())
             }
-            DataHandler.deleteUser()
+            
             appDelegate.logIn = false
             appDelegate.offersShown = nil
+            
+            DataHandler.deleteUser()
             nav?.presentViewController(vc, animated: true, completion: nil)
             self.navigationController?.popToRootViewControllerAnimated(true)
 

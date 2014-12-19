@@ -19,8 +19,13 @@ class OfferView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("offerview opened")
         label_description.text = labelDescriptionValue
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        println("offerview did appear")
     }
     
     @IBAction func cancelPressed(sender: AnyObject) {

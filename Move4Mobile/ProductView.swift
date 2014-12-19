@@ -14,6 +14,8 @@ class ProductView: UIViewController {
     @IBOutlet var label_description: UILabel!
     @IBOutlet var imageView_productImage: UIImageView!
     @IBOutlet var button_cancel: UIButton!
+    var labelDescriptionForSetting = String()
+    var labelTitleForSetting = String()
     
     
     @IBAction func dismissView(sender: AnyObject) {
@@ -24,9 +26,15 @@ class ProductView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        label_Title.text = "Productbeschrijving " + labelTitleForSetting
+        label_description.text = labelDescriptionForSetting
         imageView_productImage.layer.cornerRadius = 20
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.productActive = true
     }
 
     override func didReceiveMemoryWarning() {

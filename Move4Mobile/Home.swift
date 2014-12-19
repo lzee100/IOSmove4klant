@@ -22,7 +22,6 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.hidden = false
-        
     }
     
     override func viewDidAppear(animated: Bool) {

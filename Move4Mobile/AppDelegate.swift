@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  Move4Mobile
@@ -23,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var beaconsFromDataBase : [Beacon]?
     var rangedBeacon : Beacon?
     var offer : Offer?
-    var beacons: [CLBeacon]?
+    var beacons = [CLBeacon]()
     var locationManager: CLLocationManager?
     var lastProximity: CLProximity?
     let beaconID = 31690
@@ -245,7 +246,14 @@ extension AppDelegate: CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager!,
         didRangeBeacons beacons: [AnyObject]!,
         inRegion region: CLBeaconRegion!) {
-            self.beacons = beacons as [CLBeacon]?
+            self.beacons = beacons as [CLBeacon]
+            
+            for var i = 0; i < self.beacons.count; i++ {
+                var beacon : CLBeacon = beacons[i] as CLBeacon
+                if beacon.rssi == 0 {
+                    self.beacons.removeAtIndex(i)
+                }
+            }
             
             var message:String = ""
             var playSound = false
@@ -270,7 +278,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                     if beaconsFromDataBase!.count != 0 {
                         
                         // get de nearest beacon
-                        let nearestBeacon:CLBeacon = beacons[0] as CLBeacon
+                        let nearestBeacon:CLBeacon = self.beacons[0] as CLBeacon
                         
                         // beacon information
                         lastProximity = nearestBeacon.proximity;
@@ -308,7 +316,6 @@ extension AppDelegate: CLLocationManagerDelegate {
                             
                             // only once per 3 seconds
                             if activateNewScreen() {
-                                productActive = true
                                 showProduct(product!)
                             }
                             
@@ -337,7 +344,9 @@ extension AppDelegate: CLLocationManagerDelegate {
                                     if !isOfferShown(offer!) {
                                         showOffer(offer!)
                                         if didEnterBackground {
-                                            showNotificationOffer(offer!)
+                                            dispatch_sync(dispatch_get_main_queue()){
+                                            self.showNotificationOffer(self.offer!)
+                                            }
                                         }
                                     }
                                 }
@@ -378,7 +387,8 @@ extension AppDelegate: CLLocationManagerDelegate {
     func showProduct(product : Product) {
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let vc  = storyboard.instantiateViewControllerWithIdentifier("Product") as ProductView
-        //vc.lab= product.productdescription
+        vc.labelTitleForSetting = product.name!
+        vc.labelDescriptionForSetting = product.productdescription!
         //ToDo Sander:
         // let image = product.image (toImage in product).... (from string64 to image)
         //vc.imageView_productImage.image = image
@@ -422,13 +432,14 @@ extension AppDelegate: CLLocationManagerDelegate {
             offersShown!.append(offer)
             return false
         }
+        
             
-        for offerCheck in offersShown! {
-            if offerCheck.ID != offer.ID {
-                    offersShown!.append(offer)
-                    return false
+        for offerCheck : Offer in offersShown! {
+            if offerCheck.ID == offer.ID {
+                    return true
             }
         }
+        offersShown!.append(offer)
         return true
     } // is offer allready shown?
     
@@ -445,14 +456,14 @@ extension AppDelegate: CLLocationManagerDelegate {
         var localNotification:UILocalNotification = UILocalNotification()
         localNotification.alertAction = "Actie: " + product.productdescription!
         localNotification.alertBody = "Actie: " + product.productdescription!
-        localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
         localNotification.soundName = "tos_beep.caf"
+        localNotification.fireDate = nil
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
 
         // product notification is shown
         notificationProductShown = true
         // set timer for 30 seconds to not show notification again
-        timerProductNotification = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "resetNotificationProductShown", userInfo: nil, repeats: false)
+        timerProductNotification = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "resetNotificationProductShown", userInfo: nil, repeats: false)
     } // if screen is locked, show swipe message
     
     func showNotificationOffer(offer : Offer) {
@@ -461,6 +472,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         localNotification.alertBody = "Actie: " + offer.offerdescription!
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
         localNotification.soundName = "tos_beep.caf"
+        localNotification.fireDate = nil
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     } // if screen is locked, show swipe message
     

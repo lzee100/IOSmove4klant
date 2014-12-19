@@ -115,28 +115,29 @@ class LikedCategories: UIViewController {
         
         // check if offer shown == nil (no offers yet shown to user)
         if offerShown != nil {
-            // go through all categories to check if category is not liked
-            for var i = 0; i < allCategories.count; i++ {
-                var cat : Category = allCategories[i]
-                
-                // if category is not liked anymore, delete it from appDel shown categories
-                if cat.liked == 0 {
-                    for var ii = 0; i < offerShown!.count; ii++ {
-                        var offer : Offer = offerShown![ii]
-                        if offer.categoryID == cat.ID {
-                            offerShown!.removeAtIndex(ii)
+            if offerShown!.count != 0 {
+                // go through all categories to check if category is not liked
+                for var i = 0; i < allCategories.count; i++ {
+                    var cat : Category = allCategories[i]
+                    
+                    // if category is not liked anymore, delete it from appDel shown categories
+                    if cat.liked == 0 {
+                        for var ii = 0; ii < offerShown!.count; ii++ {
+                            var offer : Offer = offerShown![ii]
+                            if offer.categoryID == cat.ID {
+                                offerShown!.removeAtIndex(ii)
+                            }
                         }
                     }
                 }
             }
-            // if offerShown is 0, set is again to nil to re-show offers
-            if (offerShown?.count == 0) {
-                offerShown = nil
-            }
+        }
+        // if offerShown is 0, set is again to nil to re-show offers
+        if (offerShown?.count == 0) {
+            appDelegate.offersShown = nil
         }
         
-
-        
+    
         appDelegate.offersShown = offerShown
 
 

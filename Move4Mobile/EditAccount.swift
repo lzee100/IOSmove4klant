@@ -42,8 +42,9 @@ class EditAccount: UIViewController, UINavigationControllerDelegate, UIImagePick
         textinput_firstName.placeholder = user.name!
         textinput_sirName.placeholder = user.lastName!
         textinput_email.placeholder = user.email!
-        
+        if user.image != nil{
         imageView_profilePicture.image = user.image
+        }
         self.imageView_profilePicture.layer.cornerRadius = 20;
         self.imageView_profilePicture.clipsToBounds = true;
         

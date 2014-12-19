@@ -25,8 +25,8 @@ class OfferView: UIViewController {
     
     @IBAction func cancelPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
-        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDel.startTime = NSDate()
+//        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//        appDel.startTime = NSDate()
     }
     /*
     // MARK: - Navigation

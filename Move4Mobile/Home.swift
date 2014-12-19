@@ -12,7 +12,6 @@ import CoreData
 class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     @IBOutlet var settings: UIBarButtonItem!
     @IBOutlet var label_ijzerhandel: UILabel!
-    @IBOutlet weak var button_checkFunctions: UIButton!
     var actInd : UIActivityIndicatorView?
     
     var products = [NSManagedObject]()
@@ -28,8 +27,12 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
     
     override func viewDidAppear(animated: Bool) {
         var user = DataHandler.getUserFromDB()
-        if user.email == nil {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.user = user
+        if (user.email != nil){
+        appDelegate.logIn = true
+        }
+        if user.email == nil {
         let nav = appDelegate.nav
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let vc  = storyboard.instantiateViewControllerWithIdentifier("navLogIn") as UINavigationController

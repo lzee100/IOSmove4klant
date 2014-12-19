@@ -10,7 +10,8 @@ import UIKit
 
 class SignUp: UIViewController {
 
-    @IBOutlet var editText_name: UITextField!
+    @IBOutlet var editText_firstName: UITextField!
+    @IBOutlet var editText_lastName: UITextField!
     @IBOutlet var editText_email: UITextField!
     @IBOutlet var editText_password: UITextField!
     @IBOutlet var button_signUp: UIButton!
@@ -107,7 +108,8 @@ class SignUp: UIViewController {
     */
     
     func signUp(sender : AnyObject) {
-        let firstName = editText_name.text
+        let firstName = editText_firstName.text
+        let lastName = editText_lastName.text
         let password = editText_password.text
         let email = editText_email.text
         
@@ -115,12 +117,15 @@ class SignUp: UIViewController {
         if firstName == "" {
             showAlert("Leeg veld", message: "vul een naam in")
         }
+        else if lastName == "" {
+            showAlert("Leeg veld", message: "vul een achternaam in")
+        }
         else if password == "" {
             showAlert("Leeg veld", message: "vul een wachtwoord in")
         } else if email == "" {
             showAlert("Leeg veld", message: "vul een email in")
         } else {
-            ServerRequestHandler.signUp(firstName, lastname: "test", email: email, password: password, response: { (httpResponse: HTTPResponse) -> Void in
+            ServerRequestHandler.signUp(firstName, lastname: lastName, email: email, password: password, response: { (httpResponse: HTTPResponse) -> Void in
                 if let data = httpResponse.responseObject as? NSData {
                     let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
                     //var sep = str.componentsSeparatedByString("<")
@@ -201,14 +206,16 @@ class SignUp: UIViewController {
     
     // keyboard behavior
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.editText_name.resignFirstResponder()
+        self.editText_firstName.resignFirstResponder()
+        self.editText_lastName.resignFirstResponder()
         self.editText_email.resignFirstResponder()
         self.editText_password.resignFirstResponder()
         return true
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.editText_name.resignFirstResponder()
+        self.editText_firstName.resignFirstResponder()
+        self.editText_lastName.resignFirstResponder()
         self.editText_email.resignFirstResponder()
         self.editText_password.resignFirstResponder()
     }

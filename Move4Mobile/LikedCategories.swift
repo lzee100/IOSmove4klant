@@ -56,6 +56,8 @@ class LikedCategories: UIViewController {
         if (cell == nil) {
             cell = tableView.dequeueReusableCellWithIdentifier(id) as LikedCategoriesCell!
         }
+        cell!.selectionStyle = UITableViewCellSelectionStyle.None
+
         
         cell!.label_category.text = allCategories[indexPath.row].name!
         if (allCategories[indexPath.row].liked == 1){
@@ -102,9 +104,42 @@ class LikedCategories: UIViewController {
     
     @IBAction func savePressed(sender: AnyObject) {
         saveData()
+        
         //reset de likes in de appdel
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         appDelegate.likes = DataHandler.getLikedCategoriesFromDB()
+        // reset offer shown
+        
+        var offerShown : [Offer]?
+        offerShown = appDelegate.offersShown
+        
+        // check if offer shown == nil (no offers yet shown to user)
+        if offerShown != nil {
+            // go through all categories to check if category is not liked
+            for var i = 0; i < allCategories.count; i++ {
+                var cat : Category = allCategories[i]
+                
+                // if category is not liked anymore, delete it from appDel shown categories
+                if cat.liked == 0 {
+                    for var ii = 0; i < offerShown!.count; ii++ {
+                        var offer : Offer = offerShown![ii]
+                        if offer.categoryID == cat.ID {
+                            offerShown!.removeAtIndex(ii)
+                        }
+                    }
+                }
+            }
+            // if offerShown is 0, set is again to nil to re-show offers
+            if (offerShown?.count == 0) {
+                offerShown = nil
+            }
+        }
+        
+
+        
+        appDelegate.offersShown = offerShown
+
+
         
         self.navigationController?.popToRootViewControllerAnimated(true)
        // [self.navigationController popToRootViewControllerAnimated(NO)];

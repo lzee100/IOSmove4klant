@@ -78,6 +78,10 @@ class Settings: UITableViewController {
             let nav = appDelegate.nav
             let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
             let vc  = storyboard.instantiateViewControllerWithIdentifier("navLogIn") as UINavigationController
+            if appDelegate.customerInStore{
+                appDelegate.customerInStore = false
+                ServerRequestHandler.checkinout(DataHandler.getUserID())
+            }
             DataHandler.deleteUser()
             appDelegate.logIn = false
             nav?.presentViewController(vc, animated: true, completion: nil)

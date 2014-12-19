@@ -17,7 +17,6 @@ public class Config{
     public  let GETALLOFFERS = "http://playground.m4mapp.com/beacons/getoffers.php"
     public  let GETALLBEACONS = "http://playground.m4mapp.com/beacons/getbeacons.php"
     public  let UPLOADIMAGE = "http://playground.m4mapp.com/beacons/imagecontroller.php"
-    //public  let UPLOADIMAGE = "http://ibeacontest.herobo.com/imagecontroller.php"
     public  let GETALLPRODUCTS = "http://playground.m4mapp.com/beacons/getproductinfo.php"
     public  let CHECKINGSTATUS = "http://playground.m4mapp.com/beacons/checkinstatus.php"
     public  let EDITUSER = "http://playground.m4mapp.com/beacons/editcostumer.php"

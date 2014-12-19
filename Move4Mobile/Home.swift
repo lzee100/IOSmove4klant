@@ -28,7 +28,7 @@ class Home: UIViewController, UINavigationControllerDelegate, UIImagePickerContr
     
     override func viewDidAppear(animated: Bool) {
         var user = DataHandler.getUserFromDB()
-        if user.userID == nil {
+        if user.email == nil {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let nav = appDelegate.nav
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)

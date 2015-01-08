@@ -15,6 +15,7 @@ class OfferView: UIViewController {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var button_cancel: UIButton!
     var labelDescriptionValue : String!
+    var offerImage : UIImage?
     
     
     override func viewDidLoad() {
@@ -22,6 +23,10 @@ class OfferView: UIViewController {
         println("offerview opened")
         label_description.text = labelDescriptionValue
         // Do any additional setup after loading the view.
+        
+        if offerImage != nil {
+            imageView.image=offerImage
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

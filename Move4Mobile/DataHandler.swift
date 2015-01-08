@@ -44,8 +44,8 @@ public class DataHandler{
                 product.setValue(p.ID, forKey: "id")
                 product.setValue(p.name, forKey: "name")
                 product.setValue(p.productdescription, forKey: "productdescription")
-                if p.image != nil {
-                    product.setValue(UIImagePNGRepresentation(p.image), forKey: "image")
+                if p.serverImagePath != nil {
+                    product.setValue(p.serverImagePath, forKey: "serverimagepath")
                 }
                 
             }
@@ -84,6 +84,9 @@ public class DataHandler{
             var desc: String = p.valueForKey("productdescription") as String
             
            var pr : Product = Product(ID: id, categoryID: catid, productdescription: desc, name: name)
+            if p.valueForKey("image") != nil{
+                pr.setImage(UIImage(data: p.valueForKey("image") as NSData )!)
+            }
             products.append(pr)
         }
         return products
@@ -118,8 +121,24 @@ public class DataHandler{
             //var catid: Int = p.valueForKey("categoryID") as Int
             var name: String = p.valueForKey("name") as String
             var desc: String = p.valueForKey("productdescription") as String
+        
+                
             
-            products = Product(ID: id, productdescription: desc, name: name)
+            
+                if p.valueForKey("image") != nil{
+                    var imgdata = p.valueForKey("image") as NSData
+                    if var img = UIImage(data: imgdata){
+                        //products.setImage(img!)
+                        products = Product(ID: id, productdescription: desc, name: name, image: img)
+                    }
+                    else{
+                        products = Product(ID: id, productdescription: desc, name: name)
+                    }
+                    
+                }
+                else{
+                    products = Product(ID: id, productdescription: desc, name: name)
+                }
             }
         }
         return products
@@ -424,6 +443,11 @@ public class DataHandler{
                 offer.setValue(o.ID, forKey: "id")
                 offer.setValue(o.offerdescription, forKey: "offerDescription")
                 offer.setValue(o.categoryID, forKey: "categoryID")
+                
+                if o.serverImagePath != nil {
+                    offer.setValue(o.serverImagePath, forKey: "serverimagepath")
+                }
+                
             }
         }
     }
@@ -488,6 +512,15 @@ public class DataHandler{
                     let catid = o.valueForKey("categoryID") as Int
                     
                     offer = Offer(ID: id, categoryID: catid, offerdescription: desc)
+                    if o.valueForKey("image") != nil{
+                        var imgdata = o.valueForKey("image") as NSData
+                        if var img = UIImage(data: imgdata){
+                            //products.setImage(img!)
+                            offer.setImage(img)
+                        }
+                    }
+                    
+                    
                 }
                 
               
@@ -663,6 +696,7 @@ public class DataHandler{
         updateCategories()
         updateProducts()
         updateOffers()
+        updateImages()
     }
     
     class func getManagedObjects(entity: String) -> [NSManagedObject]{
@@ -685,5 +719,43 @@ public class DataHandler{
         
         return dbdata
     }
+    
+    class func updateImages(){
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        var dict = ServerRequestHandler.getImages()
+        
+        var products = DataHandler.getManagedObjects("Product")
+        var offers = DataHandler.getManagedObjects("Offer")
+        
+        for m : NSManagedObject in products{
+            if m.valueForKey("serverimagepath") != nil{
+                var mpath: NSString = m.valueForKey("serverimagepath") as NSString
+                if dict[mpath] != nil {
+                    m.setValue(UIImagePNGRepresentation(dict[mpath]), forKey: "image")
+                    // println("image succes")
+                }
+            }
+        }
+        
+        for o : NSManagedObject in offers{
+            if o.valueForKey("serverimagepath") != nil{
+                var mpath : String = o.valueForKey("serverimagepath") as String
+                if dict[mpath] != nil {
+                    o.setValue(UIImagePNGRepresentation(dict[mpath]), forKey: "image")
+                    // println("image succes")
+                }
+            }
+        }
+
+                   var error: NSError?
+                    if !managedContext.save(&error) {
+                   }
+
+    
+    
+    }
+
+
     
 }

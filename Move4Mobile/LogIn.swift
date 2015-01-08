@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import SystemConfiguration
 
 class LogIn: UIViewController, UITextFieldDelegate {
     @IBOutlet var editText_UserName: UITextField!
@@ -108,6 +109,9 @@ class LogIn: UIViewController, UITextFieldDelegate {
              actInd.startAnimating()
             container.hidden = false
             
+            if ServerRequestHandler.isConnectedToNetwork(){
+                
+            
             
             ServerRequestHandler.logIn(userName, password: password, responseMain: { (success : String, message : String, error : NSError!) -> () in
                 dispatch_sync(dispatch_get_main_queue()){
@@ -149,6 +153,16 @@ class LogIn: UIViewController, UITextFieldDelegate {
                 
               
             })
+            }
+            else{
+                dispatch_async(dispatch_get_main_queue()){
+                    self.container.hidden=true
+                    var alert = UIAlertController(title: "Geen Verbinding", message: "Controleer uw internetverbinding", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.container.removeFromSuperview()
+                }
+            }
         }
     }
     
@@ -164,6 +178,9 @@ class LogIn: UIViewController, UITextFieldDelegate {
         skipIfLoggedIn()
 
     }
+    
+    
+
     
     
     // keyboard behavior
@@ -247,7 +264,7 @@ class LogIn: UIViewController, UITextFieldDelegate {
     }
     
     func skipIfLoggedIn(){
-        var alert = UIAlertController(title: "email:", message: DataHandler.getUserFromDB().email, preferredStyle: UIAlertControllerStyle.Alert)
+//        var alert = UIAlertController(title: "email:", message: DataHandler.getUserFromDB().email, preferredStyle: UIAlertControllerStyle.Alert)
 
         if DataHandler.getUserFromDB().email != nil{
             DataHandler.updateAll()

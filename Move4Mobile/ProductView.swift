@@ -16,6 +16,7 @@ class ProductView: UIViewController {
     @IBOutlet var button_cancel: UIButton!
     var labelDescriptionForSetting = String()
     var labelTitleForSetting = String()
+    var productImage : UIImage?
     
     
     @IBAction func dismissView(sender: AnyObject) {
@@ -29,6 +30,9 @@ class ProductView: UIViewController {
         label_Title.text = "Productbeschrijving " + labelTitleForSetting
         label_description.text = labelDescriptionForSetting
         imageView_productImage.layer.cornerRadius = 20
+        if productImage != nil{
+            imageView_productImage.image=productImage
+        }
         // Do any additional setup after loading the view.
     }
     

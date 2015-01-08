@@ -15,6 +15,7 @@ class Product: NSObject {
     var name: String?
     var image: UIImage?
     var productdescription: String?
+    var serverImagePath : String?
     
     override init(){}
     
@@ -41,6 +42,13 @@ class Product: NSObject {
         self.productdescription=productdescription
         self.name=name
     }
+    
+    init(ID: Int, productdescription: String, name:String, image:UIImage){
+        self.ID = ID
+        self.productdescription=productdescription
+        self.name=name
+        self.image=image
+    }
 
     
     func toString() -> String{
@@ -49,6 +57,10 @@ class Product: NSObject {
     
     func setImage(image: UIImage){
         self.image=image
+    }
+    
+    func setImagePath(imagePath: String){
+        self.serverImagePath=imagePath
     }
     
     

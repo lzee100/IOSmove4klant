@@ -14,6 +14,7 @@ class Offer: NSObject {
     var categoryID : Int?
     var offerdescription: String?
     var image: UIImage?
+    var serverImagePath : String?
     
     override init(){}
     
@@ -40,6 +41,12 @@ class Offer: NSObject {
     func setImage(image: UIImage){
         self.image=image
     }
+    
+    
+    func setImagePath(imagePath: String){
+        self.serverImagePath=imagePath
+    }
+    
     
     
 

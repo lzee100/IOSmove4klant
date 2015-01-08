@@ -125,6 +125,7 @@ class SignUp: UIViewController {
         } else if email == "" {
             showAlert("Leeg veld", message: "vul een email in")
         } else {
+            if ServerRequestHandler.isConnectedToNetwork(){
             ServerRequestHandler.signUp(firstName, lastname: lastName, email: email, password: password, response: { (httpResponse: HTTPResponse) -> Void in
                 if let data = httpResponse.responseObject as? NSData {
                     let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
@@ -194,7 +195,11 @@ class SignUp: UIViewController {
            
 
 
-            
+            }
+            else {
+                showAlert("Geen Verbinding", message: "Controleer uw internet connectie")
+
+            }
         }
     }
     

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="McL-sy-tD8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="McL-sy-tD8">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sanderwubs@gmail.com" borderStyle="roundedRect" placeholder="Gebruikersnaam" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KYG-pj-Dza">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sanderwubs@gmail.com" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KYG-pj-Dza">
                                 <rect key="frame" x="16" y="370" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2DS-bP-Drt"/>
@@ -74,7 +74,7 @@
                                     <constraint firstAttribute="height" constant="70" id="YIg-2x-cFk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Log in">
+                                <state key="normal" title="Aanmelden">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -176,7 +176,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="wachtwoord" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dIv-Hx-TAI">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wachtwoord" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dIv-Hx-TAI">
                                 <rect key="frame" x="16" y="507" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="bdZ-wi-nND"/>
@@ -191,7 +191,7 @@
                                     <constraint firstAttribute="height" constant="70" id="eIL-ah-tDe"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Sign up">
+                                <state key="normal" title="Aanmelden">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -205,7 +205,7 @@
                                     <action selector="signUpPressed:" destination="i7e-Ws-fux" eventType="touchUpInside" id="U0v-I0-hff"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="emailadres" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5sq-Ws-ksC">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mailadres" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5sq-Ws-ksC">
                                 <rect key="frame" x="16" y="457" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="WZW-4a-1La"/>
@@ -468,9 +468,16 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="hardware_tools_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="hag-lh-eC9">
+                                <rect key="frame" x="109" y="226" width="156" height="156"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hag-lh-eC9" secondAttribute="height" multiplier="1:1" id="uMc-wz-sXn"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.34509803919999998" green="0.67843137249999996" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="hag-lh-eC9" firstAttribute="width" secondItem="hag-lh-eC9" secondAttribute="height" multiplier="1:1" id="JV5-c0-u2a"/>
                             <constraint firstItem="g8X-Bb-cAu" firstAttribute="leading" secondItem="TX4-FK-CpQ" secondAttribute="leadingMargin" id="PRK-fQ-Au4"/>
                             <constraint firstItem="g8X-Bb-cAu" firstAttribute="top" secondItem="OiI-6a-rev" secondAttribute="bottom" constant="44" id="doJ-j1-Klm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g8X-Bb-cAu" secondAttribute="trailing" id="htG-2F-00C"/>

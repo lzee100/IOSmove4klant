@@ -323,8 +323,10 @@ extension AppDelegate: CLLocationManagerDelegate {
                             } else if (rssi < -60 && rssi > -90) {
                             
                             // get offer from ranged beacon
+                            if rangedBeacon != nil{
                             offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
                             //println("ranged beacon offer ID: \(rangedBeacon?.offerID)")
+                            
                             
                             // see if offer is liked by user
                             //println("offerID : \(offer!.ID)")
@@ -351,6 +353,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                                     }
                                 }
                             }
+                                }
                         }
                     } // end if no beacons yet in db.
                 } // no beacons found when counting them
@@ -386,12 +389,19 @@ extension AppDelegate: CLLocationManagerDelegate {
     
     func showProduct(product : Product) {
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-        let vc  = storyboard.instantiateViewControllerWithIdentifier("Product") as ProductView
+        var vc  = storyboard.instantiateViewControllerWithIdentifier("Product") as ProductView
         vc.labelTitleForSetting = product.name!
         vc.labelDescriptionForSetting = product.productdescription!
         //ToDo Sander:
         // let image = product.image (toImage in product).... (from string64 to image)
         //vc.imageView_productImage.image = image
+        
+        if product.image != nil{
+            vc.productImage = product.image
+        }
+       
+
+        
         
         nav?.presentViewController(vc, animated: true, completion: nil)
     }
@@ -404,6 +414,10 @@ extension AppDelegate: CLLocationManagerDelegate {
         // ToDo Sander:
         // let image = offer.image (toImage in offer).... (from string64 to image)
         //vc.imageView.image = image
+        
+        if offer.image != nil{
+            vc.offerImage = offer.image
+        }
         
         nav?.presentViewController(vc, animated: true, completion: nil)
         

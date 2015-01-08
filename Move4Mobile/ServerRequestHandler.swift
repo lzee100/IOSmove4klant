@@ -8,6 +8,9 @@
 
 import UIKit
 import Foundation
+import SystemConfiguration
+import CoreData
+
 
 public class ServerRequestHandler: NSObject {
     
@@ -40,15 +43,15 @@ public class ServerRequestHandler: NSObject {
         return returnarray
         //var request = NSMutableURLRequest(URL:Config().CATEGORYURL)
         
-//        var request = HTTPTask()
-//        request.GET(Config().CATEGORYURL, parameters: nil, success: {(response: HTTPResponse) in
-//            if let data = response.responseObject as? NSData {
-//                let str = NSString(data: data, encoding: NSUTF8StringEncoding)
-//                NSLog("Categorieen %@", str!)
-//            }
-//            },failure: {(error: NSError, response: HTTPResponse?) in
-//                println("error: \(error)")
-//        })
+        //        var request = HTTPTask()
+        //        request.GET(Config().CATEGORYURL, parameters: nil, success: {(response: HTTPResponse) in
+        //            if let data = response.responseObject as? NSData {
+        //                let str = NSString(data: data, encoding: NSUTF8StringEncoding)
+        //                NSLog("Categorieen %@", str!)
+        //            }
+        //            },failure: {(error: NSError, response: HTTPResponse?) in
+        //                println("error: \(error)")
+        //        })
     }
     
     func getAllOffers() -> [Offer]{
@@ -79,19 +82,28 @@ public class ServerRequestHandler: NSObject {
                     //productobj.categoryID = collection["categoryID"] as? Int
                     offercat = collection["category"] as String
                 }
-
+                
                 
                 //let offercat : String = collection["category"] as String
                 let offerdesc : String = collection["description"] as String
                 
                 let beaconobj : Offer = Offer(ID: offerid.toInt()!, categoryID: offercat.toInt()!, offerdescription: offerdesc)
+                
+                
+                if collection["image"] != nil{
+                    var img : String = collection["image"] as String
+                    if img != "none" && img != "null" && img != ""  {
+                        beaconobj.setImagePath(img)
+                    }
+                }
+                
                 //println(beaconobj.toString())
                 returnarray.append(beaconobj)
             }
         }
         return returnarray
     }
-
+    
     func getAllBeacons() -> [Beacon]{
         var returnarray = [Beacon]()
         let url=NSURL(string: Config().GETALLBEACONS)
@@ -139,16 +151,16 @@ public class ServerRequestHandler: NSObject {
             for index in 0...json.count-1 {
                 
                 let beacon : AnyObject? = json[index]
-               // println(beacon)
+                // println(beacon)
                 let collection = beacon! as Dictionary<String, AnyObject>
                 
                 var productid : String  = collection["id"] as String
                 let productname : String = collection["name"]as String
-               // println(collection["categoryID"])
+                // println(collection["categoryID"])
                 var temp: AnyObject? = collection["categoryID"]
                 
                 
-              
+                
                 let productdesc : String = collection["description"]as String
                 
                 let productobj : Product = Product(ID: productid.toInt()!, productdescription: productdesc, name: productname)
@@ -158,13 +170,12 @@ public class ServerRequestHandler: NSObject {
                 }
                 else{
                     productobj.categoryID = collection["categoryID"] as? Int
-                        
-                    }
+                }
                 
                 if collection["image"] != nil{
                     var img : String = collection["image"] as String
-                    if img != "none" && img != "null" && img != "" && countElements(img) > 70 {
-                    productobj.setImage(ImageHandler.base64ToUIImage(img))
+                    if img != "none" && img != "null" && img != ""  {
+                        productobj.setImagePath(img)
                     }
                 }
                 
@@ -175,7 +186,175 @@ public class ServerRequestHandler: NSObject {
         }
         return returnarray
     }
-
+    
+    class func getAllImages(){
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        
+        
+        let url=NSURL(string: Config().GETIMAGES)
+        let allContactsData=NSData(contentsOfURL:url!)
+        
+        let str : NSString = NSString(data: allContactsData!, encoding: NSUTF8StringEncoding)!
+        //var sep = str.componentsSeparatedByString("<")
+        var henk = str.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
+        
+        //let varb: AnyObject = str as AnyObject
+        
+        if let json = allContacts as? Array<AnyObject> {
+            
+            for index in 0...json.count-1 {
+                // println(json[index]["image"])
+                //println()
+                //println()
+                
+                var path : String = json[index].valueForKey("path") as String
+                
+                var products = DataHandler.getManagedObjects("Product")
+                var offers = DataHandler.getManagedObjects("Offer")
+                
+                var base64 = json[index]["image"] as NSString
+                
+                
+                for m : NSManagedObject in products{
+                    var mpath : String = m.valueForKey("serverimagepath") as String
+                    if path == mpath{
+                        if base64 != ""{
+                            var image = ImageHandler.base64ToUIImage(base64)
+                            m.setValue(UIImagePNGRepresentation(image), forKey: "image")
+                            // println("image succes")
+                        }
+                    }
+                }
+                for m : NSManagedObject in offers{
+                    if m.valueForKey("serverimagepath") != nil{
+                        var mpath : String = m.valueForKey("serverimagepath") as String
+                        if path == mpath{
+                            if base64 != ""{
+                                var image = ImageHandler.base64ToUIImage(base64)
+                                m.setValue(UIImagePNGRepresentation(image), forKey: "image")
+                                // println("image succes")
+                            }
+                        }
+                    }
+                }
+                
+                
+            }
+            
+            var error: NSError?
+            if !managedContext.save(&error) {
+            }
+            
+            
+            
+            
+            
+            //return json
+            
+            
+        }
+        else{
+            // return  Array<AnyObject>()
+        }
+    }
+    
+    class func getImages() -> Dictionary<String, UIImage>{
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        
+        
+        let url=NSURL(string: Config().GETIMAGES)
+        let allContactsData=NSData(contentsOfURL:url!)
+        
+        let str : NSString = NSString(data: allContactsData!, encoding: NSUTF8StringEncoding)!
+        //var sep = str.componentsSeparatedByString("<")
+        var henk = str.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
+        
+        //let varb: AnyObject = str as AnyObject
+        
+        var returnvalue = Dictionary<String, UIImage>()
+        
+        if var json = allContacts as? Array<AnyObject> {
+            
+            
+            for index in 0...json.count-1 {
+                var imgpath = json[index]["path"] as String
+                var image = json[index]["image"] as NSString
+                var decodedimage = ImageHandler.base64ToUIImage(image)
+                returnvalue.updateValue(decodedimage, forKey: imgpath)
+                
+                
+                
+                println(json[index]["path"])
+                println()
+                println()
+            }
+            
+            
+            //             return json
+            //            for index in 0...json.count-1 {
+            //                // println(json[index]["image"])
+            //                //println()
+            //                //println()
+            //
+            //                var path : String = json[index].valueForKey("path") as String
+            //
+            //                var products = DataHandler.getManagedObjects("Product")
+            //                var offers = DataHandler.getManagedObjects("Offer")
+            //
+            //                var base64 = json[index]["image"] as NSString
+            //
+            //
+            //                for m : NSManagedObject in products{
+            //                    var mpath : String = m.valueForKey("serverimagepath") as String
+            //                    if path == mpath{
+            //                        if base64 != ""{
+            //                            var image = ImageHandler.base64ToUIImage(base64)
+            //                            m.setValue(UIImagePNGRepresentation(image), forKey: "image")
+            //                            // println("image succes")
+            //                        }
+            //                    }
+            //                }
+            //                for m : NSManagedObject in offers{
+            //                    if m.valueForKey("serverimagepath") != nil{
+            //                        var mpath : String = m.valueForKey("serverimagepath") as String
+            //                        if path == mpath{
+            //                            if base64 != ""{
+            //                                var image = ImageHandler.base64ToUIImage(base64)
+            //                                m.setValue(UIImagePNGRepresentation(image), forKey: "image")
+            //                                // println("image succes")
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //
+            //
+            //            }
+            //
+            //            var error: NSError?
+            //            if !managedContext.save(&error) {
+            //            }
+            //
+            //
+            //
+            //
+            
+            
+        }
+        
+        return returnvalue
+    }
+    
+    
+    
+    
     
     //user functions
     
@@ -209,20 +388,21 @@ public class ServerRequestHandler: NSObject {
                 var allContacts = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil) as NSDictionary
                 // if there is an user, login went correct
                 if ((allContacts["returnvalue"]) != nil) {
-                    let returnBool = allContacts["returnvalue"] as Int
-                    if returnBool == 1 {
-                        bool = true
+                    if let returnBool = allContacts["returnvalue"] as? Int {
+                        if returnBool == 1 {
+                            bool = true
+                        }
                     }
-                
+                    
                 }
             }
             responseMain(success: bool, error: nil)
             
-        },failure: {(error: NSError, response: HTTPResponse?) in
-            responseMain(success: bool, error: error)
+            },failure: {(error: NSError, response: HTTPResponse?) in
+                responseMain(success: bool, error: error)
         })
-    
-    
+        
+        
     }
     
     class func uploadLikes(customerID: Int, categories: [Int]){
@@ -273,7 +453,7 @@ public class ServerRequestHandler: NSObject {
                 let str = NSString(data: data, encoding: NSUTF8StringEncoding)
                 println("response upload image: \(str)") //prints the HTML of the page
             }
-        },failure: {(error: NSError, response: HTTPResponse?) in
+            },failure: {(error: NSError, response: HTTPResponse?) in
         })
     }
     
@@ -300,7 +480,7 @@ public class ServerRequestHandler: NSObject {
                 var allContacts = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil) as NSDictionary
                 // if there is an user, login went correct
                 if ((allContacts["user"]) != nil) {
-                   let dicUser : AnyObject = allContacts["user"]!
+                    let dicUser : AnyObject = allContacts["user"]!
                     if let collection = dicUser as? Dictionary<String, AnyObject> {
                         let userFirstName : String = collection["fname"] as String
                         let userLastName : String = collection["lname"]as String
@@ -333,8 +513,8 @@ public class ServerRequestHandler: NSObject {
                 }
                 responseMain(success: success, message: message, error: nil)
             }
-        },failure: {(error: NSError, response: HTTPResponse?) in
-            responseMain (success: success, message: message, error: error)
+            },failure: {(error: NSError, response: HTTPResponse?) in
+                responseMain (success: success, message: message, error: error)
         })
     }
     
@@ -349,37 +529,53 @@ public class ServerRequestHandler: NSObject {
     
     
     
-    //other 
+    //other
     
-
+    class func isConnectedToNetwork() -> Bool {
+        
+        var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0)).takeRetainedValue()
+        }
+        
+        var flags: SCNetworkReachabilityFlags = 0
+        if SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) == 0 {
+            return false
+        }
+        
+        let isReachable = (flags & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        
+        return (isReachable && !needsConnection) ? true : false
+    }
     
     
     
     
     
-    
-    
-    
-//    func login2(email: String, password: String, respone: ((HTTPResponse) -> Void)!) -> User{
-//        var request = HTTPTask()
-//        var returnvalue = User()
-//        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
-//        let params: Dictionary<String,AnyObject> = ["tag": "login", "email": email, "password": password]
-//        request.POST(Config().LOGINURL, parameters: params, success: respone ,failure: {(error: NSError, response: HTTPResponse?) in
-//        })
-//        return returnvalue
-//        
-//    }
-//    
-//    class func uploadImage2(customerID: Int, image: String, respone: ((HTTPResponse) -> Void)!){
-//        var request = HTTPTask()
-//        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
-//        let params: Dictionary<String,AnyObject> = ["customerID": customerID, "image": image]
-//        request.POST(Config().UPLOADIMAGE, parameters: params, success: respone,failure: {(error: NSError, response: HTTPResponse?) in
-//            
-//        })
-//    }
-//    
+    //    func login2(email: String, password: String, respone: ((HTTPResponse) -> Void)!) -> User{
+    //        var request = HTTPTask()
+    //        var returnvalue = User()
+    //        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+    //        let params: Dictionary<String,AnyObject> = ["tag": "login", "email": email, "password": password]
+    //        request.POST(Config().LOGINURL, parameters: params, success: respone ,failure: {(error: NSError, response: HTTPResponse?) in
+    //        })
+    //        return returnvalue
+    //
+    //    }
+    //
+    //    class func uploadImage2(customerID: Int, image: String, respone: ((HTTPResponse) -> Void)!){
+    //        var request = HTTPTask()
+    //        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
+    //        let params: Dictionary<String,AnyObject> = ["customerID": customerID, "image": image]
+    //        request.POST(Config().UPLOADIMAGE, parameters: params, success: respone,failure: {(error: NSError, response: HTTPResponse?) in
+    //
+    //        })
+    //    }
+    //
     
     //    class func getLikes3 (userID : Int, responseMain: (Array<Int>!, error:NSError!) ->()){
     //        //let queue = dispatch_get_main_queue()
@@ -413,7 +609,7 @@ public class ServerRequestHandler: NSObject {
     //                },failure: {(error: NSError, response: HTTPResponse?) in
     //            })
     //        //})
-    //    
+    //
     //    }
     //
 }

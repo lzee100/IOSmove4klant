@@ -20,6 +20,7 @@ public class Config{
     public  let GETALLPRODUCTS = "http://playground.m4mapp.com/beacons/getproductinfo.php"
     public  let CHECKINGSTATUS = "http://playground.m4mapp.com/beacons/checkinstatus.php"
     public  let EDITUSER = "http://playground.m4mapp.com/beacons/editcostumer.php"
+    public  let GETIMAGES = "http://playground.m4mapp.com/beacons/getimages.php"
     
     public  let LOGINURL = "http://playground.m4mapp.com/beacons/login_api/"
     public  let REGISTERURL = "http://playground.m4mapp.com/beacons/login_api/"

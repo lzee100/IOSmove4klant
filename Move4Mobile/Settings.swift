@@ -63,14 +63,14 @@ class Settings: UITableViewController {
             let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
             let vc = storyboard.instantiateViewControllerWithIdentifier("navManageAccount") as UINavigationController
             self.showViewController(vc, sender: nil)
+//            
+//        case "scanForBeacons" :
+//            let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+//            let vc = storyboard.instantiateViewControllerWithIdentifier("navScanForBeacons") as UINavigationController
+//            self.showViewController(vc, sender: nil)
             
-        case "scanForBeacons" :
-            let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("navScanForBeacons") as UINavigationController
-            self.showViewController(vc, sender: nil)
             
-            
-        case "login" :
+        case "Uitloggen" :
             let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
             let nav = appDelegate.nav
             let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)

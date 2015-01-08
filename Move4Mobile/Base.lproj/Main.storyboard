@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="height" constant="35" id="bFH-qV-U69"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Nieuwe klant? Meld je hier aan.">
+                                <state key="normal" title="Nieuwe klant? Registreer je hier.">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -186,7 +186,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dys-wR-Hjf">
                                 <rect key="frame" x="16" y="577" width="343" height="70"/>
-                                <color key="backgroundColor" red="0.24746702719999999" green="0.54487909739999996" blue="0.89719460230000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.24705882352941178" green="0.54509803921568623" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="eIL-ah-tDe"/>
                                 </constraints>
@@ -252,22 +252,22 @@
                             <constraint firstItem="zkx-iw-Dhc" firstAttribute="leading" secondItem="vxU-MP-7oG" secondAttribute="leadingMargin" id="0rc-4v-ejU"/>
                             <constraint firstItem="YSB-HE-ktz" firstAttribute="leading" secondItem="vxU-MP-7oG" secondAttribute="leadingMargin" id="33N-Xg-rAr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dIv-Hx-TAI" secondAttribute="trailing" id="3KF-jy-gTF"/>
-                            <constraint firstItem="MET-KB-B3e" firstAttribute="top" secondItem="yEF-2R-tGX" secondAttribute="bottom" constant="20" id="81d-96-KoP"/>
                             <constraint firstItem="dIv-Hx-TAI" firstAttribute="top" secondItem="5sq-Ws-ksC" secondAttribute="bottom" constant="20" id="CCh-nt-xnN"/>
                             <constraint firstItem="YSB-HE-ktz" firstAttribute="trailing" secondItem="vxU-MP-7oG" secondAttribute="trailingMargin" id="CDB-VB-kp8"/>
                             <constraint firstItem="dys-wR-Hjf" firstAttribute="trailing" secondItem="vxU-MP-7oG" secondAttribute="trailingMargin" id="Cvf-vm-ZkT"/>
+                            <constraint firstItem="MET-KB-B3e" firstAttribute="top" secondItem="yEF-2R-tGX" secondAttribute="bottom" constant="20" id="I7o-Ro-6Q0"/>
                             <constraint firstItem="fch-pH-qzD" firstAttribute="leading" secondItem="vxU-MP-7oG" secondAttribute="leadingMargin" id="R77-Ut-XvX"/>
                             <constraint firstItem="zkx-iw-Dhc" firstAttribute="top" secondItem="YSB-HE-ktz" secondAttribute="bottom" constant="20" id="RYv-rS-8lx"/>
                             <constraint firstItem="fch-pH-qzD" firstAttribute="trailing" secondItem="vxU-MP-7oG" secondAttribute="trailingMargin" id="Rwk-tq-Pj7"/>
                             <constraint firstItem="zkx-iw-Dhc" firstAttribute="trailing" secondItem="vxU-MP-7oG" secondAttribute="trailingMargin" id="T1Z-uO-YD0"/>
                             <constraint firstItem="5sq-Ws-ksC" firstAttribute="trailing" secondItem="vxU-MP-7oG" secondAttribute="trailingMargin" id="TXf-Ha-Nqr"/>
                             <constraint firstItem="5sq-Ws-ksC" firstAttribute="leading" secondItem="vxU-MP-7oG" secondAttribute="leadingMargin" id="aWb-Oe-k2n"/>
+                            <constraint firstItem="dNU-5e-8Oc" firstAttribute="top" secondItem="dys-wR-Hjf" secondAttribute="bottom" constant="20" id="auY-4W-i5i"/>
                             <constraint firstItem="5sq-Ws-ksC" firstAttribute="top" secondItem="zkx-iw-Dhc" secondAttribute="bottom" constant="20" id="bch-0e-H80"/>
                             <constraint firstItem="fch-pH-qzD" firstAttribute="top" secondItem="MET-KB-B3e" secondAttribute="bottom" constant="8" id="c1P-RU-05A"/>
                             <constraint firstItem="MET-KB-B3e" firstAttribute="leading" secondItem="vxU-MP-7oG" secondAttribute="leadingMargin" id="chf-RW-77R"/>
                             <constraint firstItem="MET-KB-B3e" firstAttribute="trailing" secondItem="vxU-MP-7oG" secondAttribute="trailingMargin" id="dvf-G1-D3p"/>
                             <constraint firstItem="dys-wR-Hjf" firstAttribute="top" secondItem="dIv-Hx-TAI" secondAttribute="bottom" constant="40" id="fL9-om-XnB"/>
-                            <constraint firstItem="dNU-5e-8Oc" firstAttribute="top" secondItem="dys-wR-Hjf" secondAttribute="bottom" constant="20" id="kwM-wM-9E9"/>
                             <constraint firstItem="YSB-HE-ktz" firstAttribute="top" secondItem="spz-OT-xmy" secondAttribute="bottom" constant="29" id="lyA-SQ-Yr3"/>
                             <constraint firstItem="dys-wR-Hjf" firstAttribute="leading" secondItem="vxU-MP-7oG" secondAttribute="leadingMargin" id="oz9-lM-wsW"/>
                             <constraint firstItem="spz-OT-xmy" firstAttribute="top" secondItem="fch-pH-qzD" secondAttribute="bottom" constant="20" id="sdW-Bn-ial"/>
@@ -479,12 +479,13 @@
                         <constraints>
                             <constraint firstItem="hag-lh-eC9" firstAttribute="width" secondItem="hag-lh-eC9" secondAttribute="height" multiplier="1:1" id="JV5-c0-u2a"/>
                             <constraint firstItem="g8X-Bb-cAu" firstAttribute="leading" secondItem="TX4-FK-CpQ" secondAttribute="leadingMargin" id="PRK-fQ-Au4"/>
+                            <constraint firstAttribute="centerX" secondItem="1Nr-Yn-8VM" secondAttribute="centerX" id="RgI-hK-ZiW"/>
                             <constraint firstItem="g8X-Bb-cAu" firstAttribute="top" secondItem="OiI-6a-rev" secondAttribute="bottom" constant="44" id="doJ-j1-Klm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g8X-Bb-cAu" secondAttribute="trailing" id="htG-2F-00C"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="L8N-Tp-Rgf" propertyAccessControl="all">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="Fxf-1P-Pfr">
+                    <navigationItem key="navigationItem" title="Home" id="L8N-Tp-Rgf" propertyAccessControl="none">
+                        <barButtonItem key="rightBarButtonItem" title="Instellingen" id="Fxf-1P-Pfr">
                             <connections>
                                 <segue destination="ued-sH-HkX" kind="show" identifier="segueToSettings" id="3yQ-nA-bDY"/>
                             </connections>
@@ -646,10 +647,10 @@
             </objects>
             <point key="canvasLocation" x="1880.5" y="573.5"/>
         </scene>
-        <!--Settings-->
+        <!--Instellingen-->
         <scene sceneID="fez-0u-yZs">
             <objects>
-                <tableViewController title="Settings" id="ued-sH-HkX" customClass="Settings" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Instellingen" id="ued-sH-HkX" customClass="Settings" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="22" sectionFooterHeight="22" id="wvB-Fc-Cnc">
                         <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -719,10 +720,10 @@
             </objects>
             <point key="canvasLocation" x="1419.5" y="-287.5"/>
         </scene>
-        <!--Manage Account-->
+        <!--Accountinformatie-->
         <scene sceneID="bWA-FH-wzY">
             <objects>
-                <viewController storyboardIdentifier="manageAccount" title="Manage Account" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bjk-PU-1bB" customClass="ManageAccount" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="manageAccount" title="Accountinformatie" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bjk-PU-1bB" customClass="ManageAccount" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pkw-Wp-hDa"/>
                         <viewControllerLayoutGuide type="bottom" id="fi9-9j-uk7"/>
@@ -948,10 +949,10 @@
             </objects>
             <point key="canvasLocation" x="1880.5" y="-287.5"/>
         </scene>
-        <!--Edit Account-->
+        <!--Wijzig accountgegevens-->
         <scene sceneID="j9i-wB-uYL">
             <objects>
-                <viewController title="Edit Account" id="Ffw-h2-T0P" customClass="EditAccount" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Wijzig accountgegevens" id="Ffw-h2-T0P" customClass="EditAccount" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2YL-ae-nlJ"/>
                         <viewControllerLayoutGuide type="bottom" id="HRz-8P-edd"/>
@@ -1157,10 +1158,10 @@
             </objects>
             <point key="canvasLocation" x="2367.5" y="-287.5"/>
         </scene>
-        <!--Liked Categories-->
+        <!--Interesses-->
         <scene sceneID="LZz-pW-Lya">
             <objects>
-                <viewController title="Liked Categories" automaticallyAdjustsScrollViewInsets="NO" id="NkB-wq-LIV" customClass="LikedCategories" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Interesses" automaticallyAdjustsScrollViewInsets="NO" id="NkB-wq-LIV" customClass="LikedCategories" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pXX-5a-dRu"/>
                         <viewControllerLayoutGuide type="bottom" id="FhT-bu-rCu"/>

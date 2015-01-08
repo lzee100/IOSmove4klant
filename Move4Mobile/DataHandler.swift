@@ -685,6 +685,7 @@ public class DataHandler{
         var error: NSError?
         if !managedContext.save(&error) {
         }
+        
     }
     
     

@@ -19,12 +19,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sanderwubs@gmail.com" borderStyle="roundedRect" placeholder="Gebruikersnaam" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KYG-pj-Dza">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sanderwubs@gmail.com" borderStyle="roundedRect" placeholder="E-mailadres" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KYG-pj-Dza">
                                 <rect key="frame" x="16" y="370" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2DS-bP-Drt"/>
                                 </constraints>
-                                <color key="textColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
@@ -42,7 +41,7 @@
                                     <constraint firstAttribute="height" constant="35" id="bFH-qV-U69"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Nieuwe klant? Meld je hier aan.">
+                                <state key="normal" title="Nieuwe klant? Registreer je hier.">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -75,7 +74,7 @@
                                     <constraint firstAttribute="height" constant="70" id="YIg-2x-cFk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Log in">
+                                <state key="normal" title="Aanmelden">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -177,7 +176,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="wachtwoord" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dIv-Hx-TAI">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Wachtwoord" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dIv-Hx-TAI">
                                 <rect key="frame" x="16" y="507" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="bdZ-wi-nND"/>
@@ -192,7 +191,7 @@
                                     <constraint firstAttribute="height" constant="70" id="eIL-ah-tDe"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Sign up">
+                                <state key="normal" title="Registreer">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -206,7 +205,7 @@
                                     <action selector="signUpPressed:" destination="i7e-Ws-fux" eventType="touchUpInside" id="U0v-I0-hff"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="emailadres" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5sq-Ws-ksC">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mailadres" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5sq-Ws-ksC">
                                 <rect key="frame" x="16" y="457" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="WZW-4a-1La"/>
@@ -469,16 +468,25 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hardware_tools_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Nr-Yn-8VM">
+                                <rect key="frame" x="87" y="251" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="MhW-Db-XzK"/>
+                                    <constraint firstAttribute="height" constant="200" id="fsE-71-725"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.34509803919999998" green="0.67843137249999996" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="1Nr-Yn-8VM" firstAttribute="top" secondItem="g8X-Bb-cAu" secondAttribute="bottom" constant="33" id="Du4-yD-eyX"/>
                             <constraint firstItem="g8X-Bb-cAu" firstAttribute="leading" secondItem="TX4-FK-CpQ" secondAttribute="leadingMargin" id="PRK-fQ-Au4"/>
+                            <constraint firstAttribute="centerX" secondItem="1Nr-Yn-8VM" secondAttribute="centerX" id="RgI-hK-ZiW"/>
                             <constraint firstItem="g8X-Bb-cAu" firstAttribute="top" secondItem="OiI-6a-rev" secondAttribute="bottom" constant="44" id="doJ-j1-Klm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g8X-Bb-cAu" secondAttribute="trailing" id="htG-2F-00C"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="L8N-Tp-Rgf" propertyAccessControl="all">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="Fxf-1P-Pfr">
+                    <navigationItem key="navigationItem" title="Home" id="L8N-Tp-Rgf" propertyAccessControl="none">
+                        <barButtonItem key="rightBarButtonItem" title="Instellingen" id="Fxf-1P-Pfr">
                             <connections>
                                 <segue destination="ued-sH-HkX" kind="show" identifier="segueToSettings" id="3yQ-nA-bDY"/>
                             </connections>
@@ -640,10 +648,10 @@
             </objects>
             <point key="canvasLocation" x="1880.5" y="573.5"/>
         </scene>
-        <!--Settings-->
+        <!--Instellingen-->
         <scene sceneID="fez-0u-yZs">
             <objects>
-                <tableViewController title="Settings" id="ued-sH-HkX" customClass="Settings" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Instellingen" id="ued-sH-HkX" customClass="Settings" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="22" sectionFooterHeight="22" id="wvB-Fc-Cnc">
                         <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -713,10 +721,10 @@
             </objects>
             <point key="canvasLocation" x="1419.5" y="-287.5"/>
         </scene>
-        <!--Manage Account-->
+        <!--Accountinformatie-->
         <scene sceneID="bWA-FH-wzY">
             <objects>
-                <viewController storyboardIdentifier="manageAccount" title="Manage Account" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bjk-PU-1bB" customClass="ManageAccount" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="manageAccount" title="Accountinformatie" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bjk-PU-1bB" customClass="ManageAccount" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pkw-Wp-hDa"/>
                         <viewControllerLayoutGuide type="bottom" id="fi9-9j-uk7"/>
@@ -942,10 +950,10 @@
             </objects>
             <point key="canvasLocation" x="1880.5" y="-287.5"/>
         </scene>
-        <!--Edit Account-->
+        <!--Wijzig accountgegevens-->
         <scene sceneID="j9i-wB-uYL">
             <objects>
-                <viewController title="Edit Account" id="Ffw-h2-T0P" customClass="EditAccount" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Wijzig accountgegevens" id="Ffw-h2-T0P" customClass="EditAccount" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2YL-ae-nlJ"/>
                         <viewControllerLayoutGuide type="bottom" id="HRz-8P-edd"/>
@@ -1151,10 +1159,10 @@
             </objects>
             <point key="canvasLocation" x="2367.5" y="-287.5"/>
         </scene>
-        <!--Liked Categories-->
+        <!--Interesses-->
         <scene sceneID="LZz-pW-Lya">
             <objects>
-                <viewController title="Liked Categories" automaticallyAdjustsScrollViewInsets="NO" id="NkB-wq-LIV" customClass="LikedCategories" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Interesses" automaticallyAdjustsScrollViewInsets="NO" id="NkB-wq-LIV" customClass="LikedCategories" customModule="Move4Klant" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pXX-5a-dRu"/>
                         <viewControllerLayoutGuide type="bottom" id="FhT-bu-rCu"/>

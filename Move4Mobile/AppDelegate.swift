@@ -257,12 +257,11 @@ extension AppDelegate: CLLocationManagerDelegate {
             
             var message:String = ""
             var playSound = false
-            
             // check if user is logged in
             if logIn {
                 // ------------ if beacon is found ------------------
-                if(beacons.count > 0) {
-
+                if(self.beacons.count > 0) {
+                    
                     // get info db
                     user = DataHandler.getUserFromDB()
                     beaconsFromDataBase = DataHandler.getBeaconsFromDB()
@@ -284,7 +283,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                         lastProximity = nearestBeacon.proximity;
                         let major = nearestBeacon.major.integerValue
                         rssi = nearestBeacon.rssi
-                        
+                        println(rssi)
                         // get rangedBeacon and assign it to a beacon object
                         for beacon in beaconsFromDataBase! {
                             if nearestBeacon.minor == beacon.minor {
@@ -292,73 +291,74 @@ extension AppDelegate: CLLocationManagerDelegate {
                                 break
                             }
                         }
-                        
-                        // ------------ distance == immidiate ----------------
-                        if (rssi > -60 && rssi != 0){
-                            // get product from beacon
-                            product = DataHandler.getProductByID(rangedBeacon!.productID!)
-                            
-                            // if in background
-                            if didEnterBackground {
-                                // beacon moet ontvangen zijn
-                                if rssi != nil {
-                                    if rssi > -60 && rssi != 0 {
-                                        if product != nil {
-                                            if !notificationProductShown {
-                                                showNotificationProduct(product!)
-                                                println("background notification")
+                        if (nearestBeacon.major != nil){
+                            // ------------ distance == immidiate ----------------
+                            if (rssi > -70 && rssi != 0){
+                                // get product from beacon
+                                product = DataHandler.getProductByID(rangedBeacon!.productID!)
+                                
+                                // if in background
+                                if didEnterBackground {
+                                    // beacon moet ontvangen zijn
+                                    if rssi != nil {
+                                        if rssi > -60 && rssi != 0 {
+                                            if product != nil {
+                                                if !notificationProductShown {
+                                                    showNotificationProduct(product!)
+                                                    println("background notification")
+                                                }
                                             }
-                                        }
-                                        
-                                    }
-                                }
-                            }
-                            
-                            // only once per 3 seconds
-                            if activateNewScreen() {
-                                showProduct(product!)
-                            }
-                            
-                            // ------------ distance == near ----------------------
-                            } else if (rssi < -60 && rssi > -90) {
-                            
-                            // get offer from ranged beacon
-                            if rangedBeacon != nil{
-                            offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
-                            //println("ranged beacon offer ID: \(rangedBeacon?.offerID)")
-                            
-                            
-                            // see if offer is liked by user
-                            //println("offerID : \(offer!.ID)")
-                            var userWantsOffer = false
-                            for like : Category in likes! {
-                                //println("LikedID : \(like.ID)")
-                                if like.ID == offer!.categoryID {
-                                    userWantsOffer = true
-                                    //println("userWantsOffer")
-                                }
-                            }
-                            // if offer is liked by user
-                            if userWantsOffer {
-                                // if product screen is not active
-                                if !productActive {
-                                    // if offer is not yet shown to customer (customer recieves only once an offer)
-                                    if !isOfferShown(offer!) {
-                                        showOffer(offer!)
-                                        if didEnterBackground {
-                                            dispatch_sync(dispatch_get_main_queue()){
-                                            self.showNotificationOffer(self.offer!)
-                                            }
+                                            
                                         }
                                     }
                                 }
-                            }
+                                
+                                // only once per 3 seconds
+                                if activateNewScreen() {
+                                    showProduct(product!)
                                 }
+                                
+                                // ------------ distance == near ----------------------
+                            } else if (rssi < -70 && rssi > -90) {
+                                
+                                // get offer from ranged beacon
+                                if rangedBeacon != nil{
+                                    offer = DataHandler.getOfferByID(rangedBeacon!.offerID!)
+                                    //println("ranged beacon offer ID: \(rangedBeacon?.offerID)")
+                                    
+                                    
+                                    // see if offer is liked by user
+                                    //println("offerID : \(offer!.ID)")
+                                    var userWantsOffer = false
+                                    for like : Category in likes! {
+                                        //println("LikedID : \(like.ID)")
+                                        if like.ID == offer!.categoryID {
+                                            userWantsOffer = true
+                                            //println("userWantsOffer")
+                                        }
+                                    }
+                                    // if offer is liked by user
+                                    if userWantsOffer {
+                                        // if product screen is not active
+                                        if !productActive {
+                                            // if offer is not yet shown to customer (customer recieves only once an offer)
+                                            if !isOfferShown(offer!) {
+                                                showOffer(offer!)
+                                                if didEnterBackground {
+                                                    dispatch_sync(dispatch_get_main_queue()){
+                                                        self.showNotificationOffer(self.offer!)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     } // end if no beacons yet in db.
                 } // no beacons found when counting them
             } // end check if user is loggedIn
-    
+            
     }
     
     func locationManager(manager: CLLocationManager!,

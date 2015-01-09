@@ -114,21 +114,22 @@ class LogIn: UIViewController, UITextFieldDelegate {
             
             
             ServerRequestHandler.logIn(userName, password: password, responseMain: { (success : String, message : String, error : NSError!) -> () in
-                dispatch_sync(dispatch_get_main_queue()){
-                    self.actInd.stopAnimating()
-                    self.container.hidden = true
-                    self.container.removeFromSuperview()
-                }
+               
                 let successR = success.toInt()
                 
                 if successR == 0 {
                     
                     dispatch_sync(dispatch_get_main_queue()){
-                        self.container.hidden=true
+                        
+                            self.actInd.stopAnimating()
+                            self.container.hidden = true
+                            self.container.removeFromSuperview()
+                        
+                      
                         var alert = UIAlertController(title: "Onjuiste inloggegevens", message: message, preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
-                        self.container.removeFromSuperview()
+                        
                     }
                     
                 } else if successR == 1 {
@@ -140,7 +141,12 @@ class LogIn: UIViewController, UITextFieldDelegate {
                     DataHandler.updateAll()
                     DataHandler.storeLikesFromServerLocally(DataHandler.getUserID())
                     
+                    
                     dispatch_sync(dispatch_get_main_queue()){
+                        self.actInd.stopAnimating()
+                        self.container.hidden = true
+                        self.container.removeFromSuperview()
+
                         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
                         appDelegate.logIn = true
                         self.dismissViewControllerAnimated(true, completion: nil)
@@ -156,6 +162,7 @@ class LogIn: UIViewController, UITextFieldDelegate {
             }
             else{
                 dispatch_async(dispatch_get_main_queue()){
+                    self.actInd.stopAnimating()
                     self.container.hidden=true
                     var alert = UIAlertController(title: "Geen Verbinding", message: "Controleer uw internetverbinding", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))

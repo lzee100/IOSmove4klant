@@ -17,11 +17,14 @@ class Settings: UITableViewController {
         super.viewDidLoad()
         self.menuTitle.append("Accountbeheer")
         self.menuDescription.append("Beheer hier je accountinformatie")
-        self.menuTitle.append("Ontkoppel account")
-        self.menuDescription.append("Log uit")
+        //self.menuTitle.append("Scan for Beacons")
+        //self.menuDescription.append("Test beacon Scanning")
+        self.menuTitle.append("Uitloggen")
+        self.menuDescription.append("Ontkoppel het account")
 
         self.segueID.append("manageAccount")
-        self.segueID.append("login")
+        //self.segueID.append("scanForBeacons")
+        self.segueID.append("Uitloggen")
     }
     
     // MARK: - Table view data source

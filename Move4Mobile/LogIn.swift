@@ -189,8 +189,9 @@ class LogIn: UIViewController, UITextFieldDelegate {
     
 
     
-    
-    // keyboard behavior
+    //////////////////////
+    // KEYBOARD BEHAVIOUR
+    //////////////////////
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.editText_Password.resignFirstResponder()
         self.editText_UserName.resignFirstResponder()
@@ -201,15 +202,8 @@ class LogIn: UIViewController, UITextFieldDelegate {
         self.editText_UserName.resignFirstResponder()
         self.editText_Password.resignFirstResponder()
     }
-    
-    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
-        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
-        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
-        let blue = CGFloat(rgbValue & 0xFF)/256.0
-        
-        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
-    }
 
+    //function to move view up when keyboard is shown so the keyboard won't overlay the view
     func keyboardWillShow(sender: NSNotification) {
         if !keyboardUp{
         var info = sender.userInfo!
@@ -219,6 +213,8 @@ class LogIn: UIViewController, UITextFieldDelegate {
           keyboardUp = true
         }
     }
+    
+    //function to move view down when the keyboard also goes down
     func keyboardWillHide(sender: NSNotification) {
         if keyboardUp{
         var info = sender.userInfo!
@@ -236,6 +232,16 @@ class LogIn: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+    }
+    
+    
+    
+    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
     }
     
 // rotate loading indicator when orientation changed

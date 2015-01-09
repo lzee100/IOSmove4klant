@@ -14,16 +14,27 @@ import CoreData
 
 public class ServerRequestHandler: NSObject {
     
+    //Get information from server
+    
     func getAllCategories() -> [Category] {
+        
         var returnarray = [Category]()
+        
+        //specify URL of API to get data from
         let url=NSURL(string: Config().CATEGORYURL)
+        
+        //get data from server
         let allContactsData=NSData(contentsOfURL:url!)
+        
+        //put data in string and remove any weird automatically added hosting message
         let str : NSString = NSString(data: allContactsData!, encoding: NSUTF8StringEncoding)!
         var sep = str.componentsSeparatedByString("<")
         var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
         
+        //string to object
         var allCategories: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
         
+        //loop trough json
         if let json = allCategories as? Array<AnyObject> {
             
             for index in 0...json.count-1 {
@@ -35,35 +46,32 @@ public class ServerRequestHandler: NSObject {
                 var catid : String  = collection["id"]!
                 let catname : String = collection["name"]!
                 
+                //make category from item in json
                 let catobj : Category = Category(ID: catid.toInt()!, name: catname)
-                //println(catobj.toString())
+                //append to returnarray
                 returnarray.append(catobj)
             }
         }
         return returnarray
-        //var request = NSMutableURLRequest(URL:Config().CATEGORYURL)
-        
-        //        var request = HTTPTask()
-        //        request.GET(Config().CATEGORYURL, parameters: nil, success: {(response: HTTPResponse) in
-        //            if let data = response.responseObject as? NSData {
-        //                let str = NSString(data: data, encoding: NSUTF8StringEncoding)
-        //                NSLog("Categorieen %@", str!)
-        //            }
-        //            },failure: {(error: NSError, response: HTTPResponse?) in
-        //                println("error: \(error)")
-        //        })
     }
     
     func getAllOffers() -> [Offer]{
         var returnarray = [Offer]()
+        
+        //specify URL of API to get data from
         let url=NSURL(string: Config().GETALLOFFERS)
+         //get data from server
         let allContactsData=NSData(contentsOfURL:url!)
+        
+        //put data in string and remove any weird automatically added hosting message
         let str : NSString = NSString(data: allContactsData!, encoding: NSUTF8StringEncoding)!
         var sep = str.componentsSeparatedByString("<")
         var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
         
+        //string to object
         var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
         
+        //loop trough json
         if let json = allContacts as? Array<AnyObject> {
             
             for index in 0...json.count-1 {
@@ -106,6 +114,8 @@ public class ServerRequestHandler: NSObject {
     
     func getAllBeacons() -> [Beacon]{
         var returnarray = [Beacon]()
+        
+        //Get data from server
         let url=NSURL(string: Config().GETALLBEACONS)
         let allContactsData=NSData(contentsOfURL:url!)
         let str : NSString = NSString(data: allContactsData!, encoding: NSUTF8StringEncoding)!
@@ -114,6 +124,7 @@ public class ServerRequestHandler: NSObject {
         
         var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
         
+        //loop through json
         if let json = allContacts as? Array<AnyObject> {
             
             for index in 0...json.count-1 {
@@ -122,12 +133,14 @@ public class ServerRequestHandler: NSObject {
                 
                 let collection = beacon! as Dictionary<String, String>
                 
+                //get values from item in json
                 var beaconid : String  = collection["beaconID"]!
                 let beaconminor : String = collection["minor"]!
                 let beaconmajor : String = collection["major"]!
                 let beaconproductid : String = collection["productID"]!
                 let beaconofferid : String = collection["offerID"]!
                 
+                //make beacon object
                 let beaconobj : Beacon = Beacon(ID: beaconid.toInt()!, productID: beaconproductid.toInt()!, offerID: beaconofferid.toInt()!, major: beaconmajor.toInt()!, minor: beaconminor.toInt()!)
                 //println(beaconobj.toString())
                 returnarray.append(beaconobj)
@@ -187,48 +200,46 @@ public class ServerRequestHandler: NSObject {
         return returnarray
     }
     
+    
+    
+    
     class func getAllImages(){
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         
-        
-        
+        //Get data from server
         let url=NSURL(string: Config().GETIMAGES)
         let allContactsData=NSData(contentsOfURL:url!)
         
+        //parse data
         let str : NSString = NSString(data: allContactsData!, encoding: NSUTF8StringEncoding)!
-        //var sep = str.componentsSeparatedByString("<")
         var henk = str.dataUsingEncoding(NSUTF8StringEncoding)
-        
         var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
-        
-        //let varb: AnyObject = str as AnyObject
-        
+
+        //loop through json
         if let json = allContacts as? Array<AnyObject> {
             
             for index in 0...json.count-1 {
-                // println(json[index]["image"])
-                //println()
-                //println()
-                
                 var path : String = json[index].valueForKey("path") as String
                 
                 var products = DataHandler.getManagedObjects("Product")
                 var offers = DataHandler.getManagedObjects("Offer")
                 
+                //get base64 string of image
                 var base64 = json[index]["image"] as NSString
                 
-                
+                //check if the image belongs to a product. if so, add the image to this product
                 for m : NSManagedObject in products{
                     var mpath : String = m.valueForKey("serverimagepath") as String
                     if path == mpath{
                         if base64 != ""{
                             var image = ImageHandler.base64ToUIImage(base64)
                             m.setValue(UIImagePNGRepresentation(image), forKey: "image")
-                            // println("image succes")
                         }
                     }
                 }
+                
+                //check if the image belongs to a offer. if so, add the image to this offer
                 for m : NSManagedObject in offers{
                     if m.valueForKey("serverimagepath") != nil{
                         var mpath : String = m.valueForKey("serverimagepath") as String
@@ -236,7 +247,6 @@ public class ServerRequestHandler: NSObject {
                             if base64 != ""{
                                 var image = ImageHandler.base64ToUIImage(base64)
                                 m.setValue(UIImagePNGRepresentation(image), forKey: "image")
-                                // println("image succes")
                             }
                         }
                     }
@@ -248,17 +258,8 @@ public class ServerRequestHandler: NSObject {
             var error: NSError?
             if !managedContext.save(&error) {
             }
-            
-            
-            
-            
-            
-            //return json
-            
-            
         }
         else{
-            // return  Array<AnyObject>()
         }
     }
     
@@ -272,83 +273,22 @@ public class ServerRequestHandler: NSObject {
         let allContactsData=NSData(contentsOfURL:url!)
         
         let str : NSString = NSString(data: allContactsData!, encoding: NSUTF8StringEncoding)!
-        //var sep = str.componentsSeparatedByString("<")
+        
         var henk = str.dataUsingEncoding(NSUTF8StringEncoding)
         
         var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
         
-        //let varb: AnyObject = str as AnyObject
-        
         var returnvalue = Dictionary<String, UIImage>()
         
         if var json = allContacts as? Array<AnyObject> {
-            
             
             for index in 0...json.count-1 {
                 var imgpath = json[index]["path"] as String
                 var image = json[index]["image"] as NSString
                 var decodedimage = ImageHandler.base64ToUIImage(image)
                 returnvalue.updateValue(decodedimage, forKey: imgpath)
-                
-                
-                
-                println(json[index]["path"])
-                println()
-                println()
             }
-            
-            
-            //             return json
-            //            for index in 0...json.count-1 {
-            //                // println(json[index]["image"])
-            //                //println()
-            //                //println()
-            //
-            //                var path : String = json[index].valueForKey("path") as String
-            //
-            //                var products = DataHandler.getManagedObjects("Product")
-            //                var offers = DataHandler.getManagedObjects("Offer")
-            //
-            //                var base64 = json[index]["image"] as NSString
-            //
-            //
-            //                for m : NSManagedObject in products{
-            //                    var mpath : String = m.valueForKey("serverimagepath") as String
-            //                    if path == mpath{
-            //                        if base64 != ""{
-            //                            var image = ImageHandler.base64ToUIImage(base64)
-            //                            m.setValue(UIImagePNGRepresentation(image), forKey: "image")
-            //                            // println("image succes")
-            //                        }
-            //                    }
-            //                }
-            //                for m : NSManagedObject in offers{
-            //                    if m.valueForKey("serverimagepath") != nil{
-            //                        var mpath : String = m.valueForKey("serverimagepath") as String
-            //                        if path == mpath{
-            //                            if base64 != ""{
-            //                                var image = ImageHandler.base64ToUIImage(base64)
-            //                                m.setValue(UIImagePNGRepresentation(image), forKey: "image")
-            //                                // println("image succes")
-            //                            }
-            //                        }
-            //                    }
-            //                }
-            //
-            //
-            //            }
-            //
-            //            var error: NSError?
-            //            if !managedContext.save(&error) {
-            //            }
-            //
-            //
-            //
-            //
-            
-            
         }
-        
         return returnvalue
     }
     

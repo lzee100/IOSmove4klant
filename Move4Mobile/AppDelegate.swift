@@ -411,17 +411,11 @@ extension AppDelegate: CLLocationManagerDelegate {
         let vc  = storyboard.instantiateViewControllerWithIdentifier("Offer") as OfferView
         vc.labelDescriptionValue = offer.offerdescription
         
-        // ToDo Sander:
-        // let image = offer.image (toImage in offer).... (from string64 to image)
-        //vc.imageView.image = image
-        
         if offer.image != nil{
             vc.offerImage = offer.image
         }
         
         nav?.presentViewController(vc, animated: true, completion: nil)
-        
-        
     }
     
     func activateNewScreen() -> Bool {

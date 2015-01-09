@@ -26,13 +26,15 @@ class SignUp: UIViewController {
         self.navigationController?.navigationBar.hidden = false
         // Do any additional setup after loading the view.
         
-       
+        // add keyboard observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-        //var backButton: UIBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Bordered, target: self, action: "hideKeyBoardIfShown")
-        //self.navigationItem.backBarButtonItem.action="hideKeyBoardIfShown:"
+        
         self.navigationItem.backBarButtonItem?.action="hideKeyBoardIfShown:"
         
+        ////////////////////
+        //LOADING INDICATOR
+        ////////////////////
         container.frame = self.view.frame
         container.center = self.view.center
         container.backgroundColor = UIColorFromHex(0xffffff, alpha: 0.3)
@@ -44,7 +46,6 @@ class SignUp: UIViewController {
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
 
-        
         actInd.center = CGPointMake(loadingView.frame.size.width / 2,
         loadingView.frame.size.height / 2);
         actInd.hidesWhenStopped = true
@@ -52,6 +53,10 @@ class SignUp: UIViewController {
         actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
         loadingView.addSubview(actInd)
         container.addSubview(loadingView)
+        ////////////////////////
+        //END LOADING INDICATOR
+        ////////////////////////
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -67,34 +72,7 @@ class SignUp: UIViewController {
         
         actInd.startAnimating()
         self.signUp(sender)
-//        ServerRequestHandler.signUp(<#name: String#>, email: <#String#>, password: <#String#>, response: <#((HTTPResponse) -> Void)!##(HTTPResponse) -> Void#>)(userID, respone: {(response: HTTPResponse) -> Void in
-//            if let data = response.responseObject as? NSData {
-//                let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
-//                var sep = str.componentsSeparatedByString("<")
-//                var henk = sep[0].dataUsingEncoding(NSUTF8StringEncoding)
-//                
-//                var allContacts: AnyObject! = NSJSONSerialization.JSONObjectWithData(henk!, options: NSJSONReadingOptions(0), error: nil)
-//                
-//                if let json = allContacts as? Dictionary<String, Array<Int>> {
-//                    
-//                    returnvalue = json["returnvalue"]!
-//                    
-//                    var cats:[NSManagedObject] = self.getManagedObjects("Categories")
-//                    
-//                    
-//                    for i : Int in returnvalue{
-//                        for category : NSManagedObject in cats{
-//                            if category.valueForKey("id") as Int==i{
-//                                category.setValue(1, forKey: "liked")
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            
-//        })
 
-        //self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /*
